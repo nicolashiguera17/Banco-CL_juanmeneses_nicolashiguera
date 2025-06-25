@@ -486,3 +486,21 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Historial_Pagos TO 'Administrador'
 
 SHOW GRANTS FOR 'Administrador'@'localhost';
 FLUSH PRIVILEGES;
+
+
+
+-- rol como operador de pagos --
+CREATE USER 'Operador_Pagos'@'localhost' IDENTIFIED BY 'operador123';
+
+-- eliminar el operador de pago --
+DROP USER 'Operador_Pagos'@'localhost'; 
+
+-- Permisos
+GRANT SELECT, INSERT, UPDATE ON banco.Pagos TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON banco.Historial_Pagos TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON banco.Tarjetas TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON banco.Clientes TO 'Operador_Pagos'@'localhost';
+
+-- Validar permisos
+SHOW GRANTS FOR 'Operador_Pagos'@'localhost';
+FLUSH PRIVILEGES;
