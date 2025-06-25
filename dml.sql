@@ -524,3 +524,16 @@ SHOW GRANTS FOR 'Gerente'@'localhost';
 FLUSH PRIVILEGES;
 
 
+-- rol como operador de consultor de tarjetas --
+CREATE USER 'Consultor_Tarjetas'@'localhost' IDENTIFIED BY 'consultor123';
+
+-- eliminar el consultor de tarjetas --
+DROP USER 'Consultor_Tarjetas'@'localhost';
+
+GRANT SELECT ON banco.Tarjetas TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON banco.Tipos_Tarjeta TO 'Consultor_Tarjetas'@'localhost';
+
+-- Validar permisos
+SHOW GRANTS FOR 'Consultor_Tarjetas'@'localhost';
+FLUSH PRIVILEGES;
