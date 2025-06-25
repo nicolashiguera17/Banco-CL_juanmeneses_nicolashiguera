@@ -52,3 +52,19 @@ INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_em
 (49, 'Luciana Gualteros', '8374652811', ' 3175544332', 'lucianagualteros@gmail.com', 49),
 (50, 'Cristóbal Jiménez', '3748592019', ' 3184433221', 'cristobaljimenez@gmail.com', 50);
 
+-- DATOS DE LA TABLA EMPLEADOS
+
+INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, correo) VALUES
+(1, 'Carlos Andrés Pérez', '2018-02-15', 'Asesor', 'carlosandresperez@empresa.com.co'),
+(2, 'María Fernanda Ríos', '2021-05-03', 'Ejecutivo', 'mariafernandarios@empresa.com.co'),
+(3, 'Luis Miguel Rodríguez', '2017-09-10', 'Coordinador', 'luismiguelrodriguez@empresa.com.co'),
+(4, 'Ana Sofía Martínez', '2019-11-22', 'Auxiliar', 'anasofiamartinez@empresa.com.co'),
+(5, 'Julián Esteban Ramírez', '2020-07-14', 'Gerente', 'julianestebanramirez@empresa.com.co'),
+(6, 'Paola Andrea Torres', '2016-03-08', 'Ejecutivo', 'paolaandreatorres@empresa.com.co'),
+(7, 'Andrés Felipe Herrera', '2022-01-12', 'Asesor', 'andresfelipeherrera@empresa.com.co'),
+(8, 'Laura Valentina Gómez', '2023-06-19', 'Auxiliar', 'lauravalentinagomez@empresa.com.co'),
+(9, 'Santiago David Vargas', '2015-04-27', 'Gerente', 'santiagodavidvargas@empresa.com.co'),
+(10, 'Catalina María Delgado', '2021-09-30', 'Coordinador', 'catalinamariadelgado@empresa.com.co'),
+(11, 'Camilo José Cárdenas', '2018-12-05', 'Ejecutivo', 'camilojosecardenas@empresa.com.co'),
+(12, 'Manuela Rodríguez López', '2017-07-17', 'Asesor', 'manuelarodriguezlopez@empresa.com.co'),
+(13, 'Daniel Alejandro Suárez', '2020-02-11', 'Auxiliar', 'danielalejandrosuarez@empresa.com.co'),
