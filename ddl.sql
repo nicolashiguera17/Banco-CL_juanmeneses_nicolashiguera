@@ -233,3 +233,4 @@ ALTER TABLE `Pagos`
 -- tarjetas_promociones → promociones
 ALTER TABLE `Tarjetas_Promociones` 
     ADD CONSTRAINT `tarjetas_promociones_id_promocion_fore
+

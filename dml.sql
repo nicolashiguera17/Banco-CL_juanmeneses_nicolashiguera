@@ -455,3 +455,34 @@ INSERT INTO Tarjetas_Promociones (id_tarjeta_promocion, id_tarjeta, id_promocion
 (48, 20008, 48, '2025-07-18'),
 (49, 20009, 49, '2025-07-19'),
 (50, 20010, 50, '2025-07-20');
+
+
+
+-- roles --
+
+
+-- eliminar el administrador 
+DROP USER 'Administrador'@'localhost'; 
+
+-- rol como administrador -- 
+CREATE USER 'Administrador'@'localhost' IDENTIFIED BY 'Admin123!';
+
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Clientes TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tarjetas TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tipos_Tarjeta TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Cuotas_de_Manejo TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Descuentos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Historial_Descuentos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Metodos_Pago TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Transacciones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Estado_Cuota TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Promociones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tarjetas_Promociones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Pagos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Historial_Pagos TO 'Administrador'@'localhost';
+
+-- Validar
+
+SHOW GRANTS FOR 'Administrador'@'localhost';
+FLUSH PRIVILEGES;
