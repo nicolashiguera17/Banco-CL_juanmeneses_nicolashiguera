@@ -52,13 +52,6 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 (49, 'Natalia Beatriz Cruz', '2017-01-13', 'Administrador', 'nataliabeatrizcruz@empresa.com.co'),
 (50, 'Manuel Alejandro Salcedo', '2022-08-29', 'Gerente', 'manuelalejandrosalcedo@empresa.com.co');
 
-
-
-
-
-
-
-
 -- DATOS DE LA TABLA CLIENTES --
 
 INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_empleado) VALUES
@@ -113,7 +106,7 @@ INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_em
 (49, 'Luciana Gualteros', '8374652811', ' 3175544332', 'lucianagualteros@gmail.com', 49),
 (50, 'Cristóbal Jiménez', '3748592019', ' 3184433221', 'cristobaljimenez@gmail.com', 50);
 
--- -- DATOS DE LA TABLA TIPOS_TARJETA--
+-- DATOS DE LA TABLA TIPOS_TARJETA--
 
 INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
 (3618, 'Black', 750000.00),
@@ -157,4 +150,21 @@ INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
 (1556, 'Oro', 30000.00),
 (9450, 'Black', 100000.00);
 
+-- -- DATOS DE LA TARJETA --
+
+INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VALUES
+(20001, 12, 3618, 5),
+(20002, 34, 3960, 3),
+(20003, 45, 5541, 12),
+(20004, 8, 1241, 7),
+(20005, 21, 3310, 18),
+(20006, 56, 8488, 2),
+(20007, 63, 2488, 6),
+(20008, 29, 2564, 14),
+(20009, 11, 1008, 9),
+(20010, 87, 4503, 1),
+(20011, 32, 9694, 4),
+(20012, 77, 4859, 11),
+(20013, 58, 5095, 13),
+(20014, 4, 8860, 10);
 
