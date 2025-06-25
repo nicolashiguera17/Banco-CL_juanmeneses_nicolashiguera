@@ -150,7 +150,7 @@ INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
 (1556, 'Oro', 30000.00),
 (9450, 'Black', 100000.00);
 
--- -- DATOS DE LA TARJETA --
+-- DATOS DE LA TARJETA --
 
 INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VALUES
 (20001, 12, 3618, 5),
@@ -193,6 +193,52 @@ INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VAL
 (20038, 60, 2567, 15),
 (20039, 97, 1556, 3),
 (20040, 13, 9450, 6);
+
+-- DATOS DE ESTADO DE CUOTA  --
+
+INSERT INTO Estado_Cuota (id_estado_cuota, descripcion) VALUES
+(1, 'Aceptada'),
+(2, 'Cancelada'),
+(3, 'Reembolsada'),
+(4, 'Pendiente'),
+(5, 'Pagada'),
+(6, 'Aceptada'),
+(7, 'Cancelada'),
+(8, 'Pendiente'),
+(9, 'Pagada'),
+(10, 'Aceptada'),
+(11, 'Reembolsada'),
+(12, 'Cancelada'),
+(13, 'Pendiente'),
+(14, 'Pagada'),
+(15, 'Reembolsada'),
+(16, 'Aceptada'),
+(17, 'Cancelada'),
+(18, 'Pendiente'),
+(19, 'Pagada'),
+(20, 'Reembolsada'),
+(21, 'Aceptada'),
+(22, 'Cancelada'),
+(23, 'Pendiente'),
+(24, 'Pagada'),
+(25, 'Reembolsada'),
+(26, 'Aceptada'),
+(27, 'Cancelada'),
+(28, 'Pendiente'),
+(29, 'Pagada'),
+(30, 'Reembolsada'),
+(31, 'Aceptada'),
+(32, 'Cancelada'),
+(33, 'Pendiente'),
+(34, 'Pagada'),
+(35, 'Reembolsada'),
+(36, 'Aceptada'),
+(37, 'Cancelada'),
+(38, 'Pendiente'),
+(39, 'Pagada'),
+(40, 'Reembolsada');
+
+
 
 
 
