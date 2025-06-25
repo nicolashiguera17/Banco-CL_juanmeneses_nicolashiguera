@@ -562,7 +562,34 @@ INSERT INTO Transacciones (id_transaccion, id_pago, fecha_transaccion, monto, ti
 (49, 149, '2025-06-19', 101000.00, 'Ingreso'),
 (50, 150, '2025-06-20', 73000.00, 'Egreso');
 
+-- DATOS DE LA TABLA NOTIFICACIONES
 
+INSERT INTO Notificaciones (`id_notificacion`, `id_cliente`, `mensaje`, `fecha_envio`, `tipo`, `leido`) VALUES
+(1, 1, '¡Camila, paga tu cuota de manejo de $15,000 antes del 5 de julio con BANCO CL!', '2025-05-01', 'Recordatorio', FALSE),
+(2, 2, 'David, disfruta 20% de descuento en Alkosto con tu tarjeta BANCO CL.', '2025-05-03', 'Promoción', TRUE),
+(3, 3, 'Luisa, tu pago de $25,000 fue procesado con éxito vía PSE.', '2025-05-05', 'Confirmación', TRUE),
+(4, 4, 'Andrés, alerta: Intento de pago fallido. Revisa tu cuenta BANCO CL.', '2025-05-07', 'Alerta', FALSE),
+(5, 5, 'Sofía, activa tu cuenta digital BANCO CL y obtén un bono de $50,000.', '2025-05-09', 'Promoción', FALSE),
+(6, 6, 'Juan, tu cuota de manejo de $18,000 vence el 30 de julio.', '2025-05-11', 'Recordatorio', FALSE),
+(7, 7, 'Valentina, paga con Nequi y evita la cuota de manejo en BANCO CL.', '2025-05-13', 'Promoción', TRUE),
+(8, 8, 'Carlos, tu pago de $15,000 fue confirmado. ¡Gracias por usar BANCO CL!', '2025-05-15', 'Confirmación', TRUE),
+(9, 9, 'Mariana, revisa tu estado de cuenta en la app BANCO CL.', '2025-05-17', 'Alerta', FALSE),
+(10, 10, 'Daniel, 15% de descuento en seguros con BANCO CL. ¡Aprovecha!', '2025-05-19', 'Promoción', FALSE),
+(11, 11, 'Tatiana, tu cuota de $10,000 está pendiente. Paga antes del 25 de agosto.', '2025-05-21', 'Recordatorio', FALSE),
+(12, 12, 'Santiago, confirma tu pago de $18,000 vía Daviplata con BANCO CL.', '2025-05-23', 'Confirmación', TRUE),
+(13, 13, 'Isabela, alerta: Transacción no autorizada detectada. Contacta a BANCO CL.', '2025-05-25', 'Alerta', FALSE),
+(14, 14, 'Felipe, 3% de descuento en tu crédito hipotecario con BANCO CL.', '2025-05-27', 'Promoción', TRUE),
+(15, 15, 'Laura, tu cuota de manejo de $30,000 vence el 15 de septiembre.', '2025-05-29', 'Recordatorio', FALSE),
+(16, 16, 'Juliana, pago de $25,000 confirmado con tarjeta débito BANCO CL.', '2025-06-01', 'Confirmación', TRUE),
+(17, 17, 'Mateo, disfruta 7% de cashback en Olímpica con BANCO CL.', '2025-06-03', 'Promoción', FALSE),
+(18, 18, 'Gabriela, revisa tu saldo en la app BANCO CL para evitar cargos.', '2025-06-05', 'Alerta', FALSE),
+(19, 19, 'Emilio, tu cuota de $15,000 está pendiente. Paga con PSE.', '2025-06-07', 'Recordatorio', FALSE),
+(20, 20, 'Diana, 10% de descuento en seguros de viaje con BANCO CL.', '2025-06-09', 'Promoción', TRUE),
+(21, 21, 'Juan José, tu pago de $25,000 fue procesado vía Nequi.', '2025-06-11', 'Confirmación', TRUE),
+(22, 22, 'Natalia, alerta: Pago de cuota fallido. Reintenta en BANCO CL.', '2025-06-13', 'Alerta', FALSE),
+(23, 23, 'Esteban, paga tu cuota de $18,000 antes del 25 de octubre.', '2025-06-15', 'Recordatorio', FALSE),
+(24, 24, 'Daniela, 5% de descuento en cambio de divisas con BANCO CL.', '2025-06-17', 'Promoción', TRUE),
+(25, 25, 'Samuel, tu pago de $30,000 fue confirmado con BANCO CL.', '2025-06-19', 'Confirmación', TRUE),
 
 -- DATOS DE LA TABLA PROMOCIONES --
 
