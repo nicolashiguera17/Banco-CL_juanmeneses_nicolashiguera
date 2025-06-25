@@ -1,3 +1,48 @@
+-- DATOS DE LA TABLA EMPLEADOS
+
+INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, correo) VALUES
+(1, 'Carlos Andrés Pérez', '2018-02-15', 'Asesor', 'carlosandresperez@empresa.com.co'),
+(2, 'María Fernanda Ríos', '2021-05-03', 'Ejecutivo', 'mariafernandarios@empresa.com.co'),
+(3, 'Luis Miguel Rodríguez', '2017-09-10', 'Coordinador', 'luismiguelrodriguez@empresa.com.co'),
+(4, 'Ana Sofía Martínez', '2019-11-22', 'Auxiliar', 'anasofiamartinez@empresa.com.co'),
+(5, 'Julián Esteban Ramírez', '2020-07-14', 'Gerente', 'julianestebanramirez@empresa.com.co'),
+(6, 'Paola Andrea Torres', '2016-03-08', 'Ejecutivo', 'paolaandreatorres@empresa.com.co'),
+(7, 'Andrés Felipe Herrera', '2022-01-12', 'Asesor', 'andresfelipeherrera@empresa.com.co'),
+(8, 'Laura Valentina Gómez', '2023-06-19', 'Auxiliar', 'lauravalentinagomez@empresa.com.co'),
+(9, 'Santiago David Vargas', '2015-04-27', 'Gerente', 'santiagodavidvargas@empresa.com.co'),
+(10, 'Catalina María Delgado', '2021-09-30', 'Coordinador', 'catalinamariadelgado@empresa.com.co'),
+(11, 'Camilo José Cárdenas', '2018-12-05', 'Ejecutivo', 'camilojosecardenas@empresa.com.co'),
+(12, 'Manuela Rodríguez López', '2017-07-17', 'Asesor', 'manuelarodriguezlopez@empresa.com.co'),
+(13, 'Daniel Alejandro Suárez', '2020-02-11', 'Auxiliar', 'danielalejandrosuarez@empresa.com.co'),
+(14, 'Natalia Andrea Méndez', '2019-08-06', 'Gerente', 'nataliaandreamendez@empresa.com.co'),
+(15, 'Juan Pablo Morales', '2022-10-28', 'Ejecutivo', 'juanpablomorales@empresa.com.co'),
+(16, 'Valentina Camila Niño', '2016-11-14', 'Coordinador', 'valentinacamilanino@empresa.com.co'),
+(17, 'Jorge Enrique Tovar', '2018-06-01', 'Asesor', 'jorgeenriquetovar@empresa.com.co'),
+(18, 'Daniela Sofía Acosta', '2021-03-09', 'Auxiliar', 'danielasofiaacosta@empresa.com.co'),
+(19, 'Esteban Camargo Pérez', '2023-01-20', 'Ejecutivo', 'estebancamargoperez@empresa.com.co'),
+(20, 'Tatiana Carolina Pineda', '2019-05-11', 'Gerente', 'tatianacarolinapineda@empresa.com.co'),
+(21, 'Sebastián Mejía León', '2017-10-23', 'Auxiliar', 'sebastianmejialeon@empresa.com.co'),
+(22, 'Karen Yuliana Salazar', '2020-01-04', 'Ejecutivo', 'karenyulianasalazar@empresa.com.co'),
+(23, 'Felipe Arturo Bernal', '2022-04-18', 'Coordinador', 'felipearturobernal@empresa.com.co'),
+(24, 'Sara Lucía Castaño', '2018-03-13', 'Asesor', 'saraluciacastano@empresa.com.co'),
+(25, 'Miguel Ángel Peña', '2016-09-09', 'Gerente', 'miguelangelpena@empresa.com.co');
+(26, 'Lorena Isabel Mendoza', '2020-08-22', 'Administrador', 'lorenaisabelmendoza@empresa.com.co'),
+(27, 'Andrés Camilo Forero', '2019-04-16', 'Operador de Pagos', 'andrescamiloforero@empresa.com.co'),
+(28, 'Claudia Marcela Gil', '2023-02-11', 'Consultor de Tarjetas', 'claudiamarcelagil@empresa.com.co'),
+(29, 'Pedro Julián Gutiérrez', '2021-11-04', 'Auditor', 'pedrojuliangutierrez@empresa.com.co'),
+(30, 'Isabella Cano Rincón', '2022-06-30', 'Ejecutivo', 'isabellacanorincon@empresa.com.co'),
+(31, 'Juan Esteban Romero', '2015-12-01', 'Gerente', 'juanestebanromero@empresa.com.co'),
+(32, 'Angie Paola Ruiz', '2020-10-08', 'Administrador', 'angiepaolaruiz@empresa.com.co'),
+(33, 'Carlos Mauricio Bonilla', '2018-05-19', 'Asesor', 'carlosmauriciobonilla@empresa.com.co'),
+
+
+
+
+
+
+
+
+
 -- DATOS DE LA TABLA CLIENTES
 
 INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_empleado) VALUES
@@ -52,31 +97,3 @@ INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_em
 (49, 'Luciana Gualteros', '8374652811', ' 3175544332', 'lucianagualteros@gmail.com', 49),
 (50, 'Cristóbal Jiménez', '3748592019', ' 3184433221', 'cristobaljimenez@gmail.com', 50);
 
--- DATOS DE LA TABLA EMPLEADOS
-
-INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, correo) VALUES
-(1, 'Carlos Andrés Pérez', '2018-02-15', 'Asesor', 'carlosandresperez@empresa.com.co'),
-(2, 'María Fernanda Ríos', '2021-05-03', 'Ejecutivo', 'mariafernandarios@empresa.com.co'),
-(3, 'Luis Miguel Rodríguez', '2017-09-10', 'Coordinador', 'luismiguelrodriguez@empresa.com.co'),
-(4, 'Ana Sofía Martínez', '2019-11-22', 'Auxiliar', 'anasofiamartinez@empresa.com.co'),
-(5, 'Julián Esteban Ramírez', '2020-07-14', 'Gerente', 'julianestebanramirez@empresa.com.co'),
-(6, 'Paola Andrea Torres', '2016-03-08', 'Ejecutivo', 'paolaandreatorres@empresa.com.co'),
-(7, 'Andrés Felipe Herrera', '2022-01-12', 'Asesor', 'andresfelipeherrera@empresa.com.co'),
-(8, 'Laura Valentina Gómez', '2023-06-19', 'Auxiliar', 'lauravalentinagomez@empresa.com.co'),
-(9, 'Santiago David Vargas', '2015-04-27', 'Gerente', 'santiagodavidvargas@empresa.com.co'),
-(10, 'Catalina María Delgado', '2021-09-30', 'Coordinador', 'catalinamariadelgado@empresa.com.co'),
-(11, 'Camilo José Cárdenas', '2018-12-05', 'Ejecutivo', 'camilojosecardenas@empresa.com.co'),
-(12, 'Manuela Rodríguez López', '2017-07-17', 'Asesor', 'manuelarodriguezlopez@empresa.com.co'),
-(13, 'Daniel Alejandro Suárez', '2020-02-11', 'Auxiliar', 'danielalejandrosuarez@empresa.com.co'),
-(14, 'Natalia Andrea Méndez', '2019-08-06', 'Gerente', 'nataliaandreamendez@empresa.com.co'),
-(15, 'Juan Pablo Morales', '2022-10-28', 'Ejecutivo', 'juanpablomorales@empresa.com.co'),
-(16, 'Valentina Camila Niño', '2016-11-14', 'Coordinador', 'valentinacamilanino@empresa.com.co'),
-(17, 'Jorge Enrique Tovar', '2018-06-01', 'Asesor', 'jorgeenriquetovar@empresa.com.co'),
-(18, 'Daniela Sofía Acosta', '2021-03-09', 'Auxiliar', 'danielasofiaacosta@empresa.com.co'),
-(19, 'Esteban Camargo Pérez', '2023-01-20', 'Ejecutivo', 'estebancamargoperez@empresa.com.co'),
-(20, 'Tatiana Carolina Pineda', '2019-05-11', 'Gerente', 'tatianacarolinapineda@empresa.com.co'),
-(21, 'Sebastián Mejía León', '2017-10-23', 'Auxiliar', 'sebastianmejialeon@empresa.com.co'),
-(22, 'Karen Yuliana Salazar', '2020-01-04', 'Ejecutivo', 'karenyulianasalazar@empresa.com.co'),
-(23, 'Felipe Arturo Bernal', '2022-04-18', 'Coordinador', 'felipearturobernal@empresa.com.co'),
-(24, 'Sara Lucía Castaño', '2018-03-13', 'Asesor', 'saraluciacastano@empresa.com.co'),
-(25, 'Miguel Ángel Peña', '2016-09-09', 'Gerente', 'miguelangelpena@empresa.com.co');
