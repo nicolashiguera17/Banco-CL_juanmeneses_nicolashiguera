@@ -504,3 +504,23 @@ GRANT SELECT ON banco.Clientes TO 'Operador_Pagos'@'localhost';
 -- Validar permisos
 SHOW GRANTS FOR 'Operador_Pagos'@'localhost';
 FLUSH PRIVILEGES;
+
+
+-- rol como gerente --
+CREATE USER 'Gerente'@'localhost' IDENTIFIED BY 'gerente123';
+
+-- eliminar el gerente --
+DROP USER 'Gerente'@'localhost'; 
+
+GRANT SELECT ON banco.Tarjetas TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Pagos TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Transacciones TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Promociones TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Descuentos TO 'Gerente'@'localhost';
+
+-- Validar permisos
+SHOW GRANTS FOR 'Gerente'@'localhost';
+FLUSH PRIVILEGES;
+
+
