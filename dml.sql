@@ -178,6 +178,32 @@ INSERT INTO `Descuentos` (`id_descuento`, `nombre_categoria`, `descripcion`) VAL
 (23, 'Seguro de Viaje', '25% de descuento en seguros de viaje para destinos como San Andrés con BANCO CL.'),
 (24, 'Cambio de Divisas', '5% de descuento en comisiones por cambio de dólares en casas de cambio con BANCO CL.'),
 (25, 'Cuenta Nómina', 'Bono de $100.000 en la apertura de cuentas nómina con BANCO CL.'),
+(26, 'Crédito Reforma Hogar', '3% de descuento en la tasa de créditos para remodelar tu casa en Barranquilla con BANCO CL.'),
+(27, 'Seguro de Salud', '12% de descuento en pólizas de salud con Sura a través de BANCO CL.'),
+(28, 'Tarjeta Premium', '30% de descuento en la cuota de tarjetas premium BANCO CL para compras en Unicentro.'),
+(29, 'Inversión en Acciones', '8% de descuento en comisiones por inversiones en la Bolsa de Valores de Colombia con BANCO CL.'),
+(30, 'Préstamo Motocicleta', '2% de descuento en la tasa de préstamos para motos Yamaha con BANCO CL.'),
+(31, 'Seguro de Mascotas', '15% de descuento en seguros para mascotas en clínicas veterinarias con BANCO CL.'),
+(32, 'Cuenta Infantil', 'Bono de $30.000 en apertura de cuentas infantiles con BANCO CL para el futuro de tus hijos.'),
+(33, 'Tasa Microcrédito', '4% de descuento en la tasa de microcréditos para emprendedores en el Valle con BANCO CL.'),
+(34, 'Transferencias Móviles', '0% de costo en transferencias vía Nequi o Daviplata con BANCO CL.'),
+(35, 'Seguro de Accidentes', '10% de descuento en seguros de accidentes personales con BANCO CL.'),
+(36, 'Plan Pensional', '5% de descuento en aportes a planes pensionales con Colpensiones y BANCO CL.'),
+(37, 'Tarjeta Empresarial', '15% de cashback en compras en HomeCenter con tarjeta empresarial BANCO CL.'),
+(38, 'Crédito Agrícola', '3.5% de descuento en la tasa de créditos agrícolas para caficultores con BANCO CL.'),
+(39, 'Seguro de Estudios', '20% de descuento en seguros educativos para colegios en Bogotá con BANCO CL.'),
+(40, 'Inversión Sostenible', '7% de descuento en comisiones de fondos sostenibles con BANCO CL.'),
+(41, 'Préstamo Vacaciones', '2.5% de descuento en la tasa de préstamos para viajar al Eje Cafetero con BANCO CL.'),
+(42, 'Cuenta Digital', '0% de costo en mantenimiento de cuentas digitales BANCO CL para pagos en Rappi.'),
+(43, 'Seguro de Celulares', '15% de descuento en seguros para celulares comprados en Ktronix con BANCO CL.'),
+(44, 'Tasa Leasing', '3% de descuento en la tasa de contratos de leasing para maquinaria con BANCO CL.'),
+(45, 'Tarjeta Estudiantil', '10% de cashback en librerías como Panamericana con tarjeta BANCO CL.'),
+(46, 'Crédito Emprendedor', '4% de descuento en la tasa de créditos para startups en Medellín con BANCO CL.'),
+(47, 'Seguro de Arte', '12% de descuento en seguros para colecciones de arte con BANCO CL.'),
+(48, 'Inversión en Bonos', '6% de descuento en comisiones por bonos del gobierno colombiano con BANCO CL.'),
+(49, 'Préstamo Salud', '3% de descuento en la tasa de créditos para procedimientos médicos con BANCO CL.'),
+(50, 'Cuenta Senior', 'Bono de $75.000 en apertura de cuentas para adultos mayores con BANCO CL.');
+
 -- DATOS DE LA TARJETA --
 
 INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VALUES
