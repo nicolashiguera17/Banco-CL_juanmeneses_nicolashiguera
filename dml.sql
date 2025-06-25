@@ -454,6 +454,35 @@ INSERT INTO Metodos_Pago (id_metodo, descripcion, estado_cuenta) VALUES
 (49, 'Daviplata', 'Inactivo'),
 (50, 'Efectivo', 'Activo');
 
+-- DATOS DE LA TABLA PAGOS
+
+INSERT INTO `Pagos` (`id_pago`, `id_cuota_manejo`, `fecha_pago`, `monto`, `estado`, `id_metodo`) VALUES
+(1, 1, '2025-01-05', 15000.00, 'Completado', 5),
+(2, 2, '2025-01-10', 20000.00, 'Completado', 2),
+(3, 3, '2025-01-15', 25000.00, 'Pendiente', 3),
+(4, 4, '2025-01-20', 12000.00, 'Completado', 4),
+(5, 5, '2025-01-25', 30000.00, 'Completado', 6),
+(6, 6, '2025-01-30', 18000.00, 'Fallido', 7),
+(7, 7, '2025-02-04', 22000.00, 'Completado', 9),
+(8, 8, '2025-02-09', 15000.00, 'Pendiente', 10),
+(9, 9, '2025-02-14', 20000.00, 'Completado', 12),
+(10, 10, '2025-02-19', 25000.00, 'Completado', 13),
+(11, 11, '2025-02-24', 10000.00, 'Reembolsado', 15),
+(12, 12, '2025-03-01', 18000.00, 'Completado', 16),
+(13, 13, '2025-03-06', 20000.00, 'Pendiente', 17),
+(14, 14, '2025-03-11', 15000.00, 'Completado', 18),
+(15, 15, '2025-03-16', 30000.00, 'Completado', 20),
+(16, 16, '2025-03-21', 25000.00, 'Fallido', 21),
+(17, 17, '2025-03-26', 20000.00, 'Completado', 23),
+(18, 18, '2025-03-31', 18000.00, 'Completado', 24),
+(19, 19, '2025-04-05', 15000.00, 'Pendiente', 25),
+(20, 20, '2025-04-10', 22000.00, 'Completado', 26),
+(21, 21, '2025-04-15', 25000.00, 'Reembolsado', 27),
+(22, 22, '2025-04-20', 20000.00, 'Completado', 28),
+(23, 23, '2025-04-25', 18000.00, 'Completado', 30),
+(24, 24, '2025-04-30', 15000.00, 'Pendiente', 31),
+(25, 25, '2025-05-05', 30000.00, 'Completado', 32),
+
 -- DATOS DE LA TABLA TRANSACCIONES --
 
 INSERT INTO Transacciones (id_transaccion, id_pago, fecha_transaccion, monto, tipo_transaccion) VALUES
