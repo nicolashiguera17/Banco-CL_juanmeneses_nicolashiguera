@@ -670,6 +670,34 @@ INSERT INTO Promociones (id_promocion, nombre_promocion, descuento_aplicado, fec
 (49, 'Promo Flash 24h', 22.00, '2025-06-25', '2025-06-25'),
 (50, 'Promo Estilo Libre', 10.00, '2025-06-22', '2025-06-28');
 
+-- DATOS DE LA TABLA CONTACTOS_CLIENTES
+
+INSERT INTO Contactos_Clientes (`id_contacto`, `id_cliente`, `tipo_contacto`, `valor`, `fecha_actualizacion`) VALUES
+(1, 1, 'Teléfono Móvil', '3114567890', '2025-01-01'),
+(2, 2, 'Teléfono Móvil', '3167891234', '2025-01-03'),
+(3, 3, 'Correo Electrónico', 'luisafernandag@mail.com', '2025-01-05'),
+(4, 4, 'Teléfono Móvil', '3151234567', '2025-01-07'),
+(5, 5, 'Correo Electrónico', 'sofiaperez@gmail.com', '2025-01-09'),
+(6, 6, 'Teléfono Móvil', '3196543210', '2025-01-11'),
+(7, 7, 'Dirección Residencial', 'Cra 15 #45-23, Bogotá', '2025-01-13'),
+(8, 8, 'Teléfono Móvil', '3104567891', '2025-01-15'),
+(9, 9, 'Correo Electrónico', 'marianaarias@gmail.com', '2025-01-17'),
+(10, 10, 'Teléfono Móvil', '3171234567', '2025-01-19'),
+(11, 11, 'Teléfono Fijo', '6012345678', '2025-01-21'),
+(12, 12, 'Teléfono Móvil', '3187890123', '2025-01-23'),
+(13, 13, 'Correo Electrónico', 'isabelamartinez@gmail.com', '2025-01-25'),
+(14, 14, 'Teléfono Móvil', '3129876543', '2025-01-27'),
+(15, 15, 'Dirección Residencial', 'Cl 80 #12-45, Medellín', '2025-01-29'),
+(16, 16, 'Teléfono Móvil', '3199876543', '2025-02-01'),
+(17, 17, 'Correo Electrónico', 'mateoramirez@gmail.com', '2025-02-03'),
+(18, 18, 'Teléfono Móvil', '3137894561', '2025-02-05'),
+(19, 19, 'Teléfono Fijo', '6049876543', '2025-02-07'),
+(20, 20, 'Teléfono Móvil', '3103456789', '2025-02-09'),
+(21, 21, 'Correo Electrónico', 'juanjosecastillo@gmail.com', '2025-02-11'),
+(22, 22, 'Dirección Residencial', 'Cra 7 #22-10, Cali', '2025-02-13'),
+(23, 23, 'Teléfono Móvil', '3157896543', '2025-02-15'),
+(24, 24, 'Teléfono Móvil', '3145678123', '2025-02-17'),
+(25, 25, 'Correo Electrónico', 'samuelquintero@gmail.com', '2025-02-19'),
 
 -- DATOS DE LA TABLA TARJETAS_PROMOCIONES --
 
