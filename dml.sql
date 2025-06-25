@@ -239,6 +239,60 @@ INSERT INTO Estado_Cuota (id_estado_cuota, descripcion) VALUES
 (40, 'Reembolsada');
 
 
+-- DATOS DE LA TABLA METODOS_PAGO --
+
+INSERT INTO Metodos_Pago (id_metodo, descripcion, estado_cuenta) VALUES
+(1, 'Efectivo', 'Activo'),
+(2, 'Tarjeta de crédito', 'Activo'),
+(3, 'Tarjeta débito', 'Activo'),
+(4, 'Transferencia bancaria', 'Activo'),
+(5, 'PSE', 'Activo'),
+(6, 'Nequi', 'Activo'),
+(7, 'Daviplata', 'Activo'),
+(8, 'Efectivo', 'Inactivo'),
+(9, 'Tarjeta de crédito', 'Activo'),
+(10, 'Tarjeta débito', 'Activo'),
+(11, 'Transferencia bancaria', 'Inactivo'),
+(12, 'PSE', 'Activo'),
+(13, 'Nequi', 'Activo'),
+(14, 'Daviplata', 'Inactivo'),
+(15, 'Efectivo', 'Activo'),
+(16, 'Tarjeta de crédito', 'Activo'),
+(17, 'Tarjeta débito', 'Activo'),
+(18, 'Transferencia bancaria', 'Activo'),
+(19, 'PSE', 'Inactivo'),
+(20, 'Nequi', 'Activo'),
+(21, 'Daviplata', 'Activo'),
+(22, 'Efectivo', 'Activo'),
+(23, 'Tarjeta de crédito', 'Activo'),
+(24, 'Tarjeta débito', 'Activo'),
+(25, 'Transferencia bancaria', 'Activo'),
+(26, 'PSE', 'Activo'),
+(27, 'Nequi', 'Activo'),
+(28, 'Daviplata', 'Activo'),
+(29, 'Efectivo', 'Inactivo'),
+(30, 'Tarjeta de crédito', 'Activo'),
+(31, 'Tarjeta débito', 'Activo'),
+(32, 'Transferencia bancaria', 'Activo'),
+(33, 'PSE', 'Activo'),
+(34, 'Nequi', 'Inactivo'),
+(35, 'Daviplata', 'Activo'),
+(36, 'Efectivo', 'Activo'),
+(37, 'Tarjeta de crédito', 'Activo'),
+(38, 'Tarjeta débito', 'Activo'),
+(39, 'Transferencia bancaria', 'Activo'),
+(40, 'PSE', 'Activo'),
+(41, 'Nequi', 'Activo'),
+(42, 'Daviplata', 'Activo'),
+(43, 'Efectivo', 'Activo'),
+(44, 'Tarjeta de crédito', 'Inactivo'),
+(45, 'Tarjeta débito', 'Activo'),
+(46, 'Transferencia bancaria', 'Activo'),
+(47, 'PSE', 'Activo'),
+(48, 'Nequi', 'Activo'),
+(49, 'Daviplata', 'Inactivo'),
+(50, 'Efectivo', 'Activo');
+
 
 
 
