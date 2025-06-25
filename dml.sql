@@ -537,3 +537,19 @@ GRANT SELECT ON banco.Tipos_Tarjeta TO 'Consultor_Tarjetas'@'localhost';
 -- Validar permisos
 SHOW GRANTS FOR 'Consultor_Tarjetas'@'localhost';
 FLUSH PRIVILEGES;
+
+
+
+--rol como auditor --
+CREATE USER 'Auditor'@'localhost' IDENTIFIED BY 'auditor123';
+
+--eliminar el auditor --
+DROP USER 'Auditor'@'localhost';
+
+GRANT SELECT ON banco.Transacciones TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Promociones TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Pagos TO 'Auditor'@'localhost';
+
+-- Validar permisos
+SHOW GRANTS FOR 'Auditor'@'localhost';
+FLUSH PRIVILEGES;
