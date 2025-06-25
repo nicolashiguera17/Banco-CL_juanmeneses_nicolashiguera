@@ -152,7 +152,7 @@ INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
 
 -- DATOS DE LOS DESCUENTOS
 
-INSERT INTO `Descuentos` (`id_descuento`, `nombre_categoria`, `descripcion`) VALUES
+INSERT INTO Descuentos (`id_descuento`, `nombre_categoria`, `descripcion`) VALUES
 (1, 'Crédito Hipotecario', '2.5% de descuento en la tasa de créditos hipotecarios con BANCO CL para comprar tu casa en Colombia.'),
 (2, 'Cuota Tarjeta Crédito', '50% de descuento en la cuota de manejo de tarjetas BANCO CL en almacenes Éxito.'),
 (3, 'Transferencias Interbancarias', '0% de costo en transferencias a bancos colombianos con BANCO CL.'),
@@ -250,7 +250,7 @@ INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VAL
 
 -- DATOS DE HISTORIAL DE DESCUENTO
 
-INSERT INTO `Historial_Descuentos` (`id_historial_descuento`, `id_tarjeta`, `porcentaje_anterior`, `porcentaje_nuevo`, `fecha_cambio`) VALUES
+INSERT INTO Historial_Descuentos (`id_historial_descuento`, `id_tarjeta`, `porcentaje_anterior`, `porcentaje_nuevo`, `fecha_cambio`) VALUES
 (1, 20001, 10.00, 15.00, '2025-01-10'),
 (2, 20002, 0.00, 0.00, '2025-01-15'),
 (3, 20003, 0.00, 0.00, '2025-01-20'),
@@ -348,7 +348,7 @@ INSERT INTO Estado_Cuota (id_estado_cuota, descripcion) VALUES
 
 -- DATOS DE LA TABLA CUOTAS DE MANEJO
 
-INSERT INTO `Cuotas_de_Manejo` (`id_cuota_manejo`, `id_tarjeta`, `monto`, `fecha_vencimiento`, `id_estado_cuota`) VALUES
+INSERT INTO Cuotas_de_Manejo (`id_cuota_manejo`, `id_tarjeta`, `monto`, `fecha_vencimiento`, `id_estado_cuota`) VALUES
 (1, 20001, 15000.00, '2025-07-05', 4),
 (2, 20002, 20000.00, '2025-07-10', 5),
 (3, 20003, 25000.00, '2025-07-15', 4),
@@ -456,7 +456,7 @@ INSERT INTO Metodos_Pago (id_metodo, descripcion, estado_cuenta) VALUES
 
 -- DATOS DE LA TABLA PAGOS
 
-INSERT INTO `Pagos` (`id_pago`, `id_cuota_manejo`, `fecha_pago`, `monto`, `estado`, `id_metodo`) VALUES
+INSERT INTO Pagos (`id_pago`, `id_cuota_manejo`, `fecha_pago`, `monto`, `estado`, `id_metodo`) VALUES
 (1, 1, '2025-01-05', 15000.00, 'Completado', 5),
 (2, 2, '2025-01-10', 20000.00, 'Completado', 2),
 (3, 3, '2025-01-15', 25000.00, 'Pendiente', 3),
@@ -561,6 +561,8 @@ INSERT INTO Transacciones (id_transaccion, id_pago, fecha_transaccion, monto, ti
 (48, 148, '2025-06-18', 66000.00, 'Egreso'),
 (49, 149, '2025-06-19', 101000.00, 'Ingreso'),
 (50, 150, '2025-06-20', 73000.00, 'Egreso');
+
+
 
 -- DATOS DE LA TABLA PROMOCIONES --
 
