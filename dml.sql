@@ -34,7 +34,23 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 (31, 'Juan Esteban Romero', '2015-12-01', 'Gerente', 'juanestebanromero@empresa.com.co'),
 (32, 'Angie Paola Ruiz', '2020-10-08', 'Administrador', 'angiepaolaruiz@empresa.com.co'),
 (33, 'Carlos Mauricio Bonilla', '2018-05-19', 'Asesor', 'carlosmauriciobonilla@empresa.com.co'),
-
+(34, 'Tatiana Isabel Vargas', '2017-07-25', 'Coordinador', 'tatanaisabelvargas@empresa.com.co'),
+(35, 'Diego Fernando Cárdenas', '2023-03-10', 'Auxiliar', 'diegofernandocardenas@empresa.com.co'),
+(36, 'Paula Andrea Gallo', '2021-01-07', 'Consultor de Tarjetas', 'paulaandreagallo@empresa.com.co'),
+(37, 'Cristian David Salinas', '2019-09-18', 'Operador de Pagos', 'cristiandavidsalinas@empresa.com.co'),
+(38, 'Juliana María Quintero', '2020-06-03', 'Ejecutivo', 'julianamariaquintero@empresa.com.co'),
+(39, 'Oscar Leonardo Pineda', '2016-04-28', 'Auditor', 'oscarleonardopineda@empresa.com.co'),
+(40, 'Mónica Alejandra Díaz', '2022-12-21', 'Asesor', 'monicaalejandradiaz@empresa.com.co'),
+(41, 'Javier Andrés Núñez', '2017-03-15', 'Gerente', 'javierandresnunez@empresa.com.co'),
+(42, 'Daniela Tatiana López', '2018-10-27', 'Administrador', 'danielatatianalopez@empresa.com.co'),
+(43, 'Felipe Camilo Ortegón', '2023-04-14', 'Auxiliar', 'felipecamiloortegon@empresa.com.co'),
+(44, 'Luisa Fernanda Londoño', '2016-08-17', 'Consultor de Tarjetas', 'luisafernandalondono@empresa.com.co'),
+(45, 'Camila Andrea Jiménez', '2021-02-25', 'Operador de Pagos', 'camilaandreajimenez@empresa.com.co'),
+(46, 'Santiago Ramírez Hoyos', '2019-06-09', 'Coordinador', 'santiagoramirezhoyos@empresa.com.co'),
+(47, 'Valeria Sofía Barrera', '2020-11-12', 'Auditor', 'valeriasofiabarrera@empresa.com.co'),
+(48, 'Ricardo José Palacios', '2023-05-06', 'Asesor', 'ricardojosepalacios@empresa.com.co'),
+(49, 'Natalia Beatriz Cruz', '2017-01-13', 'Administrador', 'nataliabeatrizcruz@empresa.com.co'),
+(50, 'Manuel Alejandro Salcedo', '2022-08-29', 'Gerente', 'manuelalejandrosalcedo@empresa.com.co');
 
 
 
