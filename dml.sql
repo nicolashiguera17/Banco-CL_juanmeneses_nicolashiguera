@@ -14,4 +14,15 @@ INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_em
 (11, 'Tatiana Forero', '3847561920', '+57 3134567890', 'tatianaforero@gmail.com', 13),
 (12, 'Santiago León', '9081726345', '+57 3187890123', 'santiagoleon@gmail.com', 14),
 (13, 'Isabela Martínez', '6574839201', '+57 3107894561', 'isabelamartinez@gmail.com', 15),
-
+(14, 'Felipe Acosta', '1938475602', '+57 3129876543', 'felipeacosta@gmail.com', 12),
+(15, 'Laura Jiménez', '3847562910', '+57 3114561234', 'laurajimenez@gmail.com', 10),
+(16, 'Juliana Vargas', '2736458190', '+57 3199876543', 'julianavargas@gmail.com', 18),
+(17, 'Mateo Ramírez', '1982736450', '+57 3156789123', 'mateoramirez@gmail.com', 19),
+(18, 'Gabriela Romero', '8374652810', '+57 3137894561', 'gabrielaromero@gmail.com', 20),
+(19, 'Emilio Salinas', '3748592018', '+57 3124567890', 'emiliosalinas@gmail.com', 21),
+(20, 'Diana Lucía Morales', '6573849201', '+57 3103456789', 'dianamorales@gmail.com', 17),
+(21, 'Juan José Castillo', '2948571039', '+57 3198765432', 'juanjosecastillo@gmail.com', 22),
+(22, 'Natalia Cano', '1827364950', '+57 3165432187', 'nataliacano@gmail.com', 23),
+(23, 'Esteban Beltrán', '7583946201', '+57 3157896543', 'estebanbeltran@gmail.com', 16),
+(24, 'Daniela Montoya', '3847561928', '+57 3145678123', 'danielamontoya@gmail.com', 24),
+(25, 'Samuel Quintero', '1938475610', '+57 3117892345', 'samuelquintero@gmail.com', 25);
