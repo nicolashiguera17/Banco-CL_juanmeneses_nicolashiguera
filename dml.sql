@@ -150,6 +150,34 @@ INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
 (1556, 'Oro', 30000.00),
 (9450, 'Black', 100000.00);
 
+-- DATOS DE LOS DESCUENTOS
+
+INSERT INTO `Descuentos` (`id_descuento`, `nombre_categoria`, `descripcion`) VALUES
+(1, 'Crédito Hipotecario', '2.5% de descuento en la tasa de créditos hipotecarios con BANCO CL para comprar tu casa en Colombia.'),
+(2, 'Cuota Tarjeta Crédito', '50% de descuento en la cuota de manejo de tarjetas BANCO CL en almacenes Éxito.'),
+(3, 'Transferencias Interbancarias', '0% de costo en transferencias a bancos colombianos con BANCO CL.'),
+(4, 'Crédito de Consumo', '3% de descuento en la tasa de créditos de consumo para compras en Falabella con BANCO CL.'),
+(5, 'Seguro de Vida', '15% de descuento en pólizas de vida con BANCO CL para proteger a tu familia.'),
+(6, 'Préstamo Vehículo', '2% de descuento en la tasa de préstamos para comprar un Renault en Colombia con BANCO CL.'),
+(7, 'Cuenta Ahorros', 'Bono de $50.000 en apertura de cuentas de ahorro con BANCO CL.'),
+(8, 'Inversiones CDT', '0.8% adicional en la rentabilidad de CDT con BANCO CL para tus ahorros.'),
+(9, 'Tarjeta de Crédito', '20% de descuento en la primera compra en Alkosto con tarjeta BANCO CL.'),
+(10, 'Crédito Empresarial', '3.5% de descuento en la tasa de créditos para PYMES en Colombia con BANCO CL.'),
+(11, 'Seguro de Vehículo', '10% de descuento en seguros para carros con BANCO CL en talleres de Bogotá.'),
+(12, 'Retiros Cajero', 'Retiros sin costo en cajeros BANCO CL en todo el país durante 6 meses.'),
+(13, 'Tasa de Sobregiro', '25% de descuento en la tasa de sobregiro para clientes BANCO CL.'),
+(14, 'Transferencias Internacionales', '7% de descuento en comisiones por giros a familiares en el exterior con BANCO CL.'),
+(15, 'Plan de Ahorro', '12% de bonificación en el primer depósito de planes de ahorro con BANCO CL.'),
+(16, 'Crédito Educativo', '4% de descuento en la tasa de créditos para estudiar en universidades como Los Andes con BANCO CL.'),
+(17, 'Seguro de Hogar', '20% de descuento en seguros de hogar para casas en Medellín con BANCO CL.'),
+(18, 'Línea de Crédito', '1.5% de descuento en la tasa de líneas de crédito para negocios en Cali con BANCO CL.'),
+(19, 'Pago de Facturas', '0% de costo en pagos de servicios como EPM o Codensa con BANCO CL.'),
+(20, 'Fondo de Inversión', '10% de descuento en comisiones de fondos de inversión BANCO CL para el mercado colombiano.'),
+(21, 'Tarjeta Débito', '7% de cashback en compras en Olímpica con tarjeta débito BANCO CL.'),
+(22, 'Préstamo Personal', '2.5% de descuento en la tasa de préstamos personales para tus vacaciones en Cartagena con BANCO CL.'),
+(23, 'Seguro de Viaje', '25% de descuento en seguros de viaje para destinos como San Andrés con BANCO CL.'),
+(24, 'Cambio de Divisas', '5% de descuento en comisiones por cambio de dólares en casas de cambio con BANCO CL.'),
+(25, 'Cuenta Nómina', 'Bono de $100.000 en la apertura de cuentas nómina con BANCO CL.'),
 -- DATOS DE LA TARJETA --
 
 INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VALUES
