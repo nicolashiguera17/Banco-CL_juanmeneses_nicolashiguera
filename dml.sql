@@ -59,7 +59,7 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 
 
 
--- DATOS DE LA TABLA CLIENTES
+-- DATOS DE LA TABLA CLIENTES --
 
 INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_empleado) VALUES
 (1, 'Camila Hernández', '1293847583', ' 3114567890', 'camilahernandez@gmail.com', 5),
@@ -112,4 +112,21 @@ INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_em
 (48, 'Juan Pablo Benítez', '1982736451', ' 3166655443', 'juanpbenitez@gmail.com', 48),
 (49, 'Luciana Gualteros', '8374652811', ' 3175544332', 'lucianagualteros@gmail.com', 49),
 (50, 'Cristóbal Jiménez', '3748592019', ' 3184433221', 'cristobaljimenez@gmail.com', 50);
+
+-- -- DATOS DE LA TABLA TIPOS_TARJETA--
+
+INSERT INTO Tipos_Tarjeta (id_tipo_tarjeta, nombre_tipo, monto_apertura) VALUES
+(3618, 'Black', 750000.00),
+(3960, 'Internacional', 50000.00),
+(5541, 'Empresarial', 30000.00),
+(1241, 'Platina', 30000.00),
+(3310, 'Joven', 150000.00),
+(8488, 'Clásica', 50000.00),
+(2488, 'Digital', 50000.00),
+(2564, 'Premium', 750000.00),
+(1008, 'Premium', 150000.00),
+(4503, 'Joven', 150000.00),
+(9694, 'Eco', 500000.00),
+(4859, 'Platina', 500000.00),
+(5095, 'Black', 100000.00),
 
