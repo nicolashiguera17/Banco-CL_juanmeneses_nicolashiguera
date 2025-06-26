@@ -61,6 +61,38 @@ DELIMITER ;
 
 -- 5. Registrar automáticamente un nuevo cliente junto con su primera tarjeta y método de pago.
 
+DELIMITER $$
+
+CREATE PROCEDURE RegistrarClienteConTarjetaYMetodoPago(
+    IN p_nombre VARCHAR(100),
+    IN p_numero_cuenta VARCHAR(20),
+    IN p_telefono VARCHAR(20),
+    IN p_correo VARCHAR(100),
+    IN p_id_tipo_tarjeta BIGINT,
+    IN p_id_descuento BIGINT,
+    IN p_id_tipo_pago BIGINT
+)
+BEGIN
+    DECLARE v_id_cliente BIGINT;
+    DECLARE v_id_tarjeta BIGINT;
+
+    INSERT INTO Clientes (nombre, numero_cuenta, telefono, correo)
+    VALUES (p_nombre, p_numero_cuenta, p_telefono, p_correo);
+
+    SET v_id_cliente = LAST_INSERT_ID();
+
+    INSERT INTO Tarjetas (id_cliente, id_tipo_tarjeta, id_descuento)
+    VALUES (v_id_cliente, p_id_tipo_tarjeta, p_id_descuento);
+
+    SET v_id_tarjeta = LAST_INSERT_ID();
+
+    INSERT INTO Metodos_Pago (id_tarjeta, id_tipo_pago)
+    VALUES (v_id_tarjeta, p_id_tipo_pago);
+END $$
+
+DELIMITER ;
+
+
 -- 6. Aplicar promociones activas a todas las tarjetas elegibles de los clientes.
 
 -- 7. Generar alertas de vencimiento para cuotas de manejo próximas a vencer.
