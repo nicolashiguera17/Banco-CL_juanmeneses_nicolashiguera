@@ -32,6 +32,31 @@ DELIMITER ;
 
 -- 3. Generar el reporte mensual de cuotas de manejo por tarjeta y cliente.
 
+DELIMITER $$
+
+CREATE PROCEDURE ReporteMensualCuotas(
+    IN p_mes INT,
+    IN p_anio INT
+)
+BEGIN
+    SELECT 
+        c.id_cliente,
+        t.id_tarjeta,
+        cm.id_cuota_manejo,
+        cm.monto,
+        cm.fecha_vencimiento
+    FROM 
+        Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    WHERE 
+        MONTH(cm.fecha_vencimiento) = p_mes
+        AND YEAR(cm.fecha_vencimiento) = p_anio;
+END $$
+
+DELIMITER ;
+
+
 -- 4. Actualizar los descuentos asignados a tarjetas si se cambian las políticas del banco.
 
 -- 5. Registrar automáticamente un nuevo cliente junto con su primera tarjeta y método de pago.
