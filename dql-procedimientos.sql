@@ -123,6 +123,18 @@ DELIMITER ;
 
 -- 9. Reasignar cuotas impagas a un nuevo período si el pago fue fallido.
 
+DELIMITER $$
+
+CREATE PROCEDURE ReasignarCuotasImpagas()
+BEGIN
+    UPDATE Cuotas_de_Manejo
+    SET fecha_vencimiento = DATE_ADD(fecha_vencimiento, INTERVAL 1 MONTH)
+    WHERE id_estado_cuota = 2;
+END $$
+
+DELIMITER ;
+
+
 -- 10. Registrar en lote las cuotas de manejo correspondientes al mes siguiente para todas las tarjetas activas.
 
 -- 11. Actualizar el estado de una transacción según el resultado del método de pago.
