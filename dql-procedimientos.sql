@@ -97,6 +97,28 @@ DELIMITER ;
 
 -- 7. Generar alertas de vencimiento para cuotas de manejo próximas a vencer.
 
+DELIMITER $$
+
+CREATE PROCEDURE AlertasCuotasProximasAVencer()
+BEGIN
+    SELECT 
+        c.id_cliente,
+        c.nombre,
+        t.id_tarjeta,
+        cm.id_cuota_manejo,
+        cm.monto,
+        cm.fecha_vencimiento
+    FROM 
+        Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    WHERE 
+        cm.fecha_vencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY);
+END $$
+
+DELIMITER ;
+
+
 -- 8. Calcular y registrar el estado de las cuotas (aceptada, vencida, rechazada, etc.) al finalizar el mes.
 
 -- 9. Reasignar cuotas impagas a un nuevo período si el pago fue fallido.
