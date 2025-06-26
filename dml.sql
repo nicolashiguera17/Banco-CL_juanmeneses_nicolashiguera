@@ -55,56 +55,56 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 -- DATOS DE LA TABLA CLIENTES --
 
 INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_empleado) VALUES
-(1, 'Camila Hernández', '1293847583', ' 3114567890', 'camilahernandez@gmail.com', 5),
-(2, 'David Torres', '2309485761', ' 3167891234', 'davidtorres@gmail.com', 3),
+(1, 'Camila Hernández', '1293847583', '3114567890', 'camilahernandez@gmail.com', 5),
+(2, 'David Torres', '2309485761', '3167891234', 'davidtorres@gmail.com', 3),
 (3, 'Luisa Fernanda Gutiérrez', '9876543210', ' 3109876543', 'luisafernandag@mail.com', 7),
-(4, 'Andrés López', '5647382910', ' 3151234567', 'andreslopez@gmail.com', 2),
-(5, 'Sofía Pérez', '8473629102', ' 3147894561', 'sofiaperez@gmail.com', 1),
-(6, 'Juan Camilo Rodríguez', '3948571028', ' 3196543210', 'juancamilor@gmail.com', 9),
-(7, 'Valentina Rojas', '2983746501', ' 3123456789', 'valentinarojas@gmail.com', 4),
-(8, 'Carlos Eduardo Nieto', '8374659201', ' 3104567891', 'carlosnieto@gmail.com', 6),
-(9, 'Mariana Arias', '5647389201', ' 3145678902', 'marianaarias@gmail.com', 11),
-(10, 'Daniel Esteban Ruiz', '1092837465', ' 3171234567', 'danielruiz@gmail.com', 8),
-(11, 'Tatiana Forero', '3847561920', ' 3134567890', 'tatianaforero@gmail.com', 13),
-(12, 'Santiago León', '9081726345', ' 3187890123', 'santiagoleon@gmail.com', 14),
-(13, 'Isabela Martínez', '6574839201', ' 3107894561', 'isabelamartinez@gmail.com', 15),
-(14, 'Felipe Acosta', '1938475602', ' 3129876543', 'felipeacosta@gmail.com', 12),
-(15, 'Laura Jiménez', '3847562910', ' 3114561234', 'laurajimenez@gmail.com', 10),
-(16, 'Juliana Vargas', '2736458190', ' 3199876543', 'julianavargas@gmail.com', 18),
-(17, 'Mateo Ramírez', '1982736450', ' 3156789123', 'mateoramirez@gmail.com', 19),
-(18, 'Gabriela Romero', '8374652810', ' 3137894561', 'gabrielaromero@gmail.com', 20),
-(19, 'Emilio Salinas', '3748592018', ' 3124567890', 'emiliosalinas@gmail.com', 21),
-(20, 'Diana Lucía Morales', '6573849201', ' 3103456789', 'dianamorales@gmail.com', 17),
-(21, 'Juan José Castillo', '2948571039', ' 3198765432', 'juanjosecastillo@gmail.com', 22),
-(22, 'Natalia Cano', '1827364950', ' 3165432187', 'nataliacano@gmail.com', 23),
-(23, 'Esteban Beltrán', '7583946201', ' 3157896543', 'estebanbeltran@gmail.com', 16),
-(24, 'Daniela Montoya', '3847561928', ' 3145678123', 'danielamontoya@gmail.com', 24),
-(25, 'Samuel Quintero', '1938475610', ' 3117892345', 'samuelquintero@gmail.com', 25),
-(26, 'Camilo Cárdenas', '2039485762', ' 3109871234', 'camilocardenas@gmail.com', 26),
-(27, 'María Alejandra Ruiz', '8473629103', ' 3118765432', 'marialejandraruiz@gmail.com', 27),
-(28, 'Julián Escobar', '3847561921', ' 3127654321', 'julianescobar@gmail.com', 28),
-(29, 'Sara Milena Castro', '6574839202', ' 3136543210', 'saramilenacastro@gmail.com', 29),
-(30, 'Felipe Andrés Mejía', '1938475603', ' 3145432109', 'felipeandresmejia@gmail.com', 30),
-(31, 'Valentina Moreno', '9081726346', ' 3154321098', 'valentinamoreno@gmail.com', 31),
-(32, 'Andrés Felipe Duarte', '1293847584', ' 3163210987', 'andresfelipeduarte@gmail.com', 32),
-(33, 'Natalia Andrea Pino', '2309485762', ' 3172109876', 'nataliaandreapino@gmail.com', 33),
-(34, 'Tomás Giraldo', '9876543211', ' 3181098765', 'tomasgiraldo@gmail.com', 34),
-(35, 'Melany Rodríguez', '5647382911', ' 3199988776', 'melanyrodriguez@gmail.com', 35),
-(36, 'Sebastián Lozano', '8473629104', ' 3128877665', 'sebastianlozano@gmail.com', 36),
-(37, 'Isabela Cifuentes', '3948571029', ' 3107766554', 'isabelacifuentes@gmail.com', 37),
-(38, 'Juan Sebastián Mora', '2983746502', ' 3116655443', 'juansebastianmora@gmail.com', 38),
-(39, 'Manuela Torres', '8374659202', ' 3145544332', 'manuelatorres@gmail.com', 39),
-(40, 'Alejandro Molina', '5647389202', ' 3164433221', 'alejandromolina@gmail.com', 40),
-(41, 'Laura Valeria Chávez', '1092837466', ' 3173322110', 'laurachavez@gmail.com', 41),
-(42, 'David Santiago Buitrago', '3847561922', ' 3182211009', 'davidsbuitrago@gmail.com', 42),
-(43, 'Daniela Sofía Páez', '9081726347', ' 3191100998', 'danielasofia.paez@gmail.com', 43),
-(44, 'Emilio Andrés Barrera', '6574839203', ' 3120099887', 'emilioabarrera@gmail.com', 44),
-(45, 'Antonella Meneses', '1938475604', ' 3139988776', 'antonellameneses@gmail.com', 45),
-(46, 'Samuel Alejandro Rico', '3847562912', ' 3148877665', 'samuelarico@gmail.com', 46),
-(47, 'Mariana Sofía Prieto', '2736458191', ' 3157766554', 'marianaprieto@gmail.com', 47),
-(48, 'Juan Pablo Benítez', '1982736451', ' 3166655443', 'juanpbenitez@gmail.com', 48),
-(49, 'Luciana Gualteros', '8374652811', ' 3175544332', 'lucianagualteros@gmail.com', 49),
-(50, 'Cristóbal Jiménez', '3748592019', ' 3184433221', 'cristobaljimenez@gmail.com', 50);
+(4, 'Andrés López', '5647382910', '3151234567', 'andreslopez@gmail.com', 2),
+(5, 'Sofía Pérez', '8473629102', '3147894561', 'sofiaperez@gmail.com', 1),
+(6, 'Juan Camilo Rodríguez', '3948571028', '3196543210', 'juancamilor@gmail.com', 9),
+(7, 'Valentina Rojas', '2983746501', '3123456789', 'valentinarojas@gmail.com', 4),
+(8, 'Carlos Eduardo Nieto', '8374659201', '3104567891', 'carlosnieto@gmail.com', 6),
+(9, 'Mariana Arias', '5647389201', '3145678902', 'marianaarias@gmail.com', 11),
+(10, 'Daniel Esteban Ruiz', '1092837465', '3171234567', 'danielruiz@gmail.com', 8),
+(11, 'Tatiana Forero', '3847561920', '3134567890', 'tatianaforero@gmail.com', 13),
+(12, 'Santiago León', '9081726345', '3187890123', 'santiagoleon@gmail.com', 14),
+(13, 'Isabela Martínez', '6574839201', '3107894561', 'isabelamartinez@gmail.com', 15),
+(14, 'Felipe Acosta', '1938475602', '3129876543', 'felipeacosta@gmail.com', 12),
+(15, 'Laura Jiménez', '3847562910', '3114561234', 'laurajimenez@gmail.com', 10),
+(16, 'Juliana Vargas', '2736458190', '3199876543', 'julianavargas@gmail.com', 18),
+(17, 'Mateo Ramírez', '1982736450', '3156789123', 'mateoramirez@gmail.com', 19),
+(18, 'Gabriela Romero', '8374652810', '3137894561', 'gabrielaromero@gmail.com', 20),
+(19, 'Emilio Salinas', '3748592018', '3124567890', 'emiliosalinas@gmail.com', 21),
+(20, 'Diana Lucía Morales', '6573849201', '3103456789', 'dianamorales@gmail.com', 17),
+(21, 'Juan José Castillo', '2948571039', '3198765432', 'juanjosecastillo@gmail.com', 22),
+(22, 'Natalia Cano', '1827364950', '3165432187', 'nataliacano@gmail.com', 23),
+(23, 'Esteban Beltrán', '7583946201', '3157896543', 'estebanbeltran@gmail.com', 16),
+(24, 'Daniela Montoya', '3847561928', '3145678123', 'danielamontoya@gmail.com', 24),
+(25, 'Samuel Quintero', '1938475610', '3117892345', 'samuelquintero@gmail.com', 25),
+(26, 'Camilo Cárdenas', '2039485762', '3109871234', 'camilocardenas@gmail.com', 26),
+(27, 'María Alejandra Ruiz', '8473629103', '3118765432', 'marialejandraruiz@gmail.com', 27),
+(28, 'Julián Escobar', '3847561921', '3127654321', 'julianescobar@gmail.com', 28),
+(29, 'Sara Milena Castro', '6574839202', '3136543210', 'saramilenacastro@gmail.com', 29),
+(30, 'Felipe Andrés Mejía', '1938475603', '3145432109', 'felipeandresmejia@gmail.com', 30),
+(31, 'Valentina Moreno', '9081726346', '3154321098', 'valentinamoreno@gmail.com', 31),
+(32, 'Andrés Felipe Duarte', '1293847584', '3163210987', 'andresfelipeduarte@gmail.com', 32),
+(33, 'Natalia Andrea Pino', '2309485762', '3172109876', 'nataliaandreapino@gmail.com', 33),
+(34, 'Tomás Giraldo', '9876543211', '3181098765', 'tomasgiraldo@gmail.com', 34),
+(35, 'Melany Rodríguez', '5647382911', '3199988776', 'melanyrodriguez@gmail.com', 35),
+(36, 'Sebastián Lozano', '8473629104', '3128877665', 'sebastianlozano@gmail.com', 36),
+(37, 'Isabela Cifuentes', '3948571029', '3107766554', 'isabelacifuentes@gmail.com', 37),
+(38, 'Juan Sebastián Mora', '2983746502', '3116655443', 'juansebastianmora@gmail.com', 38),
+(39, 'Manuela Torres', '8374659202', '3145544332', 'manuelatorres@gmail.com', 39),
+(40, 'Alejandro Molina', '5647389202', '3164433221', 'alejandromolina@gmail.com', 40),
+(41, 'Laura Valeria Chávez', '1092837466', '3173322110', 'laurachavez@gmail.com', 41),
+(42, 'David Santiago Buitrago', '3847561922', '3182211009', 'davidsbuitrago@gmail.com', 42),
+(43, 'Daniela Sofía Páez', '9081726347', '3191100998', 'danielasofia.paez@gmail.com', 43),
+(44, 'Emilio Andrés Barrera', '6574839203', '3120099887', 'emilioabarrera@gmail.com', 44),
+(45, 'Antonella Meneses', '1938475604', '3139988776', 'antonellameneses@gmail.com', 45),
+(46, 'Samuel Alejandro Rico', '3847562912', '3148877665', 'samuelarico@gmail.com', 46),
+(47, 'Mariana Sofía Prieto', '2736458191', '3157766554', 'marianaprieto@gmail.com', 47),
+(48, 'Juan Pablo Benítez', '1982736451', '3166655443', 'juanpbenitez@gmail.com', 48),
+(49, 'Luciana Gualteros', '8374652811', '3175544332', 'lucianagualteros@gmail.com', 49),
+(50, 'Cristóbal Jiménez', '3748592019', '3184433221', 'cristobaljimenez@gmail.com', 50);
 
 -- DATOS DE LA TABLA TIPOS_TARJETA--
 
@@ -204,7 +204,7 @@ INSERT INTO Descuentos (`id_descuento`, `nombre_categoria`, `descripcion`) VALUE
 (49, 'Préstamo Salud', '3% de descuento en la tasa de créditos para procedimientos médicos con BANCO CL.'),
 (50, 'Cuenta Senior', 'Bono de $75.000 en apertura de cuentas para adultos mayores con BANCO CL.');
 
--- DATOS DE LA TARJETA --
+-- DATOS DE LA TARJETAS --
 
 INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VALUES
 (20001, 12, 3618, 5),
@@ -212,40 +212,40 @@ INSERT INTO Tarjetas (id_tarjeta, id_cliente, id_tipo_tarjeta, id_descuento) VAL
 (20003, 45, 5541, 12),
 (20004, 8, 1241, 7),
 (20005, 21, 3310, 18),
-(20006, 56, 8488, 2),
-(20007, 63, 2488, 6),
+(20006, 6, 8488, 2),
+(20007, 13, 2488, 6),
 (20008, 29, 2564, 14),
 (20009, 11, 1008, 9),
 (20010, 87, 4503, 1),
 (20011, 32, 9694, 4),
-(20012, 77, 4859, 11),
-(20013, 58, 5095, 13),
+(20012, 27, 4859, 11),
+(20013, 8, 5095, 13),
 (20014, 4, 8860, 10),
 (20015, 14, 7043, 16),
 (20016, 39, 7000, 8),
-(20017, 91, 2464, 17),
-(20018, 67, 6474, 15),
+(20017, 41, 2464, 17),
+(20018, 17, 6474, 15),
 (20019, 23, 1500, 2),
 (20020, 18, 7641, 5),
 (20021, 7, 4539, 1),
-(20022, 92, 2361, 20),
+(20022, 42, 2361, 20),
 (20023, 25, 5106, 6),
-(20024, 86, 7249, 9),
+(20024, 24, 7249, 9),
 (20025, 36, 4233, 3),
-(20026, 99, 4723, 12),
+(20026, 49, 4723, 12),
 (20027, 44, 1960, 8),
 (20028, 53, 4074, 19),
 (20029, 16, 5272, 10),
 (20030, 78, 7947, 7),
 (20031, 2, 2194, 18),
-(20032, 62, 1405, 4),
+(20032, 32, 1405, 4),
 (20033, 9, 3785, 11),
-(20034, 74, 8050, 17),
+(20034, 34, 8050, 17),
 (20035, 33, 4158, 13),
-(20036, 88, 8258, 14),
+(20036, 38, 8258, 14),
 (20037, 20, 1940, 16),
 (20038, 60, 2567, 15),
-(20039, 97, 1556, 3),
+(20039, 37, 1556, 3),
 (20040, 13, 9450, 6);
 
 -- DATOS DE HISTORIAL DE DESCUENTO
@@ -511,57 +511,56 @@ INSERT INTO Pagos (`id_pago`, `id_cuota_manejo`, `fecha_pago`, `monto`, `estado`
 -- DATOS DE LA TABLA TRANSACCIONES --
 
 INSERT INTO Transacciones (id_transaccion, id_pago, fecha_transaccion, monto, tipo_transaccion) VALUES
-(1, 101, '2024-12-05', 150000.00, 'Ingreso'),
-(2, 102, '2025-01-15', 80000.00, 'Egreso'),
-(3, 103, '2025-02-20', 120000.00, 'Ingreso'),
-(4, 104, '2025-03-10', 50000.00, 'Egreso'),
-(5, 105, '2025-03-18', 98000.00, 'Ingreso'),
-(6, 106, '2025-04-01', 75000.00, 'Egreso'),
-(7, 107, '2025-04-12', 60000.00, 'Ingreso'),
-(8, 108, '2025-04-25', 45000.00, 'Egreso'),
-(9, 109, '2025-05-03', 134000.00, 'Ingreso'),
-(10, 110, '2025-05-10', 72000.00, 'Egreso'),
-(11, 111, '2025-05-11', 96000.00, 'Ingreso'),
-(12, 112, '2025-05-12', 66000.00, 'Egreso'),
-(13, 113, '2025-05-13', 54000.00, 'Ingreso'),
-(14, 114, '2025-05-14', 89000.00, 'Egreso'),
-(15, 115, '2025-05-15', 102000.00, 'Ingreso'),
-(16, 116, '2025-05-16', 93000.00, 'Egreso'),
-(17, 117, '2025-05-17', 115000.00, 'Ingreso'),
-(18, 118, '2025-05-18', 64000.00, 'Egreso'),
-(19, 119, '2025-05-19', 123000.00, 'Ingreso'),
-(20, 120, '2025-05-20', 53000.00, 'Egreso'),
-(21, 121, '2025-05-21', 88000.00, 'Ingreso'),
-(22, 122, '2025-05-22', 47000.00, 'Egreso'),
-(23, 123, '2025-05-23', 134000.00, 'Ingreso'),
-(24, 124, '2025-05-24', 82000.00, 'Egreso'),
-(25, 125, '2025-05-25', 99000.00, 'Ingreso'),
-(26, 126, '2025-05-26', 72000.00, 'Egreso'),
-(27, 127, '2025-05-27', 110000.00, 'Ingreso'),
-(28, 128, '2025-05-28', 56000.00, 'Egreso'),
-(29, 129, '2025-05-29', 105000.00, 'Ingreso'),
-(30, 130, '2025-05-30', 68000.00, 'Egreso'),
-(31, 131, '2025-06-01', 121000.00, 'Ingreso'),
-(32, 132, '2025-06-02', 77000.00, 'Egreso'),
-(33, 133, '2025-06-03', 89000.00, 'Ingreso'),
-(34, 134, '2025-06-04', 43000.00, 'Egreso'),
-(35, 135, '2025-06-05', 94000.00, 'Ingreso'),
-(36, 136, '2025-06-06', 71000.00, 'Egreso'),
-(37, 137, '2025-06-07', 87000.00, 'Ingreso'),
-(38, 138, '2025-06-08', 49000.00, 'Egreso'),
-(39, 139, '2025-06-09', 108000.00, 'Ingreso'),
-(40, 140, '2025-06-10', 57000.00, 'Egreso'),
-(41, 141, '2025-06-11', 96000.00, 'Ingreso'),
-(42, 142, '2025-06-12', 64000.00, 'Egreso'),
-(43, 143, '2025-06-13', 122000.00, 'Ingreso'),
-(44, 144, '2025-06-14', 52000.00, 'Egreso'),
-(45, 145, '2025-06-15', 91000.00, 'Ingreso'),
-(46, 146, '2025-06-16', 49000.00, 'Egreso'),
-(47, 147, '2025-06-17', 119000.00, 'Ingreso'),
-(48, 148, '2025-06-18', 66000.00, 'Egreso'),
-(49, 149, '2025-06-19', 101000.00, 'Ingreso'),
-(50, 150, '2025-06-20', 73000.00, 'Egreso');
-
+(1, 1, '2024-12-05', 150000.00, 'Ingreso'),
+(2, 2, '2025-01-15', 80000.00, 'Egreso'),
+(3, 3, '2025-02-20', 120000.00, 'Ingreso'),
+(4, 4, '2025-03-10', 50000.00, 'Egreso'),
+(5, 5, '2025-03-18', 98000.00, 'Ingreso'),
+(6, 6, '2025-04-01', 75000.00, 'Egreso'),
+(7, 7, '2025-04-12', 60000.00, 'Ingreso'),
+(8, 8, '2025-04-25', 45000.00, 'Egreso'),
+(9, 9, '2025-05-03', 134000.00, 'Ingreso'),
+(10, 10, '2025-05-10', 72000.00, 'Egreso'),
+(11, 11, '2025-05-11', 96000.00, 'Ingreso'),
+(12, 12, '2025-05-12', 66000.00, 'Egreso'),
+(13, 13, '2025-05-13', 54000.00, 'Ingreso'),
+(14, 14, '2025-05-14', 89000.00, 'Egreso'),
+(15, 15, '2025-05-15', 102000.00, 'Ingreso'),
+(16, 16, '2025-05-16', 93000.00, 'Egreso'),
+(17, 17, '2025-05-17', 115000.00, 'Ingreso'),
+(18, 18, '2025-05-18', 64000.00, 'Egreso'),
+(19, 19, '2025-05-19', 123000.00, 'Ingreso'),
+(20, 20, '2025-05-20', 53000.00, 'Egreso'),
+(21, 21, '2025-05-21', 88000.00, 'Ingreso'),
+(22, 22, '2025-05-22', 47000.00, 'Egreso'),
+(23, 23, '2025-05-23', 134000.00, 'Ingreso'),
+(24, 24, '2025-05-24', 82000.00, 'Egreso'),
+(25, 25, '2025-05-25', 99000.00, 'Ingreso'),
+(26, 26, '2025-05-26', 72000.00, 'Egreso'),
+(27, 27, '2025-05-27', 110000.00, 'Ingreso'),
+(28, 28, '2025-05-28', 56000.00, 'Egreso'),
+(29, 29, '2025-05-29', 105000.00, 'Ingreso'),
+(30, 30, '2025-05-30', 68000.00, 'Egreso'),
+(31, 31, '2025-06-01', 121000.00, 'Ingreso'),
+(32, 32, '2025-06-02', 77000.00, 'Egreso'),
+(33, 33, '2025-06-03', 89000.00, 'Ingreso'),
+(34, 34, '2025-06-04', 43000.00, 'Egreso'),
+(35, 35, '2025-06-05', 94000.00, 'Ingreso'),
+(36, 36, '2025-06-06', 71000.00, 'Egreso'),
+(37, 37, '2025-06-07', 87000.00, 'Ingreso'),
+(38, 38, '2025-06-08', 49000.00, 'Egreso'),
+(39, 39, '2025-06-09', 108000.00, 'Ingreso'),
+(40, 40, '2025-06-10', 57000.00, 'Egreso'),
+(41, 41, '2025-06-11', 96000.00, 'Ingreso'),
+(42, 42, '2025-06-12', 64000.00, 'Egreso'),
+(43, 43, '2025-06-13', 122000.00, 'Ingreso'),
+(44, 44, '2025-06-14', 52000.00, 'Egreso'),
+(45, 45, '2025-06-15', 91000.00, 'Ingreso'),
+(46, 46, '2025-06-16', 49000.00, 'Egreso'),
+(47, 47, '2025-06-17', 119000.00, 'Ingreso'),
+(48, 48, '2025-06-18', 66000.00, 'Egreso'),
+(49, 49, '2025-06-19', 101000.00, 'Ingreso'),
+(50, 50, '2025-06-20', 73000.00, 'Egreso');
 -- DATOS DE LA TABLA NOTIFICACIONES
 
 INSERT INTO Notificaciones (`id_notificacion`, `id_cliente`, `mensaje`, `fecha_envio`, `tipo`, `leido`) VALUES
@@ -811,11 +810,13 @@ FLUSH PRIVILEGES;
 
 
 
+-- eliminar el operador de pago --
+DROP USER 'Operador_Pagos'@'localhost'; 
+
 -- rol como operador de pagos --
 CREATE USER 'Operador_Pagos'@'localhost' IDENTIFIED BY 'operador123';
 
--- eliminar el operador de pago --
-DROP USER 'Operador_Pagos'@'localhost'; 
+
 
 -- Permisos
 GRANT SELECT, INSERT, UPDATE ON banco.Pagos TO 'Operador_Pagos'@'localhost';
@@ -827,12 +828,13 @@ GRANT SELECT ON banco.Clientes TO 'Operador_Pagos'@'localhost';
 SHOW GRANTS FOR 'Operador_Pagos'@'localhost';
 FLUSH PRIVILEGES;
 
+-- eliminar el gerente --
+DROP USER 'Gerente'@'localhost'; 
 
 -- rol como gerente --
 CREATE USER 'Gerente'@'localhost' IDENTIFIED BY 'gerente123';
 
--- eliminar el gerente --
-DROP USER 'Gerente'@'localhost'; 
+
 
 GRANT SELECT ON banco.Tarjetas TO 'Gerente'@'localhost';
 GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Gerente'@'localhost';
@@ -845,12 +847,13 @@ GRANT SELECT ON banco.Descuentos TO 'Gerente'@'localhost';
 SHOW GRANTS FOR 'Gerente'@'localhost';
 FLUSH PRIVILEGES;
 
+-- eliminar el consultor de tarjetas --
+DROP USER 'Consultor_Tarjetas'@'localhost';
 
 -- rol como operador de consultor de tarjetas --
 CREATE USER 'Consultor_Tarjetas'@'localhost' IDENTIFIED BY 'consultor123';
 
--- eliminar el consultor de tarjetas --
-DROP USER 'Consultor_Tarjetas'@'localhost';
+
 
 GRANT SELECT ON banco.Tarjetas TO 'Consultor_Tarjetas'@'localhost';
 GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Consultor_Tarjetas'@'localhost';
@@ -862,11 +865,13 @@ FLUSH PRIVILEGES;
 
 
 
+--eliminar el auditor --
+DROP USER 'Auditor'@'localhost';
+
 --rol como auditor --
 CREATE USER 'Auditor'@'localhost' IDENTIFIED BY 'auditor123';
 
---eliminar el auditor --
-DROP USER 'Auditor'@'localhost';
+
 
 GRANT SELECT ON banco.Transacciones TO 'Auditor'@'localhost';
 GRANT SELECT ON banco.Promociones TO 'Auditor'@'localhost';
