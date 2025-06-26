@@ -823,6 +823,8 @@ GRANT SELECT, INSERT, UPDATE ON banco.Pagos TO 'Operador_Pagos'@'localhost';
 GRANT SELECT ON banco.Historial_Pagos TO 'Operador_Pagos'@'localhost';
 GRANT SELECT ON banco.Tarjetas TO 'Operador_Pagos'@'localhost';
 GRANT SELECT ON banco.Clientes TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON banco.Metodos_Pago TO 'Operador_Pagos'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Operador_Pagos'@'localhost';
@@ -842,6 +844,9 @@ GRANT SELECT ON banco.Pagos TO 'Gerente'@'localhost';
 GRANT SELECT ON banco.Transacciones TO 'Gerente'@'localhost';
 GRANT SELECT ON banco.Promociones TO 'Gerente'@'localhost';
 GRANT SELECT ON banco.Descuentos TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Clientes TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Tipos_Tarjeta TO 'Gerente'@'localhost';
+GRANT SELECT ON banco.Notificaciones TO 'Gerente'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Gerente'@'localhost';
@@ -858,6 +863,8 @@ CREATE USER 'Consultor_Tarjetas'@'localhost' IDENTIFIED BY 'consultor123';
 GRANT SELECT ON banco.Tarjetas TO 'Consultor_Tarjetas'@'localhost';
 GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Consultor_Tarjetas'@'localhost';
 GRANT SELECT ON banco.Tipos_Tarjeta TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON banco.Clientes TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON banco.Descuentos TO 'Consultor_Tarjetas'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Consultor_Tarjetas'@'localhost';
@@ -872,10 +879,13 @@ DROP USER 'Auditor'@'localhost';
 CREATE USER 'Auditor'@'localhost' IDENTIFIED BY 'auditor123';
 
 
-
 GRANT SELECT ON banco.Transacciones TO 'Auditor'@'localhost';
 GRANT SELECT ON banco.Promociones TO 'Auditor'@'localhost';
 GRANT SELECT ON banco.Pagos TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Tarjetas TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Clientes TO 'Auditor'@'localhost';
+GRANT SELECT ON banco.Historial_Descuentos TO 'Auditor'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Auditor'@'localhost';
