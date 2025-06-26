@@ -1,4 +1,32 @@
 -- 1. Registrar una nueva cuota de manejo calculando automáticamente el descuento según la tarjeta.--
+DELIMITER $$
+
+CREATE PROCEDURE RegistrarCuotaManejo(
+    IN p_id_tarjeta BIGINT,
+    IN p_monto_base DECIMAL(10,2),
+    IN p_fecha_vencimiento DATE
+)
+BEGIN
+    DECLARE v_id_descuento BIGINT;
+    DECLARE v_descuento_porcentaje DECIMAL(5,2);
+    DECLARE v_monto_final DECIMAL(10,2);
+
+    SELECT id_descuento INTO v_id_descuento
+    FROM Tarjetas
+    WHERE id_tarjeta = p_id_tarjeta;
+
+    SELECT CAST(descripcion AS DECIMAL(5,2)) INTO v_descuento_porcentaje
+    FROM Descuentos
+    WHERE id_descuento = v_id_descuento;
+
+    SET v_monto_final = p_monto_base - (p_monto_base * v_descuento_porcentaje / 100);
+
+    INSERT INTO Cuotas_de_Manejo (id_tarjeta, monto, fecha_vencimiento, id_estado_cuota)
+    VALUES (p_id_tarjeta, v_monto_final, p_fecha_vencimiento, 1);
+END $$
+
+DELIMITER ;
+
 
 -- 2. Procesar el pago de una cuota de manejo y actualizar el historial de pagos del cliente.
 

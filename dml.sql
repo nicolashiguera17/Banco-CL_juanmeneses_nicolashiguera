@@ -25,7 +25,7 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 (22, 'Karen Yuliana Salazar', '2020-01-04', 'Ejecutivo', 'karenyulianasalazar@empresa.com.co'),
 (23, 'Felipe Arturo Bernal', '2022-04-18', 'Coordinador', 'felipearturobernal@empresa.com.co'),
 (24, 'Sara Lucía Castaño', '2018-03-13', 'Asesor', 'saraluciacastano@empresa.com.co'),
-(25, 'Miguel Ángel Peña', '2016-09-09', 'Gerente', 'miguelangelpena@empresa.com.co');
+(25, 'Miguel Ángel Peña', '2016-09-09', 'Gerente', 'miguelangelpena@empresa.com.co'),
 (26, 'Lorena Isabel Mendoza', '2020-08-22', 'Administrador', 'lorenaisabelmendoza@empresa.com.co'),
 (27, 'Andrés Camilo Forero', '2019-04-16', 'Operador de Pagos', 'andrescamiloforero@empresa.com.co'),
 (28, 'Claudia Marcela Gil', '2023-02-11', 'Consultor de Tarjetas', 'claudiamarcelagil@empresa.com.co'),
@@ -57,7 +57,7 @@ INSERT INTO Empleados (id_empleado, nombre_empleado, fecha_ingreso, cargo, corre
 INSERT INTO Clientes (id_cliente, nombre, numero_cuenta, telefono, correo, id_empleado) VALUES
 (1, 'Camila Hernández', '1293847583', '3114567890', 'camilahernandez@gmail.com', 5),
 (2, 'David Torres', '2309485761', '3167891234', 'davidtorres@gmail.com', 3),
-(3, 'Luisa Fernanda Gutiérrez', '9876543210', ' 3109876543', 'luisafernandag@mail.com', 7),
+(3, 'Luisa Fernanda Gutiérrez', '9876543210', '3109876543', 'luisafernandag@mail.com', 7),
 (4, 'Andrés López', '5647382910', '3151234567', 'andreslopez@gmail.com', 2),
 (5, 'Sofía Pérez', '8473629102', '3147894561', 'sofiaperez@gmail.com', 1),
 (6, 'Juan Camilo Rodríguez', '3948571028', '3196543210', 'juancamilor@gmail.com', 9),
@@ -789,19 +789,19 @@ DROP USER 'Administrador'@'localhost';
 CREATE USER 'Administrador'@'localhost' IDENTIFIED BY 'Admin123!';
 
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Clientes TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tarjetas TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tipos_Tarjeta TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Cuotas_de_Manejo TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Descuentos TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Historial_Descuentos TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Metodos_Pago TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Transacciones TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Estado_Cuota TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Promociones TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Tarjetas_Promociones TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Pagos TO 'Administrador'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON banco.Historial_Pagos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Clientes TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Tarjetas TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Tipos_Tarjeta TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Cuotas_de_Manejo TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Descuentos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Historial_Descuentos TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Metodos_Pago TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Transacciones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Estado_Cuota TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Promociones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Tarjetas_Promociones TO 'Administrador'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Pagos TO 'Administrador'@'localhost';
+
 
 -- Validar
 
@@ -819,12 +819,11 @@ CREATE USER 'Operador_Pagos'@'localhost' IDENTIFIED BY 'operador123';
 
 
 -- Permisos
-GRANT SELECT, INSERT, UPDATE ON banco.Pagos TO 'Operador_Pagos'@'localhost';
-GRANT SELECT ON banco.Historial_Pagos TO 'Operador_Pagos'@'localhost';
-GRANT SELECT ON banco.Tarjetas TO 'Operador_Pagos'@'localhost';
-GRANT SELECT ON banco.Clientes TO 'Operador_Pagos'@'localhost';
-GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Operador_Pagos'@'localhost';
-GRANT SELECT ON banco.Metodos_Pago TO 'Operador_Pagos'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON Pagos TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON Tarjetas TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON Clientes TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON Cuotas_de_Manejo TO 'Operador_Pagos'@'localhost';
+GRANT SELECT ON Metodos_Pago TO 'Operador_Pagos'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Operador_Pagos'@'localhost';
@@ -838,15 +837,15 @@ CREATE USER 'Gerente'@'localhost' IDENTIFIED BY 'gerente123';
 
 
 
-GRANT SELECT ON banco.Tarjetas TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Pagos TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Transacciones TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Promociones TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Descuentos TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Clientes TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Tipos_Tarjeta TO 'Gerente'@'localhost';
-GRANT SELECT ON banco.Notificaciones TO 'Gerente'@'localhost';
+GRANT SELECT ON Tarjetas TO 'Gerente'@'localhost';
+GRANT SELECT ON Cuotas_de_Manejo TO 'Gerente'@'localhost';
+GRANT SELECT ON Pagos TO 'Gerente'@'localhost';
+GRANT SELECT ON Transacciones TO 'Gerente'@'localhost';
+GRANT SELECT ON Promociones TO 'Gerente'@'localhost';
+GRANT SELECT ON Descuentos TO 'Gerente'@'localhost';
+GRANT SELECT ON Clientes TO 'Gerente'@'localhost';
+GRANT SELECT ON Tipos_Tarjeta TO 'Gerente'@'localhost';
+GRANT SELECT ON Notificaciones TO 'Gerente'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Gerente'@'localhost';
@@ -860,11 +859,11 @@ CREATE USER 'Consultor_Tarjetas'@'localhost' IDENTIFIED BY 'consultor123';
 
 
 
-GRANT SELECT ON banco.Tarjetas TO 'Consultor_Tarjetas'@'localhost';
-GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Consultor_Tarjetas'@'localhost';
-GRANT SELECT ON banco.Tipos_Tarjeta TO 'Consultor_Tarjetas'@'localhost';
-GRANT SELECT ON banco.Clientes TO 'Consultor_Tarjetas'@'localhost';
-GRANT SELECT ON banco.Descuentos TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON Tarjetas TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON Cuotas_de_Manejo TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON Tipos_Tarjeta TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON Clientes TO 'Consultor_Tarjetas'@'localhost';
+GRANT SELECT ON Descuentos TO 'Consultor_Tarjetas'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Consultor_Tarjetas'@'localhost';
@@ -879,13 +878,13 @@ DROP USER 'Auditor'@'localhost';
 CREATE USER 'Auditor'@'localhost' IDENTIFIED BY 'auditor123';
 
 
-GRANT SELECT ON banco.Transacciones TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Promociones TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Pagos TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Cuotas_de_Manejo TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Tarjetas TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Clientes TO 'Auditor'@'localhost';
-GRANT SELECT ON banco.Historial_Descuentos TO 'Auditor'@'localhost';
+GRANT SELECT ON Transacciones TO 'Auditor'@'localhost';
+GRANT SELECT ON Promociones TO 'Auditor'@'localhost';
+GRANT SELECT ON Pagos TO 'Auditor'@'localhost';
+GRANT SELECT ON Cuotas_de_Manejo TO 'Auditor'@'localhost';
+GRANT SELECT ON Tarjetas TO 'Auditor'@'localhost';
+GRANT SELECT ON Clientes TO 'Auditor'@'localhost';
+GRANT SELECT ON Historial_Descuentos TO 'Auditor'@'localhost';
 
 -- Validar permisos
 SHOW GRANTS FOR 'Auditor'@'localhost';

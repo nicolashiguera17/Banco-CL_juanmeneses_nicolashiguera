@@ -1,236 +1,236 @@
--- crear la base de datos --
-CREATE DATABASE banco_cl;
-
--- usar la base de datos creada --
+-- Active: 1750963035337@@127.0.0.1@3307
+-- Crear base de datos --
+CREATE DATABASE IF NOT EXISTS banco_cl;
+-- usar la bas de datos --
 USE banco_cl;
 
--- eliminar tablas si existen previamente para evitar errores de duplicación --
-DROP TABLE IF EXISTS Empleados;
-DROP TABLE IF EXISTS Clientes;
-DROP TABLE IF EXISTS Tipos_Tarjeta;
-DROP TABLE IF EXISTS Descuentos;
-DROP TABLE IF EXISTS Tarjetas;
-DROP TABLE IF EXISTS Historial_Descuentos;
-DROP TABLE IF EXISTS Estado_Cuota;
-DROP TABLE IF EXISTS Cuotas_de_Manejo;
-DROP TABLE IF EXISTS Metodos_Pago;
-DROP TABLE IF EXISTS Pagos;
-DROP TABLE IF EXISTS Transacciones;
-DROP TABLE IF EXISTS Notificaciones;
-DROP TABLE IF EXISTS Promociones;
-DROP TABLE IF EXISTS Contactos_Clientes;
+-- Eliminar tablas si existen previamente para evitar errores de duplicación --
 DROP TABLE IF EXISTS Tarjetas_Promociones;
+DROP TABLE IF EXISTS Contactos_Clientes;
+DROP TABLE IF EXISTS Promociones;
+DROP TABLE IF EXISTS Notificaciones;
+DROP TABLE IF EXISTS Transacciones;
+DROP TABLE IF EXISTS Pagos;
+DROP TABLE IF EXISTS Metodos_Pago;
+DROP TABLE IF EXISTS Cuotas_de_Manejo;
+DROP TABLE IF EXISTS Estado_Cuota;
+DROP TABLE IF EXISTS Historial_Descuentos;
+DROP TABLE IF EXISTS Tarjetas;
+DROP TABLE IF EXISTS Descuentos;
+DROP TABLE IF EXISTS Tipos_Tarjeta;
+DROP TABLE IF EXISTS Clientes;
+DROP TABLE IF EXISTS Empleados;
 
--- crear tabla de empleados --
-CREATE TABLE `Empleados`(
-    `id_empleado` BIGINT NOT NULL,
-    `nombre_empleado` VARCHAR(255) NULL,
-    `fecha_ingreso` DATE NULL,
-    `cargo` VARCHAR(50) NULL,
-    `correo` VARCHAR(255) NULL,
-    PRIMARY KEY(`id_empleado`)
+-- Tabla: Empleados --
+CREATE TABLE `Empleados` (
+    `id_empleado` BIGINT NOT NULL AUTO_INCREMENT,
+    `nombre_empleado` VARCHAR(255),
+    `fecha_ingreso` DATE,
+    `cargo` VARCHAR(50),
+    `correo` VARCHAR(255),
+    PRIMARY KEY (`id_empleado`)
 );
 
--- crear tabla de clientes --
-CREATE TABLE `Clientes`(
-    `id_cliente` BIGINT NOT NULL,
-    `nombre` VARCHAR(255) NULL,
-    `numero_cuenta` VARCHAR(50) NULL,
-    `telefono` VARCHAR(20) NULL,
-    `correo` VARCHAR(255) NULL,
-    `id_empleado` BIGINT NULL,
-    PRIMARY KEY(`id_cliente`)
+-- Tabla: Clientes --
+CREATE TABLE `Clientes` (
+    `id_cliente` BIGINT NOT NULL AUTO_INCREMENT,
+    `nombre` VARCHAR(255),
+    `numero_cuenta` VARCHAR(50),
+    `telefono` VARCHAR(20),
+    `correo` VARCHAR(255),
+    `id_empleado` BIGINT,
+    PRIMARY KEY (`id_cliente`)
 );
 
--- crear tabla de tipos de tarjeta --
-CREATE TABLE `Tipos_Tarjeta`(
-    `id_tipo_tarjeta` BIGINT NOT NULL,
-    `nombre_tipo` VARCHAR(100) NULL,
-    `monto_apertura` DECIMAL(10, 2) NULL,
-    PRIMARY KEY(`id_tipo_tarjeta`)
+-- Tabla: Tipos_Tarjeta --
+CREATE TABLE `Tipos_Tarjeta` (
+    `id_tipo_tarjeta` BIGINT NOT NULL AUTO_INCREMENT,
+    `nombre_tipo` VARCHAR(100),
+    `monto_apertura` DECIMAL(10,2),
+    PRIMARY KEY (`id_tipo_tarjeta`)
 );
 
--- crear tabla de descuentos --
-CREATE TABLE `Descuentos`(
-    `id_descuento` BIGINT NOT NULL,
-    `nombre_categoria` VARCHAR(100) NULL,
-    `descripcion` VARCHAR(255) NULL,
-    PRIMARY KEY(`id_descuento`)
+-- Tabla: Descuentos --
+CREATE TABLE `Descuentos` (
+    `id_descuento` BIGINT NOT NULL AUTO_INCREMENT,
+    `nombre_categoria` VARCHAR(100),
+    `descripcion` VARCHAR(255),
+    PRIMARY KEY (`id_descuento`)
 );
 
--- crear tabla de tarjetas --
-CREATE TABLE `Tarjetas`(
-    `id_tarjeta` BIGINT NOT NULL,
-    `id_cliente` BIGINT NULL,
-    `id_tipo_tarjeta` BIGINT NULL,
-    `id_descuento` BIGINT NULL,
-    PRIMARY KEY(`id_tarjeta`)
+-- Tabla: Tarjetas --
+CREATE TABLE `Tarjetas` (
+    `id_tarjeta` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_cliente` BIGINT,
+    `id_tipo_tarjeta` BIGINT,
+    `id_descuento` BIGINT,
+    PRIMARY KEY (`id_tarjeta`)
 );
 
--- crear tabla historial de descuentos --
-CREATE TABLE `Historial_Descuentos`(
-    `id_historial_descuento` BIGINT NOT NULL,
-    `id_tarjeta` BIGINT NULL,
-    `porcentaje_anterior` DECIMAL(10, 2) NULL,
-    `porcentaje_nuevo` DECIMAL(10, 2) NULL,
-    `fecha_cambio` DATE NULL,
-    PRIMARY KEY(`id_historial_descuento`)
+-- Tabla: Historial_Descuentos --
+CREATE TABLE `Historial_Descuentos` (
+    `id_historial_descuento` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_tarjeta` BIGINT,
+    `porcentaje_anterior` DECIMAL(10,2),
+    `porcentaje_nuevo` DECIMAL(10,2),
+    `fecha_cambio` DATE,
+    PRIMARY KEY (`id_historial_descuento`)
 );
 
--- crear tabla de estado de cuotas --
-CREATE TABLE `Estado_Cuota`(
-    `id_estado_cuota` BIGINT NOT NULL,
-    `descripcion` VARCHAR(100) NULL,
-    PRIMARY KEY(`id_estado_cuota`)
+-- Tabla: Estado_Cuota --
+CREATE TABLE `Estado_Cuota` (
+    `id_estado_cuota` BIGINT NOT NULL AUTO_INCREMENT,
+    `descripcion` VARCHAR(100),
+    PRIMARY KEY (`id_estado_cuota`)
 );
 
--- crear tabla de cuotas de manejo --
-CREATE TABLE `Cuotas_de_Manejo`(
-    `id_cuota_manejo` BIGINT NOT NULL,
-    `id_tarjeta` BIGINT NULL,
-    `monto` DECIMAL(10, 2) NULL,
-    `fecha_vencimiento` DATE NULL,
-    `id_estado_cuota` BIGINT NULL,
-    PRIMARY KEY(`id_cuota_manejo`)
+-- Tabla: Cuotas_de_Manejo --
+CREATE TABLE `Cuotas_de_Manejo` (
+    `id_cuota_manejo` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_tarjeta` BIGINT,
+    `monto` DECIMAL(10,2),
+    `fecha_vencimiento` DATE,
+    `id_estado_cuota` BIGINT,
+    PRIMARY KEY (`id_cuota_manejo`)
 );
 
--- crear tabla de métodos de pago --
-CREATE TABLE `Metodos_Pago`(
-    `id_metodo` BIGINT NOT NULL,
-    `descripcion` VARCHAR(100) NULL,
-    `estado_cuenta` VARCHAR(50) NULL,
-    PRIMARY KEY(`id_metodo`)
+-- Tabla: Metodos_Pago --
+CREATE TABLE `Metodos_Pago` (
+    `id_metodo` BIGINT NOT NULL AUTO_INCREMENT,
+    `descripcion` VARCHAR(100),
+    `estado_cuenta` VARCHAR(50),
+    PRIMARY KEY (`id_metodo`)
 );
 
--- crear tabla de pagos --
-CREATE TABLE `Pagos`(
-    `id_pago` BIGINT NOT NULL,
-    `id_cuota_manejo` BIGINT NULL,
-    `fecha_pago` DATE NULL,
-    `monto` DECIMAL(10, 2) NULL,
-    `estado` VARCHAR(50) NULL,
-    `id_metodo` BIGINT NULL,
-    PRIMARY KEY(`id_pago`)
+-- Tabla: Pagos --
+CREATE TABLE `Pagos` (
+    `id_pago` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_cuota_manejo` BIGINT,
+    `fecha_pago` DATE,
+    `monto` DECIMAL(10,2),
+    `estado` VARCHAR(50),
+    `id_metodo` BIGINT,
+    PRIMARY KEY (`id_pago`)
 );
 
--- crear tabla de transacciones --
-CREATE TABLE `Transacciones`(
-    `id_transaccion` BIGINT NOT NULL,
-    `id_pago` BIGINT NULL,
-    `fecha_transaccion` DATE NULL,
-    `monto` DECIMAL(10, 2) NULL,
-    `tipo_transaccion` VARCHAR(50) NULL,
-    PRIMARY KEY(`id_transaccion`)
+-- Tabla: Transacciones --
+CREATE TABLE `Transacciones` (
+    `id_transaccion` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_pago` BIGINT,
+    `fecha_transaccion` DATE,
+    `monto` DECIMAL(10,2),
+    `tipo_transaccion` VARCHAR(50),
+    PRIMARY KEY (`id_transaccion`)
 );
 
--- crear tabla de notificaciones --
-CREATE TABLE `Notificaciones`(
-    `id_notificacion` BIGINT NOT NULL,
-    `id_cliente` BIGINT NULL,
-    `mensaje` VARCHAR(255) NULL,
-    `fecha_envio` DATE NULL,
-    `tipo` VARCHAR(50) NULL,
-    `leido` BOOLEAN NULL,
-    PRIMARY KEY(`id_notificacion`)
+-- Tabla: Notificaciones --
+CREATE TABLE `Notificaciones` (
+    `id_notificacion` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_cliente` BIGINT,
+    `mensaje` VARCHAR(255),
+    `fecha_envio` DATE,
+    `tipo` VARCHAR(50),
+    `leido` BOOLEAN,
+    PRIMARY KEY (`id_notificacion`)
 );
 
--- crear tabla de promociones --
-CREATE TABLE `Promociones`(
-    `id_promocion` BIGINT NOT NULL,
-    `nombre_promocion` VARCHAR(255) NULL,
-    `descuento_aplicado` DECIMAL(10, 2) NULL,
-    `fecha_inicio` DATE NULL,
-    `fecha_fin` DATE NULL,
-    PRIMARY KEY(`id_promocion`)
+-- Tabla: Promociones --
+CREATE TABLE `Promociones` (
+    `id_promocion` BIGINT NOT NULL AUTO_INCREMENT,
+    `nombre_promocion` VARCHAR(255),
+    `descuento_aplicado` DECIMAL(10,2),
+    `fecha_inicio` DATE,
+    `fecha_fin` DATE,
+    PRIMARY KEY (`id_promocion`)
 );
 
--- crear tabla de contactos de clientes --
-CREATE TABLE `Contactos_Clientes`(
-    `id_contacto` BIGINT NOT NULL,
-    `id_cliente` BIGINT NULL,
-    `tipo_contacto` VARCHAR(50) NULL,
-    `valor` VARCHAR(255) NULL,
-    `fecha_actualizacion` DATE NULL,
-    PRIMARY KEY(`id_contacto`)
+-- Tabla: Contactos_Clientes --
+CREATE TABLE `Contactos_Clientes` (
+    `id_contacto` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_cliente` BIGINT,
+    `tipo_contacto` VARCHAR(50),
+    `valor` VARCHAR(255),
+    `fecha_actualizacion` DATE,
+    PRIMARY KEY (`id_contacto`)
 );
 
--- crear tabla intermedia tarjetas-promociones --
-CREATE TABLE `Tarjetas_Promociones`(
-    `id_tarjeta_promocion` BIGINT NOT NULL,
-    `id_tarjeta` BIGINT NULL,
-    `id_promocion` BIGINT NULL,
-    `fecha_aplicacion` DATE NULL,
-    PRIMARY KEY(`id_tarjeta_promocion`)
+-- Tabla: Tarjetas_Promociones --
+CREATE TABLE `Tarjetas_Promociones` (
+    `id_tarjeta_promocion` BIGINT NOT NULL AUTO_INCREMENT,
+    `id_tarjeta` BIGINT,
+    `id_promocion` BIGINT,
+    `fecha_aplicacion` DATE,
+    PRIMARY KEY (`id_tarjeta_promocion`)
 );
 
--- agregar claves foráneas para relaciones entre tablas --
+-- Claves foráneas --
 
--- tarjetas → descuentos
-ALTER TABLE `Tarjetas` 
-    ADD CONSTRAINT `tarjetas_id_descuento_foreign` 
-    FOREIGN KEY(`id_descuento`) REFERENCES `Descuentos`(`id_descuento`);
-
--- transacciones → pagos
-ALTER TABLE `Transacciones` 
-    ADD CONSTRAINT `transacciones_id_pago_foreign` 
-    FOREIGN KEY(`id_pago`) REFERENCES `Pagos`(`id_pago`);
-
--- cuotas_de_manejo → tarjetas
-ALTER TABLE `Cuotas_de_Manejo` 
-    ADD CONSTRAINT `cuotas_de_manejo_id_tarjeta_foreign` 
-    FOREIGN KEY(`id_tarjeta`) REFERENCES `Tarjetas`(`id_tarjeta`);
-
--- pagos → métodos de pago
-ALTER TABLE `Pagos` 
-    ADD CONSTRAINT `pagos_id_metodo_foreign` 
-    FOREIGN KEY(`id_metodo`) REFERENCES `Metodos_Pago`(`id_metodo`);
-
--- contactos_clientes → clientes
-ALTER TABLE `Contactos_Clientes` 
-    ADD CONSTRAINT `contactos_clientes_id_cliente_foreign` 
-    FOREIGN KEY(`id_cliente`) REFERENCES `Clientes`(`id_cliente`);
-
--- clientes → empleados
-ALTER TABLE `Clientes` 
-    ADD CONSTRAINT `clientes_id_empleado_foreign` 
-    FOREIGN KEY(`id_empleado`) REFERENCES `Empleados`(`id_empleado`);
-
--- tarjetas_promociones → tarjetas
-ALTER TABLE `Tarjetas_Promociones` 
-    ADD CONSTRAINT `tarjetas_promociones_id_tarjeta_foreign` 
-    FOREIGN KEY(`id_tarjeta`) REFERENCES `Tarjetas`(`id_tarjeta`);
-
--- tarjetas → clientes
+-- La tabla Tarjetas se conecta con la tabla Clientes
 ALTER TABLE `Tarjetas` 
     ADD CONSTRAINT `tarjetas_id_cliente_foreign` 
-    FOREIGN KEY(`id_cliente`) REFERENCES `Clientes`(`id_cliente`);
+    FOREIGN KEY (`id_cliente`) REFERENCES `Clientes` (`id_cliente`);
 
--- cuotas_de_manejo → estado_cuota
-ALTER TABLE `Cuotas_de_Manejo` 
-    ADD CONSTRAINT `cuotas_de_manejo_id_estado_cuota_foreign` 
-    FOREIGN KEY(`id_estado_cuota`) REFERENCES `Estado_Cuota`(`id_estado_cuota`);
-
--- tarjetas → tipos_tarjeta
+-- La tabla Tarjetas se conecta con la tabla Tipos_Tarjeta
 ALTER TABLE `Tarjetas` 
     ADD CONSTRAINT `tarjetas_id_tipo_tarjeta_foreign` 
-    FOREIGN KEY(`id_tipo_tarjeta`) REFERENCES `Tipos_Tarjeta`(`id_tipo_tarjeta`);
+    FOREIGN KEY (`id_tipo_tarjeta`) REFERENCES `Tipos_Tarjeta` (`id_tipo_tarjeta`);
 
--- historial_descuentos → tarjetas
+-- La tabla Tarjetas se conecta con la tabla Descuentos
+ALTER TABLE `Tarjetas` 
+    ADD CONSTRAINT `tarjetas_id_descuento_foreign` 
+    FOREIGN KEY (`id_descuento`) REFERENCES `Descuentos` (`id_descuento`);
+
+-- La tabla Clientes se conecta con la tabla Empleados
+ALTER TABLE `Clientes` 
+    ADD CONSTRAINT `clientes_id_empleado_foreign` 
+    FOREIGN KEY (`id_empleado`) REFERENCES `Empleados` (`id_empleado`);
+
+-- La tabla Historial_Descuentos se conecta con la tabla Tarjetas
 ALTER TABLE `Historial_Descuentos` 
     ADD CONSTRAINT `historial_descuentos_id_tarjeta_foreign` 
-    FOREIGN KEY(`id_tarjeta`) REFERENCES `Tarjetas`(`id_tarjeta`);
+    FOREIGN KEY (`id_tarjeta`) REFERENCES `Tarjetas` (`id_tarjeta`);
 
--- notificaciones → clientes
-ALTER TABLE `Notificaciones` 
-    ADD CONSTRAINT `notificaciones_id_cliente_foreign` 
-    FOREIGN KEY(`id_cliente`) REFERENCES `Clientes`(`id_cliente`);
+-- La tabla Cuotas_de_Manejo se conecta con la tabla Tarjetas
+ALTER TABLE `Cuotas_de_Manejo` 
+    ADD CONSTRAINT `cuotas_de_manejo_id_tarjeta_foreign` 
+    FOREIGN KEY (`id_tarjeta`) REFERENCES `Tarjetas` (`id_tarjeta`);
 
--- pagos → cuotas_de_manejo
+-- La tabla Cuotas_de_Manejo se conecta con la tabla Estado_Cuota
+ALTER TABLE `Cuotas_de_Manejo` 
+    ADD CONSTRAINT `cuotas_de_manejo_id_estado_cuota_foreign` 
+    FOREIGN KEY (`id_estado_cuota`) REFERENCES `Estado_Cuota` (`id_estado_cuota`);
+
+-- La tabla Pagos se conecta con la tabla Cuotas_de_Manejo
 ALTER TABLE `Pagos` 
     ADD CONSTRAINT `pagos_id_cuota_manejo_foreign` 
-    FOREIGN KEY(`id_cuota_manejo`) REFERENCES `Cuotas_de_Manejo`(`id_cuota_manejo`);
+    FOREIGN KEY (`id_cuota_manejo`) REFERENCES `Cuotas_de_Manejo` (`id_cuota_manejo`);
 
--- tarjetas_promociones → promociones
+-- La tabla Pagos se conecta con la tabla Metodos_Pago
+ALTER TABLE `Pagos` 
+    ADD CONSTRAINT `pagos_id_metodo_foreign` 
+    FOREIGN KEY (`id_metodo`) REFERENCES `Metodos_Pago` (`id_metodo`);
+
+-- La tabla Transacciones se conecta con la tabla Pagos
+ALTER TABLE `Transacciones` 
+    ADD CONSTRAINT `transacciones_id_pago_foreign` 
+    FOREIGN KEY (`id_pago`) REFERENCES `Pagos` (`id_pago`);
+
+-- La tabla Notificaciones se conecta con la tabla Clientes
+ALTER TABLE `Notificaciones` 
+    ADD CONSTRAINT `notificaciones_id_cliente_foreign` 
+    FOREIGN KEY (`id_cliente`) REFERENCES `Clientes` (`id_cliente`);
+
+-- La tabla Contactos_Clientes se conecta con la tabla Clientes
+ALTER TABLE `Contactos_Clientes` 
+    ADD CONSTRAINT `contactos_clientes_id_cliente_foreign` 
+    FOREIGN KEY (`id_cliente`) REFERENCES `Clientes` (`id_cliente`);
+
+-- La tabla Tarjetas_Promociones se conecta con la tabla Tarjetas
 ALTER TABLE `Tarjetas_Promociones` 
-    ADD CONSTRAINT `tarjetas_promociones_id_promocion_fore
+    ADD CONSTRAINT `tarjetas_promociones_id_tarjeta_foreign` 
+    FOREIGN KEY (`id_tarjeta`) REFERENCES `Tarjetas` (`id_tarjeta`);
 
+-- La tabla Tarjetas_Promociones se conecta con la tabla Promociones
+ALTER TABLE `Tarjetas_Promociones` 
+    ADD CONSTRAINT `tarjetas_promociones_id_promocion_foreign` 
+    FOREIGN KEY (`id_promocion`) REFERENCES `Promociones` (`id_promocion`);
