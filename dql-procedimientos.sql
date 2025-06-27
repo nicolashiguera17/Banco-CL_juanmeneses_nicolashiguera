@@ -254,6 +254,28 @@ CALL InformePagosPorTipoTarjetaMes();
 
 -- 14. Suspender temporalmente tarjetas con tres o más cuotas de manejo vencidas.
 
+DELIMITER $$
+
+CREATE PROCEDURE SuspenderTarjetasVencidas()
+BEGIN
+    UPDATE Tarjetas t
+    SET t.estado = 'Suspendida'
+    WHERE t.id_tarjeta IN (
+        SELECT cm.id_tarjeta
+        FROM Cuotas_de_Manejo cm
+        WHERE cm.fecha_vencimiento < NOW()
+        AND cm.id_estado_cuota NOT IN (5, 9, 14, 19, 24, 29, 34, 39)
+        GROUP BY cm.id_tarjeta
+        HAVING COUNT(*) >= 3
+    );
+
+    SELECT 'Tarjetas con 3 o más cuotas vencidas suspendidas.' AS Mensaje;
+END $$
+
+DELIMITER ;
+
+CALL SuspenderTarjetasVencidas();
+
 -- 15. Calcular el monto total adeudado por cliente incluyendo cuotas pendientes y vencidas.
 
 -- 16. Asignar un nuevo método de pago principal a un cliente.
