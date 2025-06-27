@@ -30,6 +30,27 @@ DELIMITER ;
 
 -- 2. Procesar el pago de una cuota de manejo y actualizar el historial de pagos del cliente.
 
+DELIMITER $$
+
+
+CREATE PROCEDURE ProcesarPagoCuota(
+    IN p_id_cuota_manejo INT,
+    IN p_monto DECIMAL(10,2),
+    IN p_id_metodo INT,
+    IN p_estado VARCHAR(20)
+)
+BEGIN
+    INSERT INTO Pagos (id_cuota_manejo, fecha_pago, monto, estado, id_metodo)
+    VALUES (p_id_cuota_manejo, CURDATE(), p_monto, p_estado, p_id_metodo);
+
+    UPDATE Cuotas_de_Manejo
+    SET id_estado_cuota = (SELECT id_estado_cuota FROM Estado_Cuota WHERE descripcion = 'Pagada')
+    WHERE id_cuota_manejo = p_id_cuota_manejo;
+END $$
+
+DELIMITER ;
+
+CALL ProcesarPagoCuota(1, 15000.00, 5, 'Completado', '2025-06-26');
 -- 3. Generar el reporte mensual de cuotas de manejo por tarjeta y cliente.
 
 DELIMITER $$

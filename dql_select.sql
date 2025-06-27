@@ -2,6 +2,13 @@
 
 -- 2. Historial de pagos de un cliente específico
 
+    SELECT c.nombre, p.*, cm.*, t.*
+    FROM Clientes c
+    INNER JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    INNER JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    INNER JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    WHERE c.id_cliente = :id_cliente;
+
 -- 3. Total de cuotas de manejo pagadas durante un mes
 
 -- 4. Cuotas de manejo de los clientes con descuento aplicado
