@@ -375,6 +375,15 @@ JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta;
 
 -- 59. Total de promociones aplicadas por cliente
 
+SELECT
+    c.nombre,
+    COUNT(tp.id_tarjeta_promocion) AS total_promociones_aplicadas
+FROM Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+GROUP BY c.nombre
+ORDER BY total_promociones_aplicadas DESC;
+
 -- 60. Consultar tarjetas sin cuota de manejo asociada
 
 -- 61. Tarjetas que no han sido usadas para transacciones
