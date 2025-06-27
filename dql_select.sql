@@ -535,6 +535,18 @@ ORDER BY promedio_de_pago DESC;
 
 -- 83. Análisis de pagos por método (efectivo, tarjeta, etc.)
 
+SELECT
+    mp.descripcion AS metodo_pago,
+    COUNT(p.id_pago) AS cantidad_pagos,
+    SUM(p.monto) AS suma_total,
+    AVG(p.monto) AS promedio_pago,
+    MIN(p.monto) AS pago_minimo,
+    MAX(p.monto) AS pago_maximo
+FROM Pagos p
+JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo
+GROUP BY mp.descripcion
+ORDER BY suma_total DESC;
+
 -- 84. Cuotas más costosas del sistema
 
 -- 85. Clientes con mayor gasto mensual promedio
