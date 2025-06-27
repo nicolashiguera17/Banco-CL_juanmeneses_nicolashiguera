@@ -200,6 +200,25 @@ DELIMITER ;
 
 -- 17. Determinar el total de descuentos aplicados en un año específico.
 
+DELIMITER $$
+
+CREATE FUNCTION total_descuentos_por_anio(p_anio INT)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(descuento), 0)
+    INTO total
+    FROM transacciones
+    WHERE YEAR(fecha_transaccion) = p_anio;
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 18. Calcular la proporción de pagos en efectivo vs electrónicos por cliente.
 
 -- 19. Obtener el total de cuotas emitidas para un tipo de tarjeta.
