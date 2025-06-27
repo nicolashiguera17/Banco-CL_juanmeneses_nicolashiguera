@@ -592,6 +592,23 @@ ORDER BY
 
 -- 89. Clientes con más transacciones en el año
 
+SELECT
+    c.nombre,
+    COUNT(tr.id_transaccion) AS cantidad_transacciones
+FROM
+    Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+JOIN Transacciones tr ON p.id_pago = tr.id_pago
+WHERE
+    YEAR(tr.fecha_transaccion) = YEAR(CURDATE())
+GROUP BY
+    c.nombre
+ORDER BY
+    cantidad_transacciones DESC
+LIMIT 10;
+
 -- 90. Comparar número de cuotas por tipo de tarjeta
 
 -- 91. Descuentos con más frecuencia de aplicación
