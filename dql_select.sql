@@ -30,6 +30,15 @@ WHERE p.estado = 'Completado' AND YEAR(p.fecha_pago) = :anio AND MONTH(p.fecha_p
 -- 4. Cuotas de manejo de los clientes con descuento aplicado
 
 -- 5. Reporte mensual de las cuotas de manejo de cada tarjeta
+SELECT
+    id_tarjeta,
+    YEAR(fecha_vencimiento) AS anio,
+    MONTH(fecha_vencimiento) AS mes,
+    COUNT(id_cuota_manejo) AS cantidad_cuotas,
+    SUM(monto) AS monto_total_mensual
+FROMCuotas_de_Manejo cm
+GROUP BY id_tarjeta,anio,mes
+ORDER BY id_tarjeta, anio,mes;
 
 -- 6. Promociones activas durante una fecha específica
 
