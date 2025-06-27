@@ -270,6 +270,18 @@ ORDER BY monto_total_procesado DESC;
 
 -- 43. Cuotas vencidas por cliente
 
+SELECT
+    c.nombre,
+    COUNT(cm.id_cuota_manejo) AS cuotas_vencidas
+FROM
+    Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+WHERE cm.fecha_vencimiento < CURDATE()  AND ec.descripcion = 'Pendiente'
+GROUP BY  c.nombre
+ORDER BY  cuotas_vencidas DESC;
+
 -- 44. Listar promociones activas entre dos fechas
 
 -- 45. Consultar tarjetas con múltiples promociones
