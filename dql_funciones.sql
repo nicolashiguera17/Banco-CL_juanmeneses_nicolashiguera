@@ -22,6 +22,25 @@ DELIMITER ;
 
 -- 3. Calcular el saldo pendiente de pago de un cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION saldo_pendiente_cliente(p_id_cliente INT)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE saldo DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(monto_total - monto_pagado), 0)
+    INTO saldo
+    FROM transacciones
+    WHERE id_cliente = p_id_cliente AND estado = 'pendiente';
+
+    RETURN saldo;
+END $$
+
+DELIMITER ;
+
+
 -- 4. Estimar el total de pagos realizados por tipo de tarjeta durante un período determinado.
 
 -- 5. Calcular el monto total de las cuotas de manejo para todos los clientes de un mes.

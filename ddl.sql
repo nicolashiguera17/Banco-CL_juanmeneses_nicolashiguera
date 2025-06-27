@@ -1,4 +1,4 @@
--- Active: 1751023081714@@127.0.0.1@3307@banco_cl
+-- Active: 1750963035337@@127.0.0.1@3307@banco_cl
 -- Crear base de datos --
 CREATE DATABASE IF NOT EXISTS banco_cl;
 -- usar la bas de datos --
