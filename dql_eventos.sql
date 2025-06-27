@@ -77,6 +77,25 @@ DELIMITER ;
 -- 8. Actualizar las promociones activas según fecha de inicio y fin todos los días a las 00:00.
 
 -- 9. Generar un resumen semanal de transacciones para la gerencia.
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS resumen_semanal_transacciones
+ON SCHEDULE EVERY 1 WEEK
+STARTS CURRENT_DATE + INTERVAL 1 WEEK
+DO
+BEGIN
+  INSERT INTO resumen_transacciones (semana, total_transacciones, total_monto, fecha_generacion)
+  SELECT WEEK(CURRENT_DATE - INTERVAL 1 WEEK),
+         COUNT(*),
+         SUM(monto_total),
+         NOW()
+  FROM transacciones
+  WHERE fecha_transaccion >= CURRENT_DATE - INTERVAL 1 WEEK
+    AND fecha_transaccion < CURRENT_DATE;
+END $$
+
+DELIMITER ;
+
 
 -- 10. Validar y suspender tarjetas con tres cuotas vencidas al finalizar cada semana.
 
