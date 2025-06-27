@@ -121,6 +121,26 @@ DELIMITER ;
 
 -- 11. Calcular el total de cuotas vencidas de un cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION total_cuotas_vencidas_cliente(p_id_cliente INT)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(monto_total - monto_pagado), 0)
+    INTO total
+    FROM transacciones
+    WHERE id_cliente = p_id_cliente
+      AND estado = 'vencida';
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 12. Determinar el porcentaje de uso de promociones de un cliente.
 
 -- 13. Calcular el total recaudado por un tipo específico de promoción.
