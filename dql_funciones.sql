@@ -223,5 +223,25 @@ DELIMITER ;
 
 -- 19. Obtener el total de cuotas emitidas para un tipo de tarjeta.
 
+DELIMITER $$
+
+CREATE FUNCTION total_cuotas_por_tipo_tarjeta(p_tipo_tarjeta VARCHAR(50))
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(monto_total), 0)
+    INTO total
+    FROM transacciones t
+    JOIN tarjetas ta ON t.id_tarjeta = ta.id_tarjeta
+    WHERE ta.tipo = p_tipo_tarjeta;
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 20. Evaluar si un cliente es elegible para promociones especiales (por historial).
 
