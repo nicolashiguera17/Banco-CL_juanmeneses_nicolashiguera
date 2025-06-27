@@ -491,6 +491,13 @@ ORDER BY total_pagado DESC;
 -- 76. Top 5 clientes con más pagos realizados
 
 -- 77. Total de promociones utilizadas por mes
+SELECT
+    YEAR(fecha_aplicacion) AS anio,
+    MONTH(fecha_aplicacion) AS mes,
+    COUNT(id_tarjeta_promocion) AS total_promociones
+FROM Tarjetas_Promociones
+GROUP BY anio, mes
+ORDER BY anio, mes;
 
 -- 78. Clientes que nunca han aplicado promociones
 
