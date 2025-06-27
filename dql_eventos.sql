@@ -1,5 +1,20 @@
 -- 1. Generar reportes automáticos de cuotas de manejo al finalizar cada mes.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS generar_reporte_cuotas_manejo
+ON SCHEDULE EVERY 1 MONTH
+STARTS CURRENT_DATE + INTERVAL 1 MONTH
+DO
+BEGIN
+  INSERT INTO reportes_cuotas_manejo (id_tarjeta, monto, mes, anio)
+  SELECT id_tarjeta, cuota_manejo, MONTH(CURRENT_DATE - INTERVAL 1 MONTH), YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
+  FROM tarjetas;
+END $$
+
+DELIMITER ;
+
+
 -- 2. Actualizar el estado de las cuotas de manejo al final de cada día.
 
 -- 3. Enviar alertas por correo electrónico cuando se registre un pago pendiente de más de un mes.
@@ -38,3 +53,13 @@
 
 -- 20. Cerrar el ciclo mensual de gestión de pagos y generar reporte anual en diciembre.
 
+-- 1. Generar reportes automáticos de cuotas de manejo al finalizar cada mes.
+-- 3. Enviar alertas por correo electrónico cuando se registre un pago pendiente de más de un mes.
+-- 5. Actualizar los registros de pagos mensuales de clientes a partir de las transacciones realizadas.
+-- 7. Borrar registros temporales y logs de sistema cada domingo a medianoche.
+-- 9. Generar un resumen semanal de transacciones para la gerencia.
+-- 11. Migrar cuotas vencidas de un mes al historial el primer día del mes siguiente.
+-- 13. Recalcular el saldo pendiente de cada cliente el primer día del mes.
+-- 15. Reasignar automáticamente métodos de pago inactivos después de 90 días.
+-- 17. Recalcular estadísticas de uso de promociones cada semana.
+-- 19. Eliminar automáticamente registros de alertas antiguas cada mes.
