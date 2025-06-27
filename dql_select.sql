@@ -437,6 +437,15 @@ WHERE tt.nombre_tipo IN ('Black', 'Premium', 'Platina');
 
 -- 69. Clientes nuevos registrados en el último trimestre
 
+SELECT
+    c.id_cliente,
+    c.nombre,
+    MIN(cc.fecha_actualizacion) AS fecha_registro
+FROM Clientes c
+JOIN  Contactos_Clientes cc ON c.id_cliente = cc.id_cliente
+GROUP BY c.id_cliente, c.nombre
+HAVING fecha_registro >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
 -- 70. Consultar tarjetas activas con más de 5 cuotas pagadas
 
 -- 71. Clientes con pagos pendientes en los últimos tres meses
