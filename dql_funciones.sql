@@ -69,6 +69,25 @@ DELIMITER ;
 
 -- 7. Obtener el número total de transacciones de un cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION total_transacciones_cliente(p_id_cliente INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+
+    SELECT COUNT(*)
+    INTO total
+    FROM transacciones
+    WHERE id_cliente = p_id_cliente;
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 8. Calcular el promedio de cuotas de manejo pagadas por cliente.
 
 -- 9. Evaluar si una tarjeta está al día con sus pagos.
