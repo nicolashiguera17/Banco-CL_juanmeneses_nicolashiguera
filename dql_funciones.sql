@@ -168,6 +168,34 @@ DELIMITER ;
 
 -- 15. Evaluar si una tarjeta ha superado el monto de apertura inicial.
 
+DELIMITER $$
+
+CREATE FUNCTION tarjeta_supero_monto_apertura(p_id_tarjeta INT)
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    DECLARE monto_apertura DECIMAL(10,2);
+    DECLARE total_usado DECIMAL(10,2);
+
+    SELECT monto_apertura INTO monto_apertura
+    FROM tarjetas
+    WHERE id_tarjeta = p_id_tarjeta;
+
+    SELECT IFNULL(SUM(monto_total), 0)
+    INTO total_usado
+    FROM transacciones
+    WHERE id_tarjeta = p_id_tarjeta;
+
+    IF total_usado > monto_apertura THEN
+        RETURN 'SI';
+    ELSE
+        RETURN 'NO';
+    END IF;
+END $$
+
+DELIMITER ;
+
+
 -- 16. Calcular cuántos métodos de pago tiene registrado un cliente.
 
 -- 17. Determinar el total de descuentos aplicados en un año específico.
