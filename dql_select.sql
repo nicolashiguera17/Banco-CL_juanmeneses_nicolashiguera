@@ -402,6 +402,14 @@ WHERE  tr.id_transaccion IS NULL;
 
 -- 63. Cuotas agrupadas por estado (aceptada, rechazada, etc.)
 
+SELECT
+    ec.descripcion,
+    COUNT(cm.id_cuota_manejo) AS cantidad_de_cuotas
+FROM Cuotas_de_Manejo cm
+JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+GROUP BY ec.descripcion
+ORDER BY cantidad_de_cuotas DESC;
+
 -- 64. Consultar pagos y promociones por cliente
 
 -- 65. Consultar promociones que vencen este mes
