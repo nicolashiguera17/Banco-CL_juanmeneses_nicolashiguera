@@ -53,6 +53,22 @@ DELIMITER ;
 
 -- 7. Al registrar un nuevo cliente, crear automáticamente su historial vacío de pagos y cuotas.
 
+DELIMITER $$
+
+CREATE TRIGGER crear_historial_cliente
+AFTER INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+  INSERT INTO Historial_Pagos (id_cliente, descripcion)
+  VALUES (NEW.id_cliente, 'Historial inicial vacío');
+
+  INSERT INTO Historial_Cuotas (id_cliente, descripcion)
+  VALUES (NEW.id_cliente, 'Historial de cuotas inicial vacío');
+END $$
+
+DELIMITER ;
+
+
 -- 8. Al eliminar un cliente, borrar todas sus tarjetas y pagos asociados.
 
 -- 9. Al actualizar el estado de una cuota a "pagada", insertar un registro en el historial de pagos.
