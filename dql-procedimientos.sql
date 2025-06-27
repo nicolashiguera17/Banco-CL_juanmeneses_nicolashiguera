@@ -51,6 +51,7 @@ END $$
 DELIMITER ;
 
 CALL ProcesarPagoCuota(1, 15000.00, 5, 'Completado', '2025-06-26');
+
 -- 3. Generar el reporte mensual de cuotas de manejo por tarjeta y cliente.
 
 DELIMITER $$
@@ -79,6 +80,27 @@ DELIMITER ;
 
 
 -- 4. Actualizar los descuentos asignados a tarjetas si se cambian las políticas del banco.
+
+DELIMITER $$
+
+CREATE PROCEDURE ActualizarDescuentosTarjetas(
+    IN p_id_tipo_tarjeta INT,
+    IN p_id_descuento_nuevo INT
+)
+BEGIN
+    INSERT INTO Historial_Descuentos (id_tarjeta, porcentaje_anterior, porcentaje_nuevo, fecha_cambio)
+    SELECT id_tarjeta, 0.0, 0.0, CURDATE()
+    FROM Tarjetas
+    WHERE id_tipo_tarjeta = p_id_tipo_tarjeta;
+
+    UPDATE Tarjetas
+    SET id_descuento = p_id_descuento_nuevo
+    WHERE id_tipo_tarjeta = p_id_tipo_tarjeta;
+END $$
+
+DELIMITER ;
+
+CALL ActualizarDescuentosTarjetas(1241, 7);
 
 -- 5. Registrar automáticamente un nuevo cliente junto con su primera tarjeta y método de pago.
 
