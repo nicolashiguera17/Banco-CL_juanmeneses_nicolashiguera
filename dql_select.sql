@@ -300,6 +300,16 @@ HAVING COUNT(tp.id_promocion) > 1;
 
 -- 47. Transacciones agrupadas por mes
 
+SELECT
+    YEAR(fecha_transaccion) AS anio,
+    MONTH(fecha_transaccion) AS mes,
+    tipo_transaccion,
+    COUNT(id_transaccion) AS cantidad_transacciones,
+    SUM(monto) AS monto_total
+FROM Transacciones
+GROUP BY  anio, mes, tipo_transaccion
+ORDER BY anio, mes, tipo_transaccion;
+
 -- 48. Tarjetas por tipo con su promedio de cuota de manejo
 
 -- 49. Consultar clientes sin cuotas asociadas
