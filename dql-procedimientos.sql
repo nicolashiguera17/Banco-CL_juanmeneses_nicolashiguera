@@ -319,3 +319,15 @@ CALL AplicarDescuentoEspecialCuotas();
 -- 19. Registrar el resumen mensual de ingresos generados por pagos de cuotas.
 
 -- 20. Eliminar automáticamente los registros de historial de pagos que superen 5 años de antigüedad.
+
+DELIMITER $$
+
+CREATE PROCEDURE EliminarPagosAntiguos()
+BEGIN
+    DELETE FROM Pagos
+    WHERE fecha_pago < DATE_SUB(NOW(), INTERVAL 5 YEAR);
+END $$
+
+DELIMITER ;
+
+CALL EliminarPagosAntiguos();
