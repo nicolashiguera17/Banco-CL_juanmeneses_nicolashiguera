@@ -114,6 +114,30 @@ DELIMITER ;
 
 -- 13. Al insertar una nueva cuota, verificar si hay promociones vigentes y aplicarlas automáticamente.
 
+DELIMITER $$
+
+CREATE TRIGGER aplicar_promocion_nueva_cuota
+AFTER INSERT ON Cuotas_de_Manejo
+FOR EACH ROW
+BEGIN
+  DECLARE promo_descuento DECIMAL(5,2);
+
+  SELECT porcentaje INTO promo_descuento
+  FROM Promociones
+  WHERE estado = 'Activa'
+  ORDER BY fecha_inicio DESC
+  LIMIT 1;
+
+  IF promo_descuento IS NOT NULL THEN
+    UPDATE Cuotas_de_Manejo
+    SET monto = monto * (1 - promo_descuento / 100)
+    WHERE id_cuota_manejo = NEW.id_cuota_manejo;
+  END IF;
+END $$
+
+DELIMITER ;
+
+
 -- 14. Al cambiar el tipo de tarjeta, reasignar el monto de apertura y su nueva cuota de manejo.
 
 -- 15. Al insertar una nueva transacción, validar si el monto excede cierto límite y registrar alerta.
