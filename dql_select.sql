@@ -2,11 +2,11 @@
 SELECT
     c.nombre AS nombre_cliente,
     t.id_tarjeta,
-    cm.monto AS cuota_de_manejo,
-    cm.fecha_vencimiento
+    monto AS cuota_de_manejo,
+    fecha_vencimiento
 FROM Clientes c
 JOIN Tarjetas t ON c.id_cliente = t.id_cliente
-JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = id_tarjeta
 ORDER BY c.nombre, t.id_tarjeta;
 
 
@@ -15,11 +15,17 @@ ORDER BY c.nombre, t.id_tarjeta;
     SELECT c.nombre, p.*, cm.*, t.*
     FROM Clientes c
     INNER JOIN Tarjetas t ON c.id_cliente = t.id_cliente
-    INNER JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
-    INNER JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    INNER JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = id_tarjeta
+    INNER JOIN Pagos p ON id_cuota_manejo = p.id_cuota_manejo
     WHERE c.id_cliente = :id_cliente;
 
 -- 3. Total de cuotas de manejo pagadas durante un mes
+
+SELECT
+    SUM(p.monto) AS total_pagado_en_el_mes
+FROM
+    Pagos p
+WHERE p.estado = 'Completado' AND YEAR(p.fecha_pago) = :anio AND MONTH(p.fecha_pago) = :mes;
 
 -- 4. Cuotas de manejo de los clientes con descuento aplicado
 
