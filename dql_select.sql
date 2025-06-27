@@ -575,6 +575,19 @@ ORDER BY gasto_mensual_promedio DESC;
 
 -- 87. Comparación de uso entre tipos de tarjeta
 
+SELECT
+    tt.nombre_tipo,
+    COUNT(p.id_pago) AS numero_de_usos
+FROM
+    Tipos_Tarjeta tt
+JOIN Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY
+    tt.nombre_tipo
+ORDER BY
+    numero_de_usos DESC;
+
 -- 88. Ranking de promociones más utilizadas
 
 -- 89. Clientes con más transacciones en el año
