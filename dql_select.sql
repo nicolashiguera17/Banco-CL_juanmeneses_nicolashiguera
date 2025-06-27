@@ -55,6 +55,13 @@ WHERE c.id_cliente = :id_cliente;
 -- 8. Consultar todas las transacciones realizadas por tarjeta
 
 -- 9. Tarjetas que tienen promociones aplicadas
+SELECT DISTINCT t.id_tarjeta,c.nombre AS nombre_cliente,
+    nombre_tipo AS tipo_tarjeta
+FROM Tarjetas t
+JOIN Tarjetas_Promociones tp ON t.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = t.id_tipo_tarjeta
+ORDER BY t.id_tarjeta;
 
 -- 10. Clientes que han utilizado más de un tipo de tarjeta
 
