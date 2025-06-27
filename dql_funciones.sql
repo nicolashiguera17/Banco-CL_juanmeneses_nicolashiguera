@@ -1,5 +1,23 @@
 -- 1. Calcular la cuota de manejo para un cliente según su tipo de tarjeta y monto de apertura.
 
+DELIMITER $$
+
+CREATE FUNCTION CalcularCuotaManejo(id_cliente BIGINT) 
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+  DECLARE monto DECIMAL(10,2);
+  SELECT tt.monto_apertura INTO monto
+  FROM Tarjetas t
+  JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+  WHERE t.id_cliente = id_cliente
+  LIMIT 1;
+  RETURN monto;
+END $$
+
+DELIMITER ;
+
+
 -- 2. Estimar el descuento total aplicado sobre la cuota de manejo de una tarjeta.
 
 -- 3. Calcular el saldo pendiente de pago de un cliente.
@@ -37,3 +55,4 @@
 -- 19. Obtener el total de cuotas emitidas para un tipo de tarjeta.
 
 -- 20. Evaluar si un cliente es elegible para promociones especiales (por historial).
+
