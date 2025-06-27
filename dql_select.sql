@@ -388,6 +388,16 @@ ORDER BY total_promociones_aplicadas DESC;
 
 -- 61. Tarjetas que no han sido usadas para transacciones
 
+SELECT
+    t.id_tarjeta,
+    c.nombre AS nombre_cliente
+FROM Tarjetas t
+LEFT JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+LEFT JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+LEFT JOIN Transacciones tr ON p.id_pago = tr.id_pago
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+WHERE  tr.id_transaccion IS NULL;
+
 -- 62. Cuotas de manejo mayores al promedio
 
 -- 63. Cuotas agrupadas por estado (aceptada, rechazada, etc.)
