@@ -95,6 +95,21 @@ DELIMITER ;
 
 -- 11. Al eliminar un método de pago, desvincularlo automáticamente de las tarjetas del cliente.
 
+DELIMITER $$
+
+CREATE TRIGGER desvincular_tarjetas_al_eliminar_pago
+BEFORE DELETE ON Metodos_Pago
+FOR EACH ROW
+BEGIN
+  UPDATE Tarjetas
+  SET id_metodo_pago = NULL
+  WHERE id_metodo_pago = OLD.id_metodo;
+END $$
+
+DELIMITER ;
+
+
+
 -- 12. Al modificar una fecha de vencimiento de una cuota, recalcular la alerta de pago.
 
 -- 13. Al insertar una nueva cuota, verificar si hay promociones vigentes y aplicarlas automáticamente.
