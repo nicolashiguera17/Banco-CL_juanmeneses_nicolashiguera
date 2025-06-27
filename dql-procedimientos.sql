@@ -225,9 +225,30 @@ END $$
 DELIMITER ;
 
 CALL RegistrarCuotasMesSiguiente();
+
 -- 11. Actualizar el estado de una transacción según el resultado del método de pago.
 
 -- 12. Generar un informe consolidado de pagos por tipo de tarjeta y mes.
+
+DELIMITER $$
+
+CREATE PROCEDURE InformePagosPorTipoTarjetaMes()
+BEGIN
+    SELECT 
+        tt.nombre_tipo,
+        p.fecha_pago AS mes_pago,
+        SUM(p.monto)
+    FROM Pagos p, Cuotas_de_Manejo cm, Tarjetas t, Tipos_Tarjeta tt
+    WHERE p.id_cuota_manejo = cm.id_cuota_manejo
+    AND cm.id_tarjeta = t.id_tarjeta
+    AND t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+    AND p.estado = 'Completado'
+    GROUP BY tt.nombre_tipo, p.fecha_pago;
+END $$
+
+DELIMITER ;
+
+CALL InformePagosPorTipoTarjetaMes();
 
 -- 13. Insertar automáticamente el historial de promociones usadas por cada cliente.
 
