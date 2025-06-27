@@ -301,6 +301,21 @@ CALL AsignarMetodoPagoPrincipal(1, 5);
 
 -- 18. Aplicar un descuento especial a todas las cuotas del mes si es Black Friday o fechas especiales.
 
+DELIMITER $$
+
+CREATE PROCEDURE AplicarDescuentoEspecialCuotas()
+BEGIN
+    UPDATE Cuotas_de_Manejo cm, Promociones p
+    SET cm.monto = cm.monto * (1 - p.descuento_aplicado / 100)
+    WHERE NOW() BETWEEN p.fecha_inicio AND p.fecha_fin
+    AND YEAR(cm.fecha_vencimiento) = YEAR(NOW())
+    AND MONTH(cm.fecha_vencimiento) = MONTH(NOW());
+END $$
+
+DELIMITER ;
+
+CALL AplicarDescuentoEspecialCuotas();
+
 -- 19. Registrar el resumen mensual de ingresos generados por pagos de cuotas.
 
 -- 20. Eliminar automáticamente los registros de historial de pagos que superen 5 años de antigüedad.
