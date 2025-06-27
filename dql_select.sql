@@ -190,6 +190,20 @@ ORDER BY anio;
 
 -- 31. Total de pagos recibidos por mes en el año actual
 
+SELECT
+    MONTH(fecha_pago) AS mes,
+    SUM(monto) AS total_recibido
+FROM
+    Pagos
+WHERE
+    YEAR(fecha_pago) = YEAR(CURDATE())
+    AND estado = 'Completado'
+GROUP BY
+    MONTH(fecha_pago)
+ORDER BY
+    mes;
+
+
 -- 32. Consultar el monto promedio de las cuotas de manejo
 
 -- 33. Porcentaje de tarjetas con promociones activas
