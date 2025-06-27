@@ -178,6 +178,14 @@ WHERE mp.descripcion = 'Tarjeta de crédito';
 
 -- 29. Cuotas de manejo agrupadas por año
 
+SELECT
+    YEAR(fecha_vencimiento) AS anio,
+    COUNT(id_cuota_manejo) AS numero_de_cuotas,
+    SUM(monto) AS monto_total
+FROM Cuotas_de_Manejo
+GROUP BY YEAR(fecha_vencimiento)
+ORDER BY anio;
+
 -- 30. Historial de promociones aplicadas a una tarjeta
 
 -- 31. Total de pagos recibidos por mes en el año actual
