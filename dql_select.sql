@@ -257,6 +257,15 @@ GROUP BY grupo;
 
 -- 41. Reporte de pagos agrupados por método de pago
 
+SELECT
+    mp.descripcion AS metodo_de_pago,
+    COUNT(p.id_pago) AS cantidad_de_pagos,
+    SUM(p.monto) AS monto_total_procesado
+FROM Pagos p
+JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo
+GROUP BY mp.descripcion
+ORDER BY monto_total_procesado DESC;
+
 -- 42. Total de pagos por cliente en un rango de fechas
 
 -- 43. Cuotas vencidas por cliente
