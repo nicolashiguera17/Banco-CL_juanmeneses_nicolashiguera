@@ -551,6 +551,26 @@ ORDER BY suma_total DESC;
 
 -- 85. Clientes con mayor gasto mensual promedio
 
+WITH GastoMensual AS (
+    SELECT
+        t.id_cliente,
+        YEAR(p.fecha_pago) AS anio,
+        MONTH(p.fecha_pago) AS mes,
+        SUM(p.monto) AS gasto_total_mes
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE p.estado = 'Completado'
+    GROUP BY t.id_cliente, anio, mes
+)
+SELECT
+    c.nombre,
+    AVG(gm.gasto_total_mes) AS gasto_mensual_promedio
+FROM GastoMensual gm
+JOIN Clientes c ON gm.id_cliente = c.id_cliente
+GROUP BY c.nombre
+ORDER BY gasto_mensual_promedio DESC;
+
 -- 86. Promociones con duración mayor a 30 días
 
 -- 87. Comparación de uso entre tipos de tarjeta
