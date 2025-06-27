@@ -83,6 +83,11 @@ ORDER BY cm.fecha_vencimiento;
 -- 12. Transacciones registradas durante la última semana
 
 -- 13. Listar los clientes con más de una tarjeta activa
+SELECT c.nombre,COUNT(t.id_tarjeta) AS numero_de_tarjetas
+FROM Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+GROUP BY c.id_cliente, c.nombre
+HAVING COUNT(t.id_tarjeta) > 1;
 
 -- 14. Promociones aplicadas a una tarjeta específica
 
