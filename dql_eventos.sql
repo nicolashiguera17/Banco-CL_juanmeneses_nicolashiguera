@@ -38,6 +38,25 @@ DELIMITER ;
 
 -- 5. Actualizar los registros de pagos mensuales de clientes a partir de las transacciones realizadas.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS actualizar_pagos_mensuales
+ON SCHEDULE EVERY 1 MONTH
+DO
+BEGIN
+  UPDATE clientes c
+  JOIN (
+    SELECT id_cliente, SUM(monto_pagado) AS total_pagado
+    FROM transacciones
+    WHERE MONTH(fecha_transaccion) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)
+      AND YEAR(fecha_transaccion) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
+    GROUP BY id_cliente
+  ) t ON c.id_cliente = t.id_cliente
+  SET c.pagos_mensuales = t.total_pagado;
+END $$
+
+DELIMITER ;
+
 -- 6. Registrar automáticamente las nuevas cuotas de manejo para el siguiente mes el día 25.
 
 -- 7. Borrar registros temporales y logs de sistema cada domingo a medianoche.
