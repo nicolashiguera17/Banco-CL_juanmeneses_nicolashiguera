@@ -359,6 +359,25 @@ CALL AsignarMetodoPagoPrincipal(1, 5);
 
 -- 17. Duplicar promociones activas para extender su duración un mes más.
 
+DELIMITER $$
+
+CREATE PROCEDURE ExtenderPromociones()
+BEGIN
+    INSERT INTO Promociones (nombre_promocion, descripcion, fecha_inicio, fecha_fin, estado)
+    SELECT CONCAT(nombre_promocion, ' (Extendida)'), descripcion,
+           DATE_ADD(fecha_fin, INTERVAL 1 DAY),
+           DATE_ADD(fecha_fin, INTERVAL 1 MONTH),
+           'Activa'
+    FROM Promociones
+    WHERE estado = 'Activa';
+END $$
+
+DELIMITER ;
+
+
+CALL ExtenderPromociones();
+
+
 -- 18. Aplicar un descuento especial a todas las cuotas del mes si es Black Friday o fechas especiales.
 
 DELIMITER $$
