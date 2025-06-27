@@ -280,6 +280,23 @@ CALL SuspenderTarjetasVencidas();
 
 -- 16. Asignar un nuevo método de pago principal a un cliente.
 
+DELIMITER $$
+
+CREATE PROCEDURE AsignarMetodoPagoPrincipal(IN id_cliente INT, IN id_metodo INT)
+BEGIN
+    IF EXISTS (SELECT 1 FROM Clientes WHERE id_cliente = id_cliente)
+       AND EXISTS (SELECT 1 FROM Metodos_Pago WHERE id_metodo = id_metodo AND estado_cuenta = 'Activo') THEN
+        
+        UPDATE Clientes
+        SET id_metodo_pago_principal = id_metodo
+        WHERE id_cliente = id_cliente;
+    END IF;
+END $$
+
+DELIMITER ;
+
+CALL AsignarMetodoPagoPrincipal(1, 5);
+
 -- 17. Duplicar promociones activas para extender su duración un mes más.
 
 -- 18. Aplicar un descuento especial a todas las cuotas del mes si es Black Friday o fechas especiales.
