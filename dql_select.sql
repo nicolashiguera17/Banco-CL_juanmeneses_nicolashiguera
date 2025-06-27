@@ -519,6 +519,18 @@ WHERE
 
 -- 81. Promedios de pagos por cliente
 
+SELECT
+    c.nombre,
+    AVG(p.monto) AS promedio_de_pago
+FROM
+    Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+WHERE p.estado = 'Completado'
+GROUP BY c.nombre
+ORDER BY promedio_de_pago DESC;
+
 -- 82. Clientes que han tenido cuotas rechazadas
 
 -- 83. Análisis de pagos por método (efectivo, tarjeta, etc.)
