@@ -226,6 +226,15 @@ WHERE YEAR(fecha_transaccion) = YEAR(CURDATE());
 
 -- 37. Evolución de pagos mensuales durante el año
 
+SELECT
+    YEAR(fecha_pago) AS anio,
+    MONTH(fecha_pago) AS mes,
+    SUM(monto) AS total_pagado
+FROM Pagos
+WHERE estado = 'Completado'
+GROUP BY anio, mes
+ORDER BY anio, mes;
+
 -- 38. Top clientes por valor total pagado
 
 -- 39. Evaluación del impacto de promociones en pagos
