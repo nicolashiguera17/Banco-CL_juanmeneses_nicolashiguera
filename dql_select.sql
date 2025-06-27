@@ -218,6 +218,10 @@ SELECT
 
 -- 35. Total de transacciones realizadas este año
 
+SELECT COUNT(*) AS total_transacciones_este_anio
+FROM Transacciones
+WHERE YEAR(fecha_transaccion) = YEAR(CURDATE());
+
 -- 36. Cantidad de cuotas emitidas por mes
 
 -- 37. Evolución de pagos mensuales durante el año
