@@ -45,6 +45,26 @@ DELIMITER ;
 
 -- 5. Calcular el monto total de las cuotas de manejo para todos los clientes de un mes.
 
+DELIMITER $$
+
+CREATE FUNCTION total_cuotas_manejo_por_mes(p_mes INT, p_anio INT)
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(cuota_manejo), 0)
+    INTO total
+    FROM tarjetas
+    WHERE MONTH(fecha_emision) = p_mes
+      AND YEAR(fecha_emision) = p_anio;
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 6. Determinar si una tarjeta tiene promociones activas en una fecha dada.
 
 -- 7. Obtener el número total de transacciones de un cliente.
