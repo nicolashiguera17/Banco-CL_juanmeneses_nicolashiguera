@@ -19,6 +19,21 @@ DELIMITER ;
 
 -- 3. Enviar alertas por correo electrónico cuando se registre un pago pendiente de más de un mes.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS alerta_pagos_pendientes
+ON SCHEDULE EVERY 1 DAY
+DO
+BEGIN
+  INSERT INTO alertas (id_cliente, mensaje, fecha)
+  SELECT DISTINCT id_cliente, 'Pago pendiente por más de un mes', NOW()
+  FROM transacciones
+  WHERE estado = 'pendiente' AND fecha_transaccion < CURRENT_DATE - INTERVAL 1 MONTH;
+END $$
+
+DELIMITER ;
+
+
 -- 4. Recalcular las cuotas de manejo cuando se modifiquen las tarifas de los descuentos.
 
 -- 5. Actualizar los registros de pagos mensuales de clientes a partir de las transacciones realizadas.
