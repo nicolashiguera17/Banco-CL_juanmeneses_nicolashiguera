@@ -67,6 +67,19 @@ ORDER BY t.id_tarjeta;
 
 -- 11. Cuotas de manejo vencidas hasta la fecha
 
+SELECT
+    c.nombre AS nombre_cliente,
+    cm.id_tarjeta,
+    cm.monto,
+    cm.fecha_vencimiento,
+    ec.descripcion AS estado
+FROM Cuotas_de_Manejo cm
+JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+WHERE cm.fecha_vencimiento < CURDATE() AND ec.descripcion = 'Pendiente'
+ORDER BY cm.fecha_vencimiento;
+
 -- 12. Transacciones registradas durante la última semana
 
 -- 13. Listar los clientes con más de una tarjeta activa
