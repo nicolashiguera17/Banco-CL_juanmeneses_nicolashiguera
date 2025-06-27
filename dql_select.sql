@@ -343,6 +343,12 @@ WHERE p.descuento_aplicado > 15.00;
 
 -- 53. Total de transacciones por día
 
+SELECT fecha_transaccion,
+    SUM(monto) AS monto_total_diario
+FROM Transacciones
+GROUP BY fecha_transaccion
+ORDER BY fecha_transaccion DESC;
+
 -- 54. Transacciones por tipo (crédito/débito/otro)
 
 -- 55. Descuentos agrupados por categoría
