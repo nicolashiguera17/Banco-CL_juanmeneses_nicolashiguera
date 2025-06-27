@@ -109,6 +109,17 @@ WHERE estado_cuenta = 'Activo';
 
 -- 19. Cuotas de manejo con vencimiento próximo (menos de 7 días)
 
+SELECT
+    c.nombre AS nombre_cliente,
+    cm.id_tarjeta,
+    cm.monto,
+    cm.fecha_vencimiento
+FROM Cuotas_de_Manejo cm
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+WHERE cm.fecha_vencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)   AND ec.descripcion = 'Pendiente';
+
 -- 20. Tarjetas creadas en el último mes
 
 -- 21. Clientes que no han realizado pagos en el último mes
