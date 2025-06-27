@@ -208,6 +208,12 @@ ORDER BY
 
 -- 33. Porcentaje de tarjetas con promociones activas
 
+SELECT
+    (
+        (SELECT COUNT(DISTINCT id_tarjeta) 
+        FROM Tarjetas_Promociones) / (SELECT COUNT(*) FROM Tarjetas)
+    ) * 100 AS porcentaje_tarjetas_con_promocion;
+
 -- 34. Número total de tarjetas por cliente
 
 -- 35. Total de transacciones realizadas este año
