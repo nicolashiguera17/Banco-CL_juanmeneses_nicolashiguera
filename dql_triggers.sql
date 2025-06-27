@@ -73,6 +73,24 @@ DELIMITER ;
 
 -- 9. Al actualizar el estado de una cuota a "pagada", insertar un registro en el historial de pagos.
 
+DELIMITER $$
+
+CREATE TRIGGER registrar_historial_al_pagar
+AFTER UPDATE ON Cuotas_de_Manejo
+FOR EACH ROW
+BEGIN
+  IF NEW.id_estado_cuota = 1 AND OLD.id_estado_cuota <> 1 THEN
+    INSERT INTO Historial_Pagos (id_cliente, descripcion)
+    SELECT t.id_cliente, CONCAT('Pago de cuota ', NEW.id_cuota_manejo, ' registrado.')
+    FROM Tarjetas t
+    WHERE t.id_tarjeta = NEW.id_tarjeta;
+  END IF;
+END $$
+
+DELIMITER ;
+
+
+
 -- 10. Al cambiar el estado de una transacción a "fallida", generar una alerta o registro de auditoría.
 
 -- 11. Al eliminar un método de pago, desvincularlo automáticamente de las tarjetas del cliente.
