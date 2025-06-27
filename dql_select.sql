@@ -124,6 +124,17 @@ WHERE cm.fecha_vencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 
 
 -- 21. Clientes que no han realizado pagos en el último mes
 
+SELECT c.id_cliente,  c.nombre
+FROM Clientes c
+WHERE
+    c.id_cliente NOT IN (
+        SELECT DISTINCT t.id_cliente
+        FROM Pagos p
+        JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+        JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+        WHERE p.fecha_pago >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+    );
+
 -- 22. Promociones con más de 20% de descuento
 
 -- 23. Listado de tarjetas por tipo
