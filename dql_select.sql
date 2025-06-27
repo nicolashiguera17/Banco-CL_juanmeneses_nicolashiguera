@@ -139,6 +139,12 @@ WHERE
 
 -- 23. Listado de tarjetas por tipo
 
+SELECT  tt.nombre_tipo, COUNT(t.id_tarjeta) AS cantidad_de_tarjetas
+FROM Tipos_Tarjeta tt
+JOIN  Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+GROUP BY tt.nombre_tipo
+ORDER BY cantidad_de_tarjetas DESC;
+
 -- 24. Cuotas de manejo agrupadas por cliente
 
 -- 25. Promociones activas por mes
