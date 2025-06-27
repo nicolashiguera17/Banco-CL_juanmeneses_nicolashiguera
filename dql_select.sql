@@ -364,6 +364,13 @@ ORDER BY cantidad_de_descuentos DESC;
 
 -- 57. Consultar clientes que han usado promociones
 
+SELECT DISTINCT
+    c.id_cliente,
+    c.nombre
+FROM Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta;
+
 -- 58. Cuotas pagadas agrupadas por trimestre
 
 -- 59. Total de promociones aplicadas por cliente
