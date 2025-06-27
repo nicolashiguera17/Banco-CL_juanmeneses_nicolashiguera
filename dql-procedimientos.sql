@@ -213,6 +213,18 @@ DELIMITER ;
 
 -- 10. Registrar en lote las cuotas de manejo correspondientes al mes siguiente para todas las tarjetas activas.
 
+DELIMITER $$
+
+CREATE PROCEDURE RegistrarCuotasMesSiguiente()
+BEGIN
+    INSERT INTO Cuotas_de_Manejo (id_tarjeta, monto, fecha_vencimiento, id_estado_cuota)
+    SELECT id_tarjeta, 15000.00, '2025-07-05', 4
+    FROM Tarjetas;
+END $$
+
+DELIMITER ;
+
+CALL RegistrarCuotasMesSiguiente();
 -- 11. Actualizar el estado de una transacción según el resultado del método de pago.
 
 -- 12. Generar un informe consolidado de pagos por tipo de tarjeta y mes.
