@@ -239,6 +239,20 @@ ORDER BY anio, mes;
 
 -- 39. Evaluación del impacto de promociones en pagos
 
+SELECT
+    CASE
+        WHEN t.id_tarjeta IN (SELECT DISTINCT id_tarjeta FROM Tarjetas_Promociones) THEN 'Con Promoción'
+        ELSE 'Sin Promoción'
+    END AS grupo,
+    SUM(p.monto) AS total_pagado,
+    COUNT(DISTINCT t.id_tarjeta) AS numero_de_tarjetas
+FROM
+    Pagos p
+JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+WHERE p.estado = 'Completado'
+GROUP BY grupo;
+
 -- 40. Análisis comparativo de pagos entre trimestres
 
 -- 41. Reporte de pagos agrupados por método de pago
