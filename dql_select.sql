@@ -314,6 +314,14 @@ ORDER BY anio, mes, tipo_transaccion;
 
 -- 49. Consultar clientes sin cuotas asociadas
 
+SELECT
+    c.id_cliente,
+    c.nombre
+FROM Clientes c
+LEFT JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+LEFT JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+WHERE  cm.id_cuota_manejo IS NULL;
+
 -- 50. Cuotas de manejo con estado "pendiente"
 
 -- 51. Cuotas con descuentos superiores al 15%
