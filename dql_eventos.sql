@@ -61,6 +61,19 @@ DELIMITER ;
 
 -- 7. Borrar registros temporales y logs de sistema cada domingo a medianoche.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS limpiar_registros_temporales
+ON SCHEDULE EVERY 1 WEEK
+STARTS TIMESTAMP(CURRENT_DATE + INTERVAL (7 - WEEKDAY(CURRENT_DATE)) DAY)
+DO
+BEGIN
+  DELETE FROM logs_temporales WHERE fecha < NOW() - INTERVAL 7 DAY;
+END $$
+
+DELIMITER ;
+
+
 -- 8. Actualizar las promociones activas según fecha de inicio y fin todos los días a las 00:00.
 
 -- 9. Generar un resumen semanal de transacciones para la gerencia.
