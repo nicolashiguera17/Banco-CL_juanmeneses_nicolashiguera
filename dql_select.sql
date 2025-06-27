@@ -161,6 +161,19 @@ WHERE DATE_FORMAT(CURDATE(), '%Y-%m') BETWEEN DATE_FORMAT(fecha_inicio, '%Y-%m')
 
 -- 27. Consultar todos los pagos con tarjeta de crédito
 
+SELECT
+    p.id_pago,
+    c.nombre AS nombre_cliente,
+    p.monto,
+    p.fecha_pago,
+    p.estado
+FROM Pagos p
+JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo
+JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+WHERE mp.descripcion = 'Tarjeta de crédito';
+
 -- 28. Clientes que tienen descuentos activos
 
 -- 29. Cuotas de manejo agrupadas por año
