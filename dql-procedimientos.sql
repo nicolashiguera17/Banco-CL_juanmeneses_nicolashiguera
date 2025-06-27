@@ -229,7 +229,7 @@ CALL RegistrarCuotasMesSiguiente();
 
 -- 11. Actualizar el estado de una transacción según el resultado del método de pago.
 
-DELIMITER //
+DELIMITER $$
 
 CREATE PROCEDURE ActualizarEstadoTransaccion(
     IN trans_id BIGINT,
@@ -243,10 +243,11 @@ BEGIN
         ELSE 'Pendiente'
     END
     WHERE id_transaccion = trans_id;
-END;
-//
+END $$
 
 DELIMITER ;
+
+CALL ActualizarEstadoTransaccion(1, 'Exitoso');
 
 -- 12. Generar un informe consolidado de pagos por tipo de tarjeta y mes.
 
@@ -272,7 +273,7 @@ CALL InformePagosPorTipoTarjetaMes();
 
 -- 13. Insertar automáticamente el historial de promociones usadas por cada cliente.
 
-DELIMITER //
+DELIMITER $$
 
 CREATE PROCEDURE InsertarHistorialPromociones()
 BEGIN
@@ -285,11 +286,11 @@ BEGIN
         FROM Tarjetas_Promociones tp
         WHERE tp.id_tarjeta = t.id_tarjeta AND tp.id_promocion = p.id_promocion
     );
-END;
-//
+END $$
 
 DELIMITER ;
 
+CALL InsertarHistorialPromociones();
 
 -- 14. Suspender temporalmente tarjetas con tres o más cuotas de manejo vencidas.
 
@@ -316,6 +317,26 @@ DELIMITER ;
 CALL SuspenderTarjetasVencidas();
 
 -- 15. Calcular el monto total adeudado por cliente incluyendo cuotas pendientes y vencidas.
+DELIMITER $$
+
+CREATE PROCEDURE MontoAdeudadoPorCliente(
+    IN cliente_id BIGINT,
+    OUT total_adeudado DECIMAL(10,2)
+)
+BEGIN
+    SELECT SUM(cm.monto)
+    INTO total_adeudado
+    FROM Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = cliente_id
+      AND (cm.estado = 'Pendiente' OR cm.estado = 'Vencida');
+END $$
+
+DELIMITER ;
+
+SET @total := 0;
+CALL MontoAdeudadoPorCliente(1, @total);
+SELECT @total AS TotalAdeudad
 
 -- 16. Asignar un nuevo método de pago principal a un cliente.
 
