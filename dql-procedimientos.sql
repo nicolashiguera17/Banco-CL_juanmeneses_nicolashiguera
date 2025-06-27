@@ -27,6 +27,7 @@ END $$
 
 DELIMITER ;
 
+CALL 
 
 -- 2. Procesar el pago de una cuota de manejo y actualizar el historial de pagos del cliente.
 
@@ -227,6 +228,25 @@ DELIMITER ;
 CALL RegistrarCuotasMesSiguiente();
 
 -- 11. Actualizar el estado de una transacción según el resultado del método de pago.
+
+DELIMITER //
+
+CREATE PROCEDURE ActualizarEstadoTransaccion(
+    IN trans_id BIGINT,
+    IN resultado_pago VARCHAR(50)
+)
+BEGIN
+    UPDATE Transacciones
+    SET estado = CASE
+        WHEN resultado_pago = 'Exitoso' THEN 'Completado'
+        WHEN resultado_pago = 'Fallido' THEN 'Rechazado'
+        ELSE 'Pendiente'
+    END
+    WHERE id_transaccion = trans_id;
+END;
+//
+
+DELIMITER ;
 
 -- 12. Generar un informe consolidado de pagos por tipo de tarjeta y mes.
 
