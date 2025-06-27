@@ -326,6 +326,19 @@ WHERE  cm.id_cuota_manejo IS NULL;
 
 -- 51. Cuotas con descuentos superiores al 15%
 
+SELECT
+    cm.id_cuota_manejo,
+    cm.id_tarjeta,
+    c.nombre AS nombre_cliente,
+    p.nombre_promocion,
+    p.descuento_aplicado
+FROM Cuotas_de_Manejo cm
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+JOIN Promociones p ON tp.id_promocion = p.id_promocion
+WHERE p.descuento_aplicado > 15.00;
+
 -- 52. Clientes con más de dos pagos realizados
 
 -- 53. Total de transacciones por día
