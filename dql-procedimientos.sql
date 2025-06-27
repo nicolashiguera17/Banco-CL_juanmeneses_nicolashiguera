@@ -27,7 +27,7 @@ END $$
 
 DELIMITER ;
 
-CALL 
+ CALL RegistrarCuotaManejo(1, 50000.00, '2025-07-31');
 
 -- 2. Procesar el pago de una cuota de manejo y actualizar el historial de pagos del cliente.
 
@@ -79,6 +79,7 @@ END $$
 
 DELIMITER ;
 
+CALL ReporteMensualCuotas(6, 2025);
 
 -- 4. Actualizar los descuentos asignados a tarjetas si se cambian las políticas del banco.
 
@@ -176,7 +177,7 @@ BEGIN
 END $$
 
 DELIMITER ;
-
+CALL AlertasCuotasProximasAVencer();
 
 -- 8. Calcular y registrar el estado de las cuotas (aceptada, vencida, rechazada, etc.) al finalizar el mes.
 
@@ -211,6 +212,7 @@ END $$
 
 DELIMITER ;
 
+CALL ReasignarCuotasImpagas();
 
 -- 10. Registrar en lote las cuotas de manejo correspondientes al mes siguiente para todas las tarjetas activas.
 
@@ -396,6 +398,31 @@ DELIMITER ;
 CALL AplicarDescuentoEspecialCuotas();
 
 -- 19. Registrar el resumen mensual de ingresos generados por pagos de cuotas.
+
+DELIMITER $$
+
+CREATE PROCEDURE ResumenMensualIngresos()
+BEGIN
+    DECLARE fecha_actual DATE;
+    SET fecha_actual = CURDATE();
+
+    INSERT INTO Notificaciones (id_cliente, mensaje, fecha)
+    SELECT DISTINCT t.id_cliente,
+        CONCAT('Resumen mensual de ingresos: $', SUM(p.monto), ' en pagos de cuotas.'),
+        fecha_actual
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE MONTH(p.fecha_pago) = MONTH(fecha_actual)
+      AND YEAR(p.fecha_pago) = YEAR(fecha_actual)
+    GROUP BY t.id_cliente;
+END $$
+
+DELIMITER ;
+
+
+CALL ResumenMensualIngresos();
+
 
 -- 20. Eliminar automáticamente los registros de historial de pagos que superen 5 años de antigüedad.
 
