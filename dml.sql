@@ -778,6 +778,63 @@ INSERT INTO Tarjetas_Promociones (id_tarjeta_promocion, id_tarjeta, id_promocion
 (50, 20010, 50, '2025-07-20');
 
 
+-- DATOS DE LA TABLA HISTORIAL_PAGOS --
+INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado, fecha) VALUES
+(1, 'Pago cuota abril', 120000, '2025-04-15'),
+(2, 'Pago atrasado marzo', 95000, '2025-03-20'),
+(3, 'Cuota marzo anticipada', 100000, '2025-02-28'),
+(4, 'Pago cuota junio', 145000, '2025-06-05'),
+(5, 'Cuota mayo pagada', 89000, '2025-05-10'),
+(6, 'Pago regular mensual', 110000, '2025-04-01'),
+(7, 'Pago parcial cuota abril', 70000, '2025-04-18'),
+(8, 'Pago junio adelantado', 150000, '2025-05-29'),
+(9, 'Pago extra', 130000, '2025-04-12'),
+(10, 'Cuota regular abril', 98000, '2025-04-30'),
+
+(1, 'Pago cuota mayo', 120000, '2025-05-12'),
+(2, 'Pago atrasado abril', 90000, '2025-04-23'),
+(3, 'Cuota junio', 105000, '2025-06-10'),
+(4, 'Pago regular', 111000, '2025-06-01'),
+(5, 'Pago pendiente liquidado', 120000, '2025-03-25'),
+(6, 'Pago parcial', 60000, '2025-03-30'),
+(7, 'Pago completo mayo', 130000, '2025-05-15'),
+(8, 'Cuota mayo', 120000, '2025-05-10'),
+(9, 'Pago julio anticipado', 150000, '2025-06-20'),
+(10, 'Cuota normal abril', 97000, '2025-04-04'),
+
+(1, 'Pago regular abril', 112000, '2025-04-07'),
+(2, 'Cuota especial', 142000, '2025-05-03'),
+(3, 'Pago con recargo', 135000, '2025-04-22'),
+(4, 'Pago abril', 123000, '2025-04-14'),
+(5, 'Abono a cuota', 40000, '2025-04-09'),
+(6, 'Pago completo junio', 150000, '2025-06-11'),
+(7, 'Cuota mayo', 122000, '2025-05-09'),
+(8, 'Pago parcial abril', 65000, '2025-04-13'),
+(9, 'Cuota ordinaria', 110000, '2025-05-01'),
+(10, 'Pago único', 135000, '2025-03-15'),
+
+(1, 'Pago especial con bono', 160000, '2025-04-25'),
+(2, 'Regular mensual abril', 125000, '2025-04-02'),
+(3, 'Cuota regular junio', 98000, '2025-06-08'),
+(4, 'Pago mayo', 100000, '2025-05-07'),
+(5, 'Pago junio parcial', 77000, '2025-06-15'),
+(6, 'Cuota completa abril', 115000, '2025-04-19'),
+(7, 'Pago anticipado junio', 140000, '2025-05-28'),
+(8, 'Pago cuota pendiente', 133000, '2025-04-06'),
+(9, 'Pago con ajuste', 127000, '2025-04-30'),
+(10, 'Cuota normal mayo', 119000, '2025-05-04'),
+
+(1, 'Pago final de trimestre', 190000, '2025-06-25'),
+(2, 'Abono a deuda', 30000, '2025-04-01'),
+(3, 'Pago parcial cuota abril', 65000, '2025-04-18'),
+(4, 'Pago normal junio', 135000, '2025-06-03'),
+(5, 'Pago cuota especial', 145000, '2025-05-17'),
+(6, 'Pago atrasado febrero', 118000, '2025-03-10'),
+(7, 'Abono mensual', 95000, '2025-04-11'),
+(8, 'Pago junio', 120000, '2025-06-12'),
+(9, 'Cuota corriente mayo', 98000, '2025-05-11'),
+(10, 'Pago regular abril', 112000, '2025-04-05');
+
 
 -- roles --
 

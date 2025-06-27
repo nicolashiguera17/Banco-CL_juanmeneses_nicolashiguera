@@ -180,7 +180,21 @@ DELIMITER ;
 
 -- 18. Al actualizar los datos del cliente, registrar el cambio en una tabla de auditoría.
 
--- 19. Al eliminar un historial de pagos, actualizar el saldo pendiente del cliente.
+-- 19. Al eliminar un historial de pagos, actualizar el saldo pendiente del cliente.DELIMITER $$
+DELIMITER $$
+
+CREATE TRIGGER actualizar_saldo_tras_eliminar_historial
+AFTER DELETE ON Historial_Pagos
+FOR EACH ROW
+BEGIN
+  UPDATE Clientes
+  SET saldo_pendiente = saldo_pendiente + OLD.monto_pagado
+  WHERE id_cliente = OLD.id_cliente;
+END $$
+
+DELIMITER ;
+
+
 
 -- 20. Al asignar un nuevo rol de usuario, registrar el evento en un log de control de acceso.
 

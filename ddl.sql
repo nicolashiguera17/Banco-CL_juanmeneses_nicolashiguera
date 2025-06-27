@@ -163,6 +163,17 @@ CREATE TABLE `Tarjetas_Promociones` (
     PRIMARY KEY (`id_tarjeta_promocion`)
 );
 
+-- Tabla: historial_pagos  --
+
+CREATE TABLE Historial_Pagos (
+    id_historial BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente BIGINT,
+    descripcion TEXT,
+    monto_pagado DECIMAL(10,2),
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
 -- Claves foráneas --
 
 -- La tabla Tarjetas se conecta con la tabla Clientes
