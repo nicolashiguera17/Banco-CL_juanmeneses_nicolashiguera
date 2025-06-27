@@ -423,6 +423,16 @@ WHEREYEAR(fecha_fin) = YEAR(CURDATE()) AND MONTH(fecha_fin) = MONTH(CURDATE());
 
 -- 67. Tarjetas que aplican para promociones exclusivas
 
+SELECT DISTINCT
+    t.id_tarjeta,
+    c.nombre AS nombre_cliente,
+    tt.nombre_tipo
+FROM Tarjetas t
+JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+WHERE tt.nombre_tipo IN ('Black', 'Premium', 'Platina');
+
 -- 68. Consultar transacciones superiores a $500.000
 
 -- 69. Clientes nuevos registrados en el último trimestre
