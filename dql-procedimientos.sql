@@ -272,6 +272,25 @@ CALL InformePagosPorTipoTarjetaMes();
 
 -- 13. Insertar automáticamente el historial de promociones usadas por cada cliente.
 
+DELIMITER //
+
+CREATE PROCEDURE InsertarHistorialPromociones()
+BEGIN
+    INSERT INTO Tarjetas_Promociones (id_tarjeta, id_promocion, fecha_asignacion)
+    SELECT t.id_tarjeta, p.id_promocion, CURDATE()
+    FROM Tarjetas t
+    JOIN Promociones p ON p.estado = 'Activa'
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Tarjetas_Promociones tp
+        WHERE tp.id_tarjeta = t.id_tarjeta AND tp.id_promocion = p.id_promocion
+    );
+END;
+//
+
+DELIMITER ;
+
+
 -- 14. Suspender temporalmente tarjetas con tres o más cuotas de manejo vencidas.
 
 DELIMITER $$
