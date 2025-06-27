@@ -502,6 +502,18 @@ ORDER BY anio, mes;
 -- 78. Clientes que nunca han aplicado promociones
 
 -- 79. Clientes que han pagado puntualmente todas sus cuotas
+SELECT
+    c.id_cliente,
+    c.nombre
+FROM  Clientes c
+WHERE
+    c.id_cliente NOT IN (
+        SELECT DISTINCT t.id_cliente
+        FROM Cuotas_de_Manejo cm
+        JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+        JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+        WHERE cm.fecha_vencimiento < CURDATE() AND ec.descripcion = 'Pendiente'
+    );
 
 -- 80. Tarjetas con más movimientos de transacciones
 
