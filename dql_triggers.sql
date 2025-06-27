@@ -16,6 +16,19 @@ DELIMITER ;
 -- 2. Al modificar el monto de apertura de una tarjeta, recalcular la cuota de manejo correspondiente.
 
 -- 3. Al registrar una nueva tarjeta, asignar automáticamente el descuento basado en el tipo de tarjeta.
+DELIMITER $$
+
+CREATE TRIGGER asignar_descuento_nueva_tarjeta
+AFTER INSERT ON Tarjetas
+FOR EACH ROW
+BEGIN
+  INSERT INTO Descuentos_Tarjeta (id_tarjeta, id_descuento)
+  SELECT NEW.id_tarjeta, id_descuento
+  FROM Tipos_Tarjeta
+  WHERE id_tipo_tarjeta = NEW.id_tipo_tarjeta;
+END $$
+
+DELIMITER ;
 
 -- 4. Al eliminar una tarjeta, eliminar todas las cuotas de manejo asociadas a esa tarjeta.
 
