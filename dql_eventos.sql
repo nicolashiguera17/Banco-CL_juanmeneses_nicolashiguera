@@ -123,6 +123,26 @@ DELIMITER ;
 
 -- 13. Recalcular el saldo pendiente de cada cliente el primer día del mes.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS recalcular_saldo_pendiente
+ON SCHEDULE EVERY 1 MONTH
+STARTS DATE_FORMAT(CURRENT_DATE + INTERVAL 1 MONTH, '%Y-%m-01')
+DO
+BEGIN
+  UPDATE clientes c
+  JOIN (
+    SELECT id_cliente, SUM(monto_total - monto_pagado) AS saldo
+    FROM transacciones
+    WHERE estado = 'pendiente'
+    GROUP BY id_cliente
+  ) t ON c.id_cliente = t.id_cliente
+  SET c.saldo_pendiente = t.saldo;
+END $$
+
+DELIMITER ;
+
+
 -- 14. Crear copias de seguridad lógicas de pagos y cuotas cada día a las 2:00 AM.
 
 -- 15. Reasignar automáticamente métodos de pago inactivos después de 90 días.
