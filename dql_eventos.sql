@@ -191,5 +191,18 @@ DELIMITER ;
 
 -- 19. Eliminar automáticamente registros de alertas antiguas cada mes.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS eliminar_alertas_antiguas
+ON SCHEDULE EVERY 1 MONTH
+DO
+BEGIN
+  DELETE FROM alertas
+  WHERE fecha < NOW() - INTERVAL 6 MONTH;
+END $$
+
+DELIMITER ;
+
+
 -- 20. Cerrar el ciclo mensual de gestión de pagos y generar reporte anual en diciembre.
 
