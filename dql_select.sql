@@ -1,4 +1,14 @@
 -- 1. Listado de todas las tarjetas de los clientes junto con su cuota de manejo
+SELECT
+    c.nombre AS nombre_cliente,
+    t.id_tarjeta,
+    cm.monto AS cuota_de_manejo,
+    cm.fecha_vencimiento
+FROM Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+ORDER BY c.nombre, t.id_tarjeta;
+
 
 -- 2. Historial de pagos de un cliente específico
 
