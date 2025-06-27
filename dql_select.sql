@@ -353,6 +353,13 @@ ORDER BY fecha_transaccion DESC;
 
 -- 55. Descuentos agrupados por categoría
 
+SELECT
+    nombre_categoria,
+    COUNT(id_descuento) AS cantidad_de_descuentos
+FROM  Descuentos
+GROUP BY nombre_categoria
+ORDER BY cantidad_de_descuentos DESC;
+
 -- 56. Tarjetas con apertura superior al promedio
 
 -- 57. Consultar clientes que han usado promociones
