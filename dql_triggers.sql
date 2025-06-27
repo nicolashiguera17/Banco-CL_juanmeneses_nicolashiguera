@@ -1,4 +1,17 @@
 -- 1. Al insertar un nuevo pago, actualizar automáticamente el estado de la cuota de manejo.
+DELIMITER $$
+
+CREATE TRIGGER actualizar_estado_cuota_despues_pago
+AFTER INSERT ON Pagos
+FOR EACH ROW
+BEGIN
+  UPDATE Cuotas_de_Manejo
+  SET estado = 'Pagada'
+  WHERE id_cuota_manejo = NEW.id_cuota_manejo;
+END $$
+
+DELIMITER ;
+
 
 -- 2. Al modificar el monto de apertura de una tarjeta, recalcular la cuota de manejo correspondiente.
 
@@ -37,3 +50,5 @@
 -- 19. Al eliminar un historial de pagos, actualizar el saldo pendiente del cliente.
 
 -- 20. Al asignar un nuevo rol de usuario, registrar el evento en un log de control de acceso.
+
+
