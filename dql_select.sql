@@ -286,6 +286,16 @@ ORDER BY  cuotas_vencidas DESC;
 
 -- 45. Consultar tarjetas con múltiples promociones
 
+SELECT
+    t.id_tarjeta,
+    c.nombre AS nombre_cliente,
+    COUNT(tp.id_promocion) AS cantidad_de_promociones
+FROM  Tarjetas_Promociones tp
+JOIN Tarjetas t ON tp.id_tarjeta = t.id_tarjeta
+JOIN Clientes c ON t.id_cliente = c.id_cliente
+GROUP BY t.id_tarjeta, c.nombre
+HAVING COUNT(tp.id_promocion) > 1;
+
 -- 46. Resumen de pagos por tipo de tarjeta
 
 -- 47. Transacciones agrupadas por mes
