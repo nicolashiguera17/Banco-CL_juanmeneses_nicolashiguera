@@ -476,6 +476,17 @@ ORDER BY mes;
 -- 74. Tarjetas con el mayor y menor monto de apertura
 
 -- 75. Total de pagos realizados por tipo de tarjeta
+SELECT
+    tt.nombre_tipo,
+    SUM(p.monto) AS total_pagado
+FROM
+    Pagos p
+JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+WHERE p.estado = 'Completado'
+GROUP BY tt.nombre_tipo
+ORDER BY total_pagado DESC;
 
 -- 76. Top 5 clientes con más pagos realizados
 
