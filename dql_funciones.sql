@@ -92,6 +92,31 @@ DELIMITER ;
 
 -- 9. Evaluar si una tarjeta está al día con sus pagos.
 
+DELIMITER $$
+
+CREATE FUNCTION tarjeta_al_dia(p_id_tarjeta INT)
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    DECLARE estado VARCHAR(10);
+
+    IF EXISTS (
+        SELECT 1
+        FROM transacciones
+        WHERE id_tarjeta = p_id_tarjeta
+          AND estado = 'pendiente'
+    ) THEN
+        SET estado = 'NO';
+    ELSE
+        SET estado = 'SI';
+    END IF;
+
+    RETURN estado;
+END $$
+
+DELIMITER ;
+
+
 -- 10. Calcular la edad del cliente según su fecha de nacimiento (si la tabla la incluye).
 
 -- 11. Calcular el total de cuotas vencidas de un cliente.
