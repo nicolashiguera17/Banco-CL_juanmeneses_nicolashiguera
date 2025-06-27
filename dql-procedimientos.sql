@@ -138,6 +138,21 @@ DELIMITER ;
 
 -- 6. Aplicar promociones activas a todas las tarjetas elegibles de los clientes.
 
+DELIMITER $$
+
+CREATE PROCEDURE AplicarPromocionesActivas()
+BEGIN
+    INSERT INTO Tarjetas_Promociones (id_tarjeta, id_promocion, fecha_aplicacion)
+    SELECT t.id_tarjeta, p.id_promocion, CURDATE()
+    FROM Tarjetas t, Promociones p
+    WHERE p.fecha_inicio <= CURDATE()
+    AND p.fecha_fin >= CURDATE();
+END $$
+
+DELIMITER ;
+
+CALL AplicarPromocionesActivas();
+
 -- 7. Generar alertas de vencimiento para cuotas de manejo próximas a vencer.
 
 DELIMITER $$
