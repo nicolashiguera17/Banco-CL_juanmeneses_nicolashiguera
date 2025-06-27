@@ -101,6 +101,9 @@ WHERE p.fecha_pago = :fecha_determinada;
 -- 16. Consultar tarjetas sin promociones asignadas
 
 -- 17. Consultar métodos de pago disponibles actualmente
+SELECT id_metodo, descripcion, estado_cuenta
+FROM Metodos_Pago
+WHERE estado_cuenta = 'Activo';
 
 -- 18. Tarjetas con cuota de manejo superior a cierto valor
 
