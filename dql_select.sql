@@ -93,6 +93,11 @@ HAVING COUNT(t.id_tarjeta) > 1;
 
 -- 15. Pagos realizados en una fecha determinada
 
+SELECT p.id_pago, p.id_cuota_manejo, p.monto,p.estado, mp.descripcion AS metodo_pago
+FROM Pagos p
+JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo
+WHERE p.fecha_pago = :fecha_determinada;
+
 -- 16. Consultar tarjetas sin promociones asignadas
 
 -- 17. Consultar métodos de pago disponibles actualmente
