@@ -145,6 +145,25 @@ DELIMITER ;
 
 -- 13. Calcular el total recaudado por un tipo específico de promoción.
 
+DELIMITER $$
+
+CREATE FUNCTION total_recaudado_por_promocion(p_tipo_promocion VARCHAR(50))
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+
+    SELECT IFNULL(SUM(monto_pagado), 0)
+    INTO total
+    FROM transacciones
+    WHERE tipo_promocion = p_tipo_promocion;
+
+    RETURN total;
+END $$
+
+DELIMITER ;
+
+
 -- 14. Obtener el monto acumulado de pagos de un cliente en el año actual.
 
 -- 15. Evaluar si una tarjeta ha superado el monto de apertura inicial.
