@@ -165,6 +165,28 @@ DELIMITER ;
 
 -- 17. Recalcular estadísticas de uso de promociones cada semana.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS estadisticas_promociones
+ON SCHEDULE EVERY 1 WEEK
+STARTS CURRENT_DATE + INTERVAL 1 WEEK
+DO
+BEGIN
+  INSERT INTO estadisticas_promociones (tipo_promocion, total_usos, total_recaudado, semana)
+  SELECT tipo_promocion,
+         COUNT(*),
+         SUM(monto_pagado),
+         WEEK(CURRENT_DATE - INTERVAL 1 WEEK)
+  FROM transacciones
+  WHERE tipo_promocion IS NOT NULL
+    AND fecha_transaccion >= CURRENT_DATE - INTERVAL 1 WEEK
+    AND fecha_transaccion < CURRENT_DATE
+  GROUP BY tipo_promocion;
+END $$
+
+DELIMITER ;
+
+
 -- 18. Verificar y corregir inconsistencias en transacciones todos los domingos.
 
 -- 19. Eliminar automáticamente registros de alertas antiguas cada mes.
