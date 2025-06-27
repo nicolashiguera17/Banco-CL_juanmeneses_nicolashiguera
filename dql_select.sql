@@ -36,13 +36,21 @@ SELECT
     MONTH(fecha_vencimiento) AS mes,
     COUNT(id_cuota_manejo) AS cantidad_cuotas,
     SUM(monto) AS monto_total_mensual
-FROMCuotas_de_Manejo cm
+FROM Cuotas_de_Manejo cm
 GROUP BY id_tarjeta,anio,mes
 ORDER BY id_tarjeta, anio,mes;
 
 -- 6. Promociones activas durante una fecha específica
 
 -- 7. Métodos de pago utilizados por un cliente
+
+SELECT DISTINCT descripcion AS metodo_pago
+FROM Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = id_tarjeta
+JOIN Pagos p ON id_cuota_manejo = p.id_cuota_manejo
+JOIN Metodos_Pago mp ON p.id_metodo = id_metodo
+WHERE c.id_cliente = :id_cliente;
 
 -- 8. Consultar todas las transacciones realizadas por tarjeta
 
