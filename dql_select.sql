@@ -450,6 +450,16 @@ HAVING fecha_registro >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
 
 -- 71. Clientes con pagos pendientes en los últimos tres meses
 
+SELECT DISTINCT
+    c.id_cliente,
+    c.nombre
+FROM
+    Clientes c
+JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+WHERE ec.descripcion = 'Pendiente' AND cm.fecha_vencimiento >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
 -- 72. Cuotas aplicadas a cada tipo de tarjeta en un período específico
 
 -- 73. Reporte de descuentos aplicados durante un año
