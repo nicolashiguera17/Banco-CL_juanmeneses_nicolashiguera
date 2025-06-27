@@ -179,6 +179,24 @@ DELIMITER ;
 
 -- 8. Calcular y registrar el estado de las cuotas (aceptada, vencida, rechazada, etc.) al finalizar el mes.
 
+DELIMITER $$
+
+CREATE PROCEDURE CalcularEstadoCuotas()
+BEGIN
+    UPDATE Cuotas_de_Manejo cm
+    SET id_estado_cuota = (
+        CASE
+            WHEN EXISTS (SELECT 1 FROM Pagos p WHERE p.id_cuota_manejo = cm.id_cuota_manejo AND p.estado = 'Completado') THEN 5
+            WHEN cm.fecha_vencimiento < CURDATE() THEN 3
+            ELSE 4
+        END
+    );
+END $$
+
+DELIMITER ;
+
+CALL CalcularEstadoCuotas();
+
 -- 9. Reasignar cuotas impagas a un nuevo período si el pago fue fallido.
 
 DELIMITER $$
