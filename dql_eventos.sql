@@ -101,6 +101,24 @@ DELIMITER ;
 
 -- 11. Migrar cuotas vencidas de un mes al historial el primer día del mes siguiente.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS migrar_cuotas_vencidas
+ON SCHEDULE EVERY 1 MONTH
+STARTS DATE_FORMAT(CURRENT_DATE + INTERVAL 1 MONTH, '%Y-%m-01')
+DO
+BEGIN
+  INSERT INTO historial_cuotas (id_transaccion, id_cliente, monto, fecha)
+  SELECT id_transaccion, id_cliente, monto_total, NOW()
+  FROM transacciones
+  WHERE estado = 'vencida';
+
+  DELETE FROM transacciones WHERE estado = 'vencida';
+END $$
+
+DELIMITER ;
+
+
 -- 12. Asignar promociones especiales automáticamente cada viernes del mes.
 
 -- 13. Recalcular el saldo pendiente de cada cliente el primer día del mes.
