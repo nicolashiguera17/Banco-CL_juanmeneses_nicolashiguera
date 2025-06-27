@@ -160,13 +160,23 @@ END $$
 
 DELIMITER ;
 
-
-
-
-
 -- 16. Al eliminar una promoción, eliminar también su relación con las tarjetas afectadas.
 
 -- 17. Al insertar un nuevo estado de cuota, asociarlo automáticamente a las cuotas creadas ese día.
+DELIMITER $$
+
+CREATE TRIGGER asociar_estado_a_cuotas
+AFTER INSERT ON Estado_Cuota
+FOR EACH ROW
+BEGIN
+  UPDATE Cuotas_de_Manejo
+  SET id_estado_cuota = NEW.id_estado_cuota
+  WHERE DATE(fecha_vencimiento) = CURDATE();
+END $$
+
+DELIMITER ;
+
+
 
 -- 18. Al actualizar los datos del cliente, registrar el cambio en una tabla de auditoría.
 
