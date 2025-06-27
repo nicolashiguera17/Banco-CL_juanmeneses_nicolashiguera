@@ -142,6 +142,28 @@ DELIMITER ;
 
 -- 15. Al insertar una nueva transacción, validar si el monto excede cierto límite y registrar alerta.
 
+DELIMITER $$
+
+CREATE TRIGGER alerta_transaccion_grande
+AFTER INSERT ON Transacciones
+FOR EACH ROW
+BEGIN
+  IF NEW.monto > 1000000 THEN
+    INSERT INTO Alertas (id_cliente, mensaje, fecha)
+    VALUES (
+      NEW.id_cliente,
+      CONCAT('Transacción sospechosa de alto monto: $', NEW.monto),
+      NOW()
+    );
+  END IF;
+END $$
+
+DELIMITER ;
+
+
+
+
+
 -- 16. Al eliminar una promoción, eliminar también su relación con las tarjetas afectadas.
 
 -- 17. Al insertar un nuevo estado de cuota, asociarlo automáticamente a las cuotas creadas ese día.
