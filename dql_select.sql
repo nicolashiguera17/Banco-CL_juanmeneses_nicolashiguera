@@ -464,6 +464,15 @@ WHERE ec.descripcion = 'Pendiente' AND cm.fecha_vencimiento >= DATE_SUB(CURDATE(
 
 -- 73. Reporte de descuentos aplicados durante un año
 
+SELECT
+    YEAR(fecha_aplicacion) AS anio,
+    MONTH(fecha_aplicacion) AS mes,
+    COUNT(*) AS promociones_aplicadas
+FROM Tarjetas_Promociones
+WHERE YEAR(fecha_aplicacion) = :anio
+GROUP BY anio, mes
+ORDER BY mes;
+
 -- 74. Tarjetas con el mayor y menor monto de apertura
 
 -- 75. Total de pagos realizados por tipo de tarjeta
