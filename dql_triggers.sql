@@ -34,6 +34,21 @@ DELIMITER ;
 
 -- 5. Al actualizar un descuento, recalcular las cuotas de manejo de las tarjetas afectadas.
 
+DELIMITER $$
+
+CREATE TRIGGER recalcular_cuotas_despues_descuento
+AFTER UPDATE ON Descuentos
+FOR EACH ROW
+BEGIN
+  UPDATE Cuotas_de_Manejo AS c
+  JOIN Descuentos_Tarjeta AS dt ON c.id_tarjeta = dt.id_tarjeta
+  SET c.monto = c.monto * 0.9
+  WHERE dt.id_descuento = NEW.id_descuento;
+END $$
+
+DELIMITER ;
+
+
 -- 6. Al insertar una nueva promoción, asignarla automáticamente a las tarjetas elegibles.
 
 -- 7. Al registrar un nuevo cliente, crear automáticamente su historial vacío de pagos y cuotas.
