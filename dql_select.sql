@@ -413,7 +413,12 @@ ORDER BY cantidad_de_cuotas DESC;
 -- 64. Consultar pagos y promociones por cliente
 
 -- 65. Consultar promociones que vencen este mes
-
+SELECT
+    id_promocion,
+    nombre_promocion,
+    fecha_fin
+FROM  Promociones
+WHEREYEAR(fecha_fin) = YEAR(CURDATE()) AND MONTH(fecha_fin) = MONTH(CURDATE());
 -- 66. Clientes con múltiples descuentos aplicados
 
 -- 67. Tarjetas que aplican para promociones exclusivas
