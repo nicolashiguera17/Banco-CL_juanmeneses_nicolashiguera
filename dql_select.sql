@@ -149,6 +149,14 @@ ORDER BY cantidad_de_tarjetas DESC;
 
 -- 25. Promociones activas por mes
 
+SELECT
+    nombre_promocion,
+    descuento_aplicado,
+    fecha_inicio,
+    fecha_fin
+FROM Promociones
+WHERE DATE_FORMAT(CURDATE(), '%Y-%m') BETWEEN DATE_FORMAT(fecha_inicio, '%Y-%m') AND DATE_FORMAT(fecha_fin, '%Y-%m');
+
 -- 26. Métodos de pago más usados
 
 -- 27. Consultar todos los pagos con tarjeta de crédito
