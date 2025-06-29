@@ -17,6 +17,26 @@ DELIMITER ;
 
 -- 2. Actualizar el estado de las cuotas de manejo al final de cada día.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS update_cuotas_manejo_diario
+ON SCHEDULE EVERY 1 DAY
+STARTS '2025-06-29 23:59:00'
+DO
+BEGIN
+    UPDATE Cuotas_de_Manejo cm
+    LEFT JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    SET cm.id_estado_cuota = 
+        CASE
+            WHEN p.estado = 'Completado' THEN 5
+            WHEN p.estado = 'Reembolsado' THEN 3 
+            WHEN (p.id_pago IS NULL OR p.estado IN ('Pendiente', 'Fallido')) AND cm.fecha_vencimiento < CURDATE() THEN 4 
+            ELSE 4
+        END;
+END$$
+
+DELIMITER;
+
 -- 3. Enviar alertas por correo electrónico cuando se registre un pago pendiente de más de un mes.
 
 DELIMITER $$
