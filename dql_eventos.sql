@@ -95,6 +95,24 @@ DELIMITER ;
 
 -- 6. Registrar automáticamente las nuevas cuotas de manejo para el siguiente mes el día 25.
 
+DELIMITER $$
+CREATE EVENT IF NOT EXISTS generate_cuotas_manejo_mensual
+ON SCHEDULE EVERY 1 MONTH
+STARTS '2025-07-25 23:59:00'
+DO
+BEGIN
+    INSERT INTO Cuotas_de_Manejo (id_tarjeta, monto, fecha_vencimiento, id_estado_cuota)
+    SELECT 
+        t.id_tarjeta,
+        30000 * (1 - d.porcentaje / 100) AS monto,
+        LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) AS fecha_vencimiento,
+        4 AS id_estado_cuota
+    FROM Tarjetas t
+    JOIN Descuentos d ON t.id_descuento = d.id_descuento;
+END $$
+
+DELIMITER ;
+
 -- 7. Borrar registros temporales y logs de sistema cada domingo a medianoche.
 
 DELIMITER $$
