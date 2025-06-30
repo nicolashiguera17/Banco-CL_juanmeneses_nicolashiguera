@@ -348,6 +348,21 @@ DELIMITER ;
 
 -- 18. Verificar y corregir inconsistencias en transacciones todos los domingos.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS verificar_transacciones_semanal
+ON SCHEDULE EVERY 1 WEEK
+STARTS '2025-07-06 23:59:00' 
+DO
+BEGIN
+    UPDATE Transacciones t
+    LEFT JOIN Pagos p ON t.id_pago = p.id_pago
+    SET t.tipo_transaccion = 'Inconsistente'
+    WHERE t.id_pago IS NULL OR p.id_pago IS NULL;
+END $$
+
+DELIMITER;
+
 -- 19. Eliminar automáticamente registros de alertas antiguas cada mes.
 
 DELIMITER $$
