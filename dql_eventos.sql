@@ -299,6 +299,29 @@ DELIMITER ;
 
 -- 16. Enviar resumen de descuentos aplicados a cada cliente el último día del mes.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS resumen_descuentos_mensual
+ON SCHEDULE EVERY 1 MONTH
+STARTS '2025-06-30 23:59:00'
+DO
+BEGIN
+    INSERT INTO Notificaciones (id_cliente, mensaje, fecha_envio, tipo, leido)
+    SELECT 
+        c.id_cliente,
+        CONCAT('Resumen de descuentos de ', DATE_FORMAT(CURDATE(), '%Y-%m'), ': Tarjeta ', t.id_tarjeta, ' - ', hd.porcentaje_nuevo, '%') AS mensaje,
+        CURDATE() AS fecha_envio,
+        'Resumen Descuentos' AS tipo,
+        FALSE AS leido
+    FROM Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Historial_Descuentos hd ON t.id_tarjeta = hd.id_tarjeta
+    WHERE YEAR(hd.fecha_cambio) = YEAR(CURDATE())
+    AND MONTH(hd.fecha_cambio) = MONTH(CURDATE());
+END $$
+
+DELIMITER;
+
 -- 17. Recalcular estadísticas de uso de promociones cada semana.
 
 DELIMITER $$
