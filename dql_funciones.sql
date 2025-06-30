@@ -57,6 +57,23 @@ DELIMITER ;
 
 -- 4. Estimar el total de pagos realizados por tipo de tarjeta durante un período determinado.
 
+DELIMITER $$
+
+CREATE FUNCTION TotalPagosPorTipoTarjeta(idTipoTarjeta BIGINT, fechaInicio DATE, fechaFin DATE) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+    SELECT SUM(p.monto) INTO total
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_tipo_tarjeta = idTipoTarjeta
+    AND p.fecha_pago BETWEEN fechaInicio AND fechaFin;
+    RETURN COALESCE(total, 0.00);
+END $$
+
+DELIMITER;
+
 -- 5. Calcular el monto total de las cuotas de manejo para todos los clientes de un mes.
 
 DELIMITER $$
