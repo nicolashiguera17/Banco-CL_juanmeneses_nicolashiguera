@@ -174,7 +174,7 @@ DELIMITER $$
 
 CREATE EVENT IF NOT EXISTS suspend_tarjetas_vencidas_semanal
 ON SCHEDULE EVERY 1 WEEK
-STARTS '2025-07-06 23:59:00' -- Primer domingo después de la fecha actual
+STARTS '2025-07-06 23:59:00' 
 DO
 BEGIN
     UPDATE Tarjetas t
@@ -211,6 +211,30 @@ DELIMITER ;
 
 
 -- 12. Asignar promociones especiales automáticamente cada viernes del mes.
+
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS assign_promociones_especiales_viernes
+ON SCHEDULE EVERY 1 WEEK
+STARTS '2025-07-04 23:59:00' -- Primer viernes después de la fecha actual
+DO
+BEGIN
+    INSERT INTO Tarjetas_Promociones (id_tarjeta, id_promocion)
+    SELECT 
+        t.id_tarjeta,
+        100 AS id_promocion -- Promoción especial
+    FROM Tarjetas t
+    WHERE NOT EXISTS (
+        SELECT 1 
+        FROM Tarjetas_Promociones tp 
+        WHERE tp.id_tarjeta = t.id_tarjeta 
+        AND tp.id_promocion = 100
+        AND YEAR(CURDATE()) = YEAR(CURDATE()) 
+        AND MONTH(CURDATE()) = MONTH(CURDATE())
+    );
+END $$
+
+DELIMITER;
 
 -- 13. Recalcular el saldo pendiente de cada cliente el primer día del mes.
 
