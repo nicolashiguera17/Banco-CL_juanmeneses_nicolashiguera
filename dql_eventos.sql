@@ -130,6 +130,23 @@ DELIMITER ;
 
 -- 8. Actualizar las promociones activas según fecha de inicio y fin todos los días a las 00:00.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS update_promociones_activas_diario
+ON SCHEDULE EVERY 1 DAY
+STARTS '2025-07-01 00:00:00'
+DO
+BEGIN
+    UPDATE Promociones
+    SET activa = 
+        CASE
+            WHEN CURDATE() BETWEEN fecha_inicio AND fecha_fin THEN 1
+            ELSE 0
+        END;
+END $$
+
+DELIMITER;
+
 -- 9. Generar un resumen semanal de transacciones para la gerencia.
 DELIMITER $$
 
