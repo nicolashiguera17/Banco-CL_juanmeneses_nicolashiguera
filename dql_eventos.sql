@@ -380,3 +380,28 @@ DELIMITER ;
 
 -- 20. Cerrar el ciclo mensual de gestión de pagos y generar reporte anual en diciembre.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS cerrar_ciclo_reporte_anual
+ON SCHEDULE EVERY 1 MONTH
+STARTS '2025-06-30 23:59:00'
+DO
+BEGIN
+    UPDATE Cuotas_de_Manejo
+    SET id_estado_cuota = 6;
+
+    IF MONTH(CURDATE()) = 12 THEN
+        INSERT INTO Notificaciones (id_cliente, mensaje, tipo, leido)
+        SELECT 
+            t.id_cliente,
+            CONCAT('Reporte: $', SUM(p.monto)) AS mensaje,
+            'Reporte Anual',
+            FALSE
+        FROM Pagos p
+        JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+        JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+        GROUP BY t.id_cliente;
+    END IF;
+END $$
+
+DELIMITER;
