@@ -20,6 +20,20 @@ DELIMITER ;
 
 -- 2. Estimar el descuento total aplicado sobre la cuota de manejo de una tarjeta.
 
+DELIMITER $$
+
+CREATE FUNCTION EstimarDescuentoTotal(idTarjeta BIGINT) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+    SELECT SUM(30000 - monto) INTO total
+    FROM Cuotas_de_Manejo
+    WHERE id_tarjeta = idTarjeta;
+    RETURN total;
+END $$
+
+DELIMITER;
+
 -- 3. Calcular el saldo pendiente de pago de un cliente.
 
 DELIMITER $$
