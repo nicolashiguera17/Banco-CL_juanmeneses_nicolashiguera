@@ -98,6 +98,22 @@ DELIMITER ;
 
 -- 6. Determinar si una tarjeta tiene promociones activas en una fecha dada.
 
+DELIMITER $$
+
+CREATE FUNCTION TienePromocionesActivas(idTarjeta BIGINT, fechaDada DATE) RETURNS BOOLEAN
+DETERMINISTIC
+BEGIN
+    DECLARE existe INT;
+    SELECT COUNT(*) INTO existe
+    FROM Tarjetas_Promociones tp
+    JOIN Promociones p ON tp.id_promocion = p.id_promocion
+    WHERE tp.id_tarjeta = idTarjeta
+    AND fechaDada BETWEEN p.fecha_inicio AND p.fecha_fin;
+    RETURN existe > 0;
+END $$
+
+DELIMITER;
+
 -- 7. Obtener el número total de transacciones de un cliente.
 
 DELIMITER $$
