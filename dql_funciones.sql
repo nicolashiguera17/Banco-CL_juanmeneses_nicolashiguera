@@ -137,6 +137,21 @@ DELIMITER ;
 
 -- 8. Calcular el promedio de cuotas de manejo pagadas por cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION PromedioCuotasPagadas(idCliente BIGINT) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE promedio DECIMAL(10,2);
+    SELECT AVG(p.monto) INTO promedio
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = idCliente;
+    RETURN COALESCE(promedio, 0.00);
+END $$
+
+DELIMITER;
 -- 9. Evaluar si una tarjeta está al día con sus pagos.
 
 DELIMITER $$
