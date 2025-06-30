@@ -56,6 +56,22 @@ DELIMITER ;
 
 -- 4. Recalcular las cuotas de manejo cuando se modifiquen las tarifas de los descuentos.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS recalculate_cuotas_manejo_diario
+ON SCHEDULE EVERY 1 DAY
+STARTS '2025-06-30 23:59:00'
+DO
+BEGIN
+    UPDATE Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    JOIN Descuentos d ON t.id_descuento = d.id_descuento
+    SET cm.monto = 30000 * (1 - d.porcentaje / 100)
+    WHERE cm.id_estado_cuota = 4; -- Solo cuotas pendientes
+END $$
+
+DELIMITER;
+
 -- 5. Actualizar los registros de pagos mensuales de clientes a partir de las transacciones realizadas.
 
 DELIMITER $$
