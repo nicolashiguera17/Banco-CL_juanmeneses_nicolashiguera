@@ -170,6 +170,26 @@ DELIMITER ;
 
 -- 10. Validar y suspender tarjetas con tres cuotas vencidas al finalizar cada semana.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS suspend_tarjetas_vencidas_semanal
+ON SCHEDULE EVERY 1 WEEK
+STARTS '2025-07-06 23:59:00' -- Primer domingo después de la fecha actual
+DO
+BEGIN
+    UPDATE Tarjetas t
+    JOIN (
+        SELECT id_tarjeta
+        FROM Cuotas_de_Manejo
+        WHERE id_estado_cuota = 4 AND fecha_vencimiento < CURDATE()
+        GROUP BY id_tarjeta
+        HAVING COUNT(*) >= 3
+    ) cm ON t.id_tarjeta = cm.id_tarjeta
+    SET t.estado = 'Suspendida';
+END $$
+
+DELIMITER;
+
 -- 11. Migrar cuotas vencidas de un mes al historial el primer día del mes siguiente.
 
 DELIMITER $$
