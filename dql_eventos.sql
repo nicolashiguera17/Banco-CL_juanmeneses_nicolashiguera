@@ -260,6 +260,27 @@ DELIMITER ;
 
 -- 14. Crear copias de seguridad lógicas de pagos y cuotas cada día a las 2:00 AM.
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS backup_pagos_cuotas_diario
+ON SCHEDULE EVERY 1 DAY
+STARTS '2025-07-01 02:00:00'
+DO
+BEGIN
+    INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado)
+    SELECT t.id_cliente, 'Respaldo pago', p.monto
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta;
+
+    INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado)
+    SELECT t.id_cliente, 'Respaldo cuota', cm.monto
+    FROM Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta;
+END $$
+
+DELIMITER;
+
 -- 15. Reasignar automáticamente métodos de pago inactivos después de 90 días.
 
 DELIMITER $$
