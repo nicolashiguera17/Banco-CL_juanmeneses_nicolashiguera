@@ -78,6 +78,20 @@ DELIMITER ;
 
 -- 6. Al insertar una nueva promoción, asignarla automáticamente a las tarjetas elegibles.
 
+DELIMITER $$
+
+CREATE TRIGGER AsignarPromocionTarjetas
+AFTER INSERT ON Promociones
+FOR EACH ROW
+BEGIN
+    INSERT INTO Tarjetas_Promociones (id_tarjeta, id_promocion, fecha_aplicacion)
+    SELECT id_tarjeta, NEW.id_promocion, CURDATE()
+    FROM Tarjetas
+    WHERE id_estado = 1;
+END $$
+
+DELIMITER;
+
 -- 7. Al registrar un nuevo cliente, crear automáticamente su historial vacío de pagos y cuotas.
 
 DELIMITER $$
