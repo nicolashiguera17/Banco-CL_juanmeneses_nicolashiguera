@@ -285,6 +285,18 @@ DELIMITER ;
 
 -- 16. Al eliminar una promoción, eliminar también su relación con las tarjetas afectadas.
 
+DELIMITER $$
+
+CREATE TRIGGER EliminarRelacionesPromocion
+AFTER DELETE ON Promociones
+FOR EACH ROW
+BEGIN
+    DELETE FROM Tarjetas_Promociones
+    WHERE id_promocion = OLD.id_promocion;
+END $$
+
+DELIMITER;
+
 -- 17. Al insertar un nuevo estado de cuota, asociarlo automáticamente a las cuotas creadas ese día.
 DELIMITER $$
 
