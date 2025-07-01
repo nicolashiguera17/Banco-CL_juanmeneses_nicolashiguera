@@ -473,7 +473,7 @@ GROUP BY
     DATE_FORMAT(p.fecha_pago, '%Y-Q%q')
 ORDER BY 
     trimestre;
-    
+
 -- 41. Reporte de pagos agrupados por método de pago
 
 SELECT
@@ -486,6 +486,20 @@ GROUP BY mp.descripcion
 ORDER BY monto_total_procesado DESC;
 
 -- 42. Total de pagos por cliente en un rango de fechas
+
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    SUM(p.monto) AS total_pagado
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+WHERE 
+    p.fecha_pago BETWEEN 2025-06-30 AND 25-07-04
+GROUP BY 
+    c.id_cliente, c.nombre;
 
 -- 43. Cuotas vencidas por cliente
 
@@ -503,6 +517,17 @@ ORDER BY  cuotas_vencidas DESC;
 
 -- 44. Listar promociones activas entre dos fechas
 
+SELECT 
+    id_promocion,
+    nombre_promocion,
+    descuento_aplicado,
+    fecha_inicio,
+    fecha_fin
+FROM 
+    Promociones
+WHERE 
+    fecha_inicio <= 2025-06-30 AND fecha_fin >= 2025-07-08;
+
 -- 45. Consultar tarjetas con múltiples promociones
 
 SELECT
@@ -516,6 +541,18 @@ GROUP BY t.id_tarjeta, c.nombre
 HAVING COUNT(tp.id_promocion) > 1;
 
 -- 46. Resumen de pagos por tipo de tarjeta
+
+SELECT 
+    tt.nombre_tipo,
+    SUM(p.monto) AS total_pagado,
+    COUNT(p.id_pago) AS total_pagos
+FROM 
+    Tipos_Tarjeta tt
+    JOIN Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY 
+    tt.id_tipo_tarjeta, tt.nombre_tipo;
 
 -- 47. Transacciones agrupadas por mes
 
@@ -531,6 +568,17 @@ ORDER BY anio, mes, tipo_transaccion;
 
 -- 48. Tarjetas por tipo con su promedio de cuota de manejo
 
+SELECT 
+    tt.nombre_tipo,
+    COUNT(t.id_tarjeta) AS total_tarjetas,
+    AVG(cm.monto) AS promedio_cuota
+FROM 
+    Tipos_Tarjeta tt
+    JOIN Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+GROUP BY 
+    tt.id_tipo_tarjeta, tt.nombre_tipo;
+
 -- 49. Consultar clientes sin cuotas asociadas
 
 SELECT
@@ -543,6 +591,19 @@ WHERE  cm.id_cuota_manejo IS NULL;
 
 -- 50. Cuotas de manejo con estado "pendiente"
 
+SELECT 
+    cm.id_cuota_manejo,
+    cm.monto,
+    cm.fecha_vencimiento,
+    c.nombre AS cliente
+FROM 
+    Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+WHERE 
+    ec.descripcion = 'Pendiente';
+    
 -- 51. Cuotas con descuentos superiores al 15%
 
 SELECT
