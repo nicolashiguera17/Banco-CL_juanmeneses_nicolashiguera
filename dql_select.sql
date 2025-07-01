@@ -857,7 +857,7 @@ GROUP BY
     t.id_tarjeta, c.nombre
 HAVING 
     COUNT(p.id_pago) > 5;
-    
+
 -- 71. Clientes con pagos pendientes en los últimos tres meses
 
 SELECT DISTINCT
@@ -872,6 +872,19 @@ WHERE ec.descripcion = 'Pendiente' AND cm.fecha_vencimiento >= DATE_SUB(CURDATE(
 
 -- 72. Cuotas aplicadas a cada tipo de tarjeta en un período específico
 
+SELECT 
+    tt.nombre_tipo,
+    COUNT(cm.id_cuota_manejo) AS total_cuotas,
+    SUM(cm.monto) AS monto_total
+FROM 
+    Tipos_Tarjeta tt
+    JOIN Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+WHERE 
+    cm.fecha_vencimiento BETWEEN 2025-06-30 AND 2025-07-07
+GROUP BY 
+    tt.id_tipo_tarjeta, tt.nombre_tipo;
+
 -- 73. Reporte de descuentos aplicados durante un año
 
 SELECT
@@ -884,6 +897,30 @@ GROUP BY anio, mes
 ORDER BY mes;
 
 -- 74. Tarjetas con el mayor y menor monto de apertura
+
+(SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo,
+    tt.monto_apertura
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+WHERE 
+    tt.monto_apertura = (SELECT MAX(monto_apertura) FROM Tipos_Tarjeta))
+UNION
+(SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo,
+    tt.monto_apertura
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+WHERE 
+    tt.monto_apertura = (SELECT MIN(monto_apertura) FROM Tipos_Tarjeta));
 
 -- 75. Total de pagos realizados por tipo de tarjeta
 SELECT
@@ -900,6 +937,21 @@ ORDER BY total_pagado DESC;
 
 -- 76. Top 5 clientes con más pagos realizados
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(p.id_pago) AS total_pagos
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY 
+    c.id_cliente, c.nombre
+ORDER BY 
+    total_pagos DESC
+LIMIT 5;
+
 -- 77. Total de promociones utilizadas por mes
 SELECT
     YEAR(fecha_aplicacion) AS anio,
@@ -910,6 +962,18 @@ GROUP BY anio, mes
 ORDER BY anio, mes;
 
 -- 78. Clientes que nunca han aplicado promociones
+
+SELECT 
+    c.id_cliente,
+    c.nombre
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    LEFT JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+WHERE 
+    tp.id_tarjeta_promocion IS NULL
+GROUP BY 
+    c.id_cliente, c.nombre;
 
 -- 79. Clientes que han pagado puntualmente todas sus cuotas
 SELECT
@@ -926,6 +990,22 @@ WHERE
     );
 
 -- 80. Tarjetas con más movimientos de transacciones
+
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    COUNT(tr.id_transaccion) AS total_transacciones
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    JOIN Transacciones tr ON p.id_pago = tr.id_pago
+GROUP BY 
+    t.id_tarjeta, c.nombre
+ORDER BY 
+    total_transacciones DESC
+LIMIT 10;
 
 -- 81. Promedios de pagos por cliente
 
