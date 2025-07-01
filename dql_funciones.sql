@@ -220,6 +220,23 @@ DELIMITER ;
 
 -- 12. Determinar el porcentaje de uso de promociones de un cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION PorcentajeUsoPromociones(idCliente BIGINT) RETURNS DECIMAL(5,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+    DECLARE con_promo INT;
+    SELECT COUNT(*) INTO total FROM Tarjetas WHERE id_cliente = idCliente;
+    SELECT COUNT(*) INTO con_promo FROM Tarjetas_Promociones tp JOIN Tarjetas t ON tp.id_tarjeta = t.id_tarjeta WHERE t.id_cliente = idCliente;
+    IF total > 0 THEN
+        RETURN (con_promo / total) * 100;
+    END IF;
+    RETURN 0.00;
+END $$
+
+DELIMITER ;
+
 -- 13. Calcular el total recaudado por un tipo específico de promoción.
 
 DELIMITER $$
