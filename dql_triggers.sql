@@ -315,6 +315,18 @@ DELIMITER ;
 
 -- 18. Al actualizar los datos del cliente, registrar el cambio en una tabla de auditoría.
 
+DELIMITER $$
+
+CREATE TRIGGER AuditarCambioCliente
+AFTER UPDATE ON Clientes
+FOR EACH ROW
+BEGIN
+    INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado, fecha)
+    VALUES (NEW.id_cliente, CONCAT('Cambio en datos del cliente ', NEW.id_cliente), 0.00, NOW());
+END $$
+
+DELIMITER;
+
 -- 19. Al eliminar un historial de pagos, actualizar el saldo pendiente del cliente.DELIMITER $$
 DELIMITER $$
 
