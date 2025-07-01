@@ -375,6 +375,11 @@ ORDER BY
 
 -- 32. Consultar el monto promedio de las cuotas de manejo
 
+SELECT 
+    AVG(monto) AS promedio_cuota_manejo
+FROM 
+    Cuotas_de_Manejo;
+
 -- 33. Porcentaje de tarjetas con promociones activas
 
 SELECT
@@ -385,6 +390,16 @@ SELECT
 
 -- 34. Número total de tarjetas por cliente
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(t.id_tarjeta) AS total_tarjetas
+FROM 
+    Clientes c
+    LEFT JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+GROUP BY 
+    c.id_cliente, c.nombre;
+
 -- 35. Total de transacciones realizadas este año
 
 SELECT COUNT(*) AS total_transacciones_este_anio
@@ -392,6 +407,16 @@ FROM Transacciones
 WHERE YEAR(fecha_transaccion) = YEAR(CURDATE());
 
 -- 36. Cantidad de cuotas emitidas por mes
+
+SELECT 
+    DATE_FORMAT(fecha_vencimiento, '%Y-%m') AS mes,
+    COUNT(id_cuota_manejo) AS total_cuotas
+FROM 
+    Cuotas_de_Manejo
+GROUP BY 
+    DATE_FORMAT(fecha_vencimiento, '%Y-%m')
+ORDER BY 
+    mes;
 
 -- 37. Evolución de pagos mensuales durante el año
 
@@ -405,6 +430,21 @@ GROUP BY anio, mes
 ORDER BY anio, mes;
 
 -- 38. Top clientes por valor total pagado
+
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    SUM(p.monto) AS total_pagado
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY 
+    c.id_cliente, c.nombre
+ORDER BY 
+    total_pagado DESC
+LIMIT 10;
 
 -- 39. Evaluación del impacto de promociones en pagos
 
@@ -424,6 +464,16 @@ GROUP BY grupo;
 
 -- 40. Análisis comparativo de pagos entre trimestres
 
+SELECT 
+    DATE_FORMAT(p.fecha_pago, '%Y-Q%q') AS trimestre,
+    SUM(p.monto) AS total_pagado
+FROM 
+    Pagos p
+GROUP BY 
+    DATE_FORMAT(p.fecha_pago, '%Y-Q%q')
+ORDER BY 
+    trimestre;
+    
 -- 41. Reporte de pagos agrupados por método de pago
 
 SELECT
