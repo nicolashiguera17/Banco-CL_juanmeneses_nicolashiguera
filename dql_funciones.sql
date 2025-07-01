@@ -152,6 +152,7 @@ BEGIN
 END $$
 
 DELIMITER;
+
 -- 9. Evaluar si una tarjeta está al día con sus pagos.
 
 DELIMITER $$
@@ -180,6 +181,20 @@ DELIMITER ;
 
 
 -- 10. Calcular la edad del cliente según su fecha de nacimiento (si la tabla la incluye).
+
+DELIMITER $$
+
+CREATE FUNCTION CalcularEdadCliente(idCliente BIGINT) RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE edad INT;
+    SELECT TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) INTO edad
+    FROM Clientes
+    WHERE id_cliente = idCliente;
+    RETURN COALESCE(edad, 0);
+END $$
+
+DELIMITER;
 
 -- 11. Calcular el total de cuotas vencidas de un cliente.
 
