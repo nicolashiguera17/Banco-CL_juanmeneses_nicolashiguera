@@ -386,3 +386,18 @@ DELIMITER ;
 
 -- 20. Evaluar si un cliente es elegible para promociones especiales (por historial).
 
+DELIMITER $$
+
+CREATE FUNCTION EsElegiblePromociones(idCliente BIGINT) RETURNS BOOLEAN
+DETERMINISTIC
+BEGIN
+    DECLARE num_pagos INT;
+    SELECT COUNT(*) INTO num_pagos
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = idCliente;
+    RETURN num_pagos >= 3;
+END $$
+
+DELIMITER;
