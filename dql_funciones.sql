@@ -309,6 +309,22 @@ DELIMITER ;
 
 -- 16. Calcular cuántos métodos de pago tiene registrado un cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION ContarMetodosPagoCliente(idCliente BIGINT) RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE cantidad INT;
+    SELECT COUNT(DISTINCT p.id_metodo) INTO cantidad
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = idCliente;
+    RETURN COALESCE(cantidad, 0);
+END $$
+
+DELIMITER;
+
 -- 17. Determinar el total de descuentos aplicados en un año específico.
 
 DELIMITER $$
