@@ -603,7 +603,7 @@ FROM
     JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
 WHERE 
     ec.descripcion = 'Pendiente';
-    
+
 -- 51. Cuotas con descuentos superiores al 15%
 
 SELECT
@@ -621,6 +621,20 @@ WHERE p.descuento_aplicado > 15.00;
 
 -- 52. Clientes con más de dos pagos realizados
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(p.id_pago) AS total_pagos
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY 
+    c.id_cliente, c.nombre
+HAVING 
+    COUNT(p.id_pago) > 2;
+
 -- 53. Total de transacciones por día
 
 SELECT fecha_transaccion,
@@ -630,6 +644,15 @@ GROUP BY fecha_transaccion
 ORDER BY fecha_transaccion DESC;
 
 -- 54. Transacciones por tipo (crédito/débito/otro)
+
+SELECT 
+    t.tipo_transaccion,
+    COUNT(t.id_transaccion) AS total_transacciones,
+    SUM(t.monto) AS monto_total
+FROM 
+    Transacciones t
+GROUP BY 
+    t.tipo_transaccion;
 
 -- 55. Descuentos agrupados por categoría
 
@@ -642,6 +665,18 @@ ORDER BY cantidad_de_descuentos DESC;
 
 -- 56. Tarjetas con apertura superior al promedio
 
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo,
+    tt.monto_apertura
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+WHERE 
+    tt.monto_apertura > (SELECT AVG(monto_apertura) FROM Tipos_Tarjeta);
+
 -- 57. Consultar clientes que han usado promociones
 
 SELECT DISTINCT
@@ -652,6 +687,19 @@ JOIN Tarjetas t ON c.id_cliente = t.id_cliente
 JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta;
 
 -- 58. Cuotas pagadas agrupadas por trimestre
+
+SELECT 
+    DATE_FORMAT(p.fecha_pago, '%Y-Q%q') AS trimestre,
+    COUNT(p.id_pago) AS cuotas_pagadas,
+    SUM(p.monto) AS monto_total
+FROM 
+    Pagos p
+WHERE 
+    p.estado = 'Pagado'
+GROUP BY 
+    DATE_FORMAT(p.fecha_pago, '%Y-Q%q')
+ORDER BY 
+    trimestre;
 
 -- 59. Total de promociones aplicadas por cliente
 
@@ -666,6 +714,18 @@ ORDER BY total_promociones_aplicadas DESC;
 
 -- 60. Consultar tarjetas sin cuota de manejo asociada
 
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo AS tipo_tarjeta
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+    LEFT JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+WHERE 
+    cm.id_cuota_manejo IS NULL;
+    
 -- 61. Tarjetas que no han sido usadas para transacciones
 
 SELECT
