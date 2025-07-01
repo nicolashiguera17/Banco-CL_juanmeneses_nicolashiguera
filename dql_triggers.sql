@@ -47,6 +47,18 @@ DELIMITER ;
 
 -- 4. Al eliminar una tarjeta, eliminar todas las cuotas de manejo asociadas a esa tarjeta.
 
+DELIMITER $$
+
+CREATE TRIGGER EliminarCuotasTarjeta
+AFTER DELETE ON Tarjetas
+FOR EACH ROW
+BEGIN
+    DELETE FROM Cuotas_de_Manejo
+    WHERE id_tarjeta = OLD.id_tarjeta;
+END $$
+
+DELIMITER;
+
 -- 5. Al actualizar un descuento, recalcular las cuotas de manejo de las tarjetas afectadas.
 
 DELIMITER $$
