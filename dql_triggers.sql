@@ -15,6 +15,21 @@ DELIMITER ;
 
 -- 2. Al modificar el monto de apertura de una tarjeta, recalcular la cuota de manejo correspondiente.
 
+DELIMITER $$
+
+CREATE TRIGGER RegistrarPagoHistorial
+AFTER INSERT ON Pagos
+FOR EACH ROW
+BEGIN
+    INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado)
+    SELECT t.id_cliente, 'Nuevo pago', NEW.monto
+    FROM Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE cm.id_cuota_manejo = NEW.id_cuota_manejo;
+END $$
+
+DELIMITER;
+
 -- 3. Al registrar una nueva tarjeta, asignar automáticamente el descuento basado en el tipo de tarjeta.
 DELIMITER $$
 
