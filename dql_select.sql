@@ -1156,17 +1156,85 @@ FROM
     JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
 GROUP BY 
     tt.id_tipo_tarjeta, tt.nombre_tipo;
-    
+
 -- 91. Descuentos con más frecuencia de aplicación
+
+SELECT 
+    d.id_descuento,
+    d.descripcion,
+    COUNT(t.id_tarjeta) AS veces_aplicado
+FROM 
+    Descuentos d
+    JOIN Tarjetas t ON d.id_descuento = t.id_descuento
+GROUP BY 
+    d.id_descuento, d.descripcion
+ORDER BY 
+    veces_aplicado DESC;
 
 -- 92. Total recaudado por promociones activas
 
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    SUM(cm.monto) AS total_recaudado
+FROM 
+    Promociones p
+    JOIN Tarjetas_Promociones tp ON p.id_promocion = tp.id_promocion
+    JOIN Tarjetas t ON tp.id_tarjeta = t.id_tarjeta
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos pg ON cm.id_cuota_manejo = pg.id_cuota_manejo
+WHERE 
+    p.fecha_inicio <= CURDATE() AND p.fecha_fin >= CURDATE()
+GROUP BY 
+    p.id_promocion, p.nombre_promocion;
+
 -- 93. Clientes con más métodos de pago registrados
+
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(DISTINCT p.id_metodo) AS metodos_pago
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+GROUP BY 
+    c.id_cliente, c.nombre
+ORDER BY 
+    metodos_pago DESC;
 
 -- 94. Cuotas vencidas vs cuotas pagadas por cliente
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    SUM(CASE WHEN ec.descripcion = 'Vencida' THEN 1 ELSE 0 END) AS cuotas_vencidas,
+    SUM(CASE WHEN ec.descripcion = 'Pagada' THEN 1 ELSE 0 END) AS cuotas_pagadas
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+GROUP BY 
+    c.id_cliente, c.nombre;
+
 -- 95. Clientes con historial limpio (sin mora ni rechazo)
 
+SELECT 
+    c.id_cliente,
+    c.nombre
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
+GROUP BY 
+    c.id_cliente, c.nombre
+HAVING 
+    SUM(CASE WHEN ec.descripcion IN ('Vencida', 'Rechazada') THEN 1 ELSE 0 END) = 0;
+    
 -- 96. Tarjetas usadas exclusivamente con un método de pago
 
 -- 97. Historial de transacciones agrupado por trimestre
