@@ -60,26 +60,25 @@ Windows, macOS o Linux
 
 ### **Clonar Repositorio**
 
-Clonar desde GitHub:
+#### **Clonar desde GitHub:**
 
-```bash
+
 git clone https://github.com/nicolashiguera17/Banco-CL_juanmeneses_nicolashiguera.git
 cd banco-cl
 
-Configurar Base de Datos
+### **Configurar Base de Datos**
 
-Conexión
 
 Conéctate a MySQL con Workbench o DBeaver.
 
-Crear Base
 
-Crea la base de datos:
+
+### **Crea la base de datos:**
 
 CREATE DATABASE banco_cl;
 USE banco_cl;
 
-Ejecutar Scripts
+### **Ejecutar Scripts**
 
 Ejecuta en orden:
 - Estructura: `sql/ddl.sql`
@@ -98,17 +97,16 @@ mysql -u <usuario> -p banco_cl < sql/dql_funciones.sql
 mysql -u <usuario> -p banco_cl < sql/dql_triggers.sql
 mysql -u <usuario> -p banco_cl < sql/dql_eventos.sql
 
-Roles
+### **Roles**
 
 Ver **Roles de Usuario y Permisos** para configuración.
 
-Verificar Modelo
+### **Verificar Modelo**
 
 Revisa `Diagrama.jpg` para relaciones entre tablas.
 
-Estructura de la Base
 
-Tablas
+### **Tablas**
 
 - Clientes: ID, nombre, cuenta, tipo de tarjeta, monto apertura
 - Tarjetas: ID, tipo (Joven, Nómina, Visa), monto apertura, cliente
@@ -116,7 +114,7 @@ Tablas
 - Descuentos: Tipos (Básico, Platino, Diamante), valores
 - Historial_Pagos: Pagos vinculados a cuotas
 
-Relaciones
+### **Relaciones**
 
 - Clientes → Tarjetas (1:N)
 - Tarjetas → Descuentos (1:1)
@@ -124,15 +122,8 @@ Relaciones
 - Cuotas_Manejo → Historial_Pagos (1:1)
 Ver en `Diagrama.jpg`.
 
-Consultas
 
-Básicas
-
-
-
-
-
-Tarjetas y cuotas:
+### **Tarjetas y cuotas:**
 
 Lista tarjetas, tipo, cliente y cuota.
 
@@ -143,9 +134,9 @@ JOIN Cuotas_Manejo cm ON t.id_tarjeta = cm.id_tarjeta;
 
 
 
-Historial de pagos:
+### **Historial de pagos:**
 
-Pagos por cliente.
+#### **Pagos por cliente.**
 
 SELECT c.nombre, h.fecha_pago, h.monto_pagado
 FROM Clientes c
@@ -153,13 +144,8 @@ JOIN Tarjetas t ON c.id_cliente = t.id_cliente
 JOIN Historial_Pagos h ON t.id_tarjeta = h.id_tarjeta
 WHERE c.id_cliente = 1;
 
-Avanzadas
 
-
-
-
-
-Pagos pendientes:
+#### **Pagos pendientes:**
 
 Cuotas sin pagar (últimos 3 meses).
 
@@ -172,9 +158,8 @@ WHERE h.id_pago IS NULL AND cm.fecha_cuota >= DATE_SUB(CURDATE(), INTERVAL 3 MON
 
 
 
-Descuentos 2025:
+### **Descuentos 2025:**
 
-Descuentos por tipo en 2025.
 
 SELECT d.tipo_descuento, COUNT(cm.id_cuota) AS total_cuotas, SUM(d.valor_descuento) AS total_descuentos
 FROM Descuentos d
@@ -190,7 +175,7 @@ Procedimientos (20)
 
 
 
-**RegistrarCuotaMane-apple
+### **RegistrarCuotaMane-apple**
 
 Registra cuotas con descuentos.
 
@@ -202,7 +187,7 @@ Funciones (20)
 
 
 
-CalcularCuotaManejo:
+#### **CalcularCuotaManejo:**
 
 Calcula cuota por tipo y monto.
 
@@ -214,7 +199,7 @@ Triggers (20)
 
 
 
-AfterPagoInsert:
+#### **AfterPagoInsert:**
 
 Actualiza estado de cuota a "Pagada".
 
@@ -229,7 +214,7 @@ Eventos (20)
 
 
 
-GenerarReporteMensual:
+#### **GenerarReporteMensual:**
 
 Reportes mensuales de cuotas.
 
@@ -248,45 +233,21 @@ Acceso completo.
 CREATE ROLE administrador;
 GRANT ALL ON banco_cl.* TO administrador;
 
-Operador de Pagos
 
-Gestiona pagos y consulta cuotas.
+### **Gestiona pagos y consulta cuotas.**
 
 CREATE ROLE operador_pagos;
 GRANT SELECT, INSERT, UPDATE ON banco_cl.Historial_Pagos TO operador_pagos;
 GRANT SELECT ON banco_cl.Cuotas_Manejo TO operador_pagos;
 
-Gerente
 
-Consulta reportes y procedimientos.
-
-CREATE ROLE gerente;
-GRANT SELECT, EXECUTE ON banco_cl.* TO gerente;
-
-Consultor de Tarjetas
-
-Consulta tarjetas y cuotas.
-
-CREATE ROLE consultor_tarjetas;
-GRANT SELECT ON banco_cl.Tarjetas TO consultor_tarjetas;
-GRANT SELECT ON banco_cl.Cuotas_Manejo TO consultor_tarjetas;
-
-Auditor
-
-Consulta reportes.
-
-CREATE ROLE auditor;
-GRANT SELECT ON banco_cl.Reportes TO auditor;
-
-Asignar Roles
-
-Ejemplo:
+#### **Ejemplo:**
 
 CREATE USER 'usuario_admin'@'localhost' IDENTIFIED BY 'password';
 GRANT administrador TO 'usuario_admin'@'localhost';
 SET DEFAULT ROLE administrador FOR 'usuario_admin'@'localhost';
 
-Estructura del Repositorio
+## **Estructura del Repositorio**
 
 banco-cl/
 ├── sql/
@@ -300,7 +261,7 @@ banco-cl/
 ├── Diagrama.jpg
 ├── README.md
 
-Contribuciones
+### **Contribuciones**
 
 - Juan Meneses.
 - Nicolás Higuera.
