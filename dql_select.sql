@@ -725,7 +725,7 @@ FROM
     LEFT JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
 WHERE 
     cm.id_cuota_manejo IS NULL;
-    
+
 -- 61. Tarjetas que no han sido usadas para transacciones
 
 SELECT
@@ -740,6 +740,17 @@ WHERE  tr.id_transaccion IS NULL;
 
 -- 62. Cuotas de manejo mayores al promedio
 
+SELECT 
+    cm.id_cuota_manejo,
+    cm.monto,
+    c.nombre AS cliente
+FROM 
+    Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+WHERE 
+    cm.monto > (SELECT AVG(monto) FROM Cuotas_de_Manejo);
+
 -- 63. Cuotas agrupadas por estado (aceptada, rechazada, etc.)
 
 SELECT
@@ -752,6 +763,20 @@ ORDER BY cantidad_de_cuotas DESC;
 
 -- 64. Consultar pagos y promociones por cliente
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    SUM(p.monto) AS total_pagado,
+    COUNT(DISTINCT tp.id_promocion) AS total_promociones
+FROM 
+    Clientes c
+    LEFT JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    LEFT JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    LEFT JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    LEFT JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+GROUP BY 
+    c.id_cliente, c.nombre;
+
 -- 65. Consultar promociones que vencen este mes
 SELECT
     id_promocion,
@@ -760,6 +785,20 @@ SELECT
 FROM  Promociones
 WHEREYEAR(fecha_fin) = YEAR(CURDATE()) AND MONTH(fecha_fin) = MONTH(CURDATE());
 -- 66. Clientes con múltiples descuentos aplicados
+
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(DISTINCT t.id_descuento) AS total_descuentos
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+WHERE 
+    t.id_descuento IS NOT NULL
+GROUP BY 
+    c.id_cliente, c.nombre
+HAVING 
+    COUNT(DISTINCT t.id_descuento) > 1;
 
 -- 67. Tarjetas que aplican para promociones exclusivas
 
@@ -775,6 +814,21 @@ WHERE tt.nombre_tipo IN ('Black', 'Premium', 'Platina');
 
 -- 68. Consultar transacciones superiores a $500.000
 
+SELECT 
+    t.id_transaccion,
+    t.fecha_transaccion,
+    t.monto,
+    t.tipo_transaccion,
+    c.nombre AS cliente
+FROM 
+    Transacciones t
+    JOIN Pagos p ON t.id_pago = p.id_pago
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas tar ON cm.id_tarjeta = tar.id_tarjeta
+    JOIN Clientes c ON tar.id_cliente = c.id_cliente
+WHERE 
+    t.monto > 500000;
+
 -- 69. Clientes nuevos registrados en el último trimestre
 
 SELECT
@@ -788,6 +842,22 @@ HAVING fecha_registro >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
 
 -- 70. Consultar tarjetas activas con más de 5 cuotas pagadas
 
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    COUNT(p.id_pago) AS cuotas_pagadas
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+WHERE 
+    p.estado = 'Pagado'
+GROUP BY 
+    t.id_tarjeta, c.nombre
+HAVING 
+    COUNT(p.id_pago) > 5;
+    
 -- 71. Clientes con pagos pendientes en los últimos tres meses
 
 SELECT DISTINCT
