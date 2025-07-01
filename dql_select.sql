@@ -1023,6 +1023,17 @@ ORDER BY promedio_de_pago DESC;
 
 -- 82. Clientes que han tenido cuotas rechazadas
 
+SELECT DISTINCT 
+    c.id_cliente,
+    c.nombre
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+WHERE 
+    p.estado = 'Rechazado';
+
 -- 83. Análisis de pagos por método (efectivo, tarjeta, etc.)
 
 SELECT
@@ -1038,6 +1049,19 @@ GROUP BY mp.descripcion
 ORDER BY suma_total DESC;
 
 -- 84. Cuotas más costosas del sistema
+
+SELECT 
+    cm.id_cuota_manejo,
+    cm.monto,
+    c.nombre AS cliente,
+    t.id_tarjeta
+FROM 
+    Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+ORDER BY 
+    cm.monto DESC
+LIMIT 10;
 
 -- 85. Clientes con mayor gasto mensual promedio
 
@@ -1063,6 +1087,16 @@ ORDER BY gasto_mensual_promedio DESC;
 
 -- 86. Promociones con duración mayor a 30 días
 
+SELECT 
+    id_promocion,
+    nombre_promocion,
+    descuento_aplicado,
+    DATEDIFF(fecha_fin, fecha_inicio) AS duracion_dias
+FROM 
+    Promociones
+WHERE 
+    DATEDIFF(fecha_fin, fecha_inicio) > 30;
+
 -- 87. Comparación de uso entre tipos de tarjeta
 
 SELECT
@@ -1079,6 +1113,18 @@ ORDER BY
     numero_de_usos DESC;
 
 -- 88. Ranking de promociones más utilizadas
+
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    COUNT(tp.id_tarjeta_promocion) AS veces_aplicada
+FROM 
+    Promociones p
+    JOIN Tarjetas_Promociones tp ON p.id_promocion = tp.id_promocion
+GROUP BY 
+    p.id_promocion, p.nombre_promocion
+ORDER BY 
+    veces_aplicada DESC;
 
 -- 89. Clientes con más transacciones en el año
 
@@ -1101,6 +1147,16 @@ LIMIT 10;
 
 -- 90. Comparar número de cuotas por tipo de tarjeta
 
+SELECT 
+    tt.nombre_tipo,
+    COUNT(cm.id_cuota_manejo) AS total_cuotas
+FROM 
+    Tipos_Tarjeta tt
+    JOIN Tarjetas t ON tt.id_tipo_tarjeta = t.id_tipo_tarjeta
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+GROUP BY 
+    tt.id_tipo_tarjeta, tt.nombre_tipo;
+    
 -- 91. Descuentos con más frecuencia de aplicación
 
 -- 92. Total recaudado por promociones activas
