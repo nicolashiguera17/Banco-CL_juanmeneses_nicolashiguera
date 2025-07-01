@@ -345,4 +345,16 @@ DELIMITER ;
 
 -- 20. Al asignar un nuevo rol de usuario, registrar el evento en un log de control de acceso.
 
+DELIMITER $$
 
+CREATE TRIGGER AuditarCambioRol
+AFTER UPDATE ON Clientes
+FOR EACH ROW
+BEGIN
+    IF NEW.id_empleado != OLD.id_empleado THEN
+        INSERT INTO Historial_Pagos (id_cliente, descripcion, monto_pagado, fecha)
+        VALUES (NEW.id_cliente, CONCAT('Cambio de rol de usuario para cliente ', NEW.id_cliente), 0.00, NOW());
+    END IF;
+END $$
+
+DELIMITER;
