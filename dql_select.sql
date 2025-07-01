@@ -29,6 +29,21 @@ WHERE p.estado = 'Completado' AND YEAR(p.fecha_pago) = :anio AND MONTH(p.fecha_p
 
 -- 4. Cuotas de manejo de los clientes con descuento aplicado
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    t.id_tarjeta,
+    cm.id_cuota_manejo,
+    cm.monto,
+    d.descripcion AS descuento_aplicado
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Descuentos d ON t.id_descuento = d.id_descuento
+WHERE 
+    t.id_descuento IS NOT NULL;
+
 -- 5. Reporte mensual de las cuotas de manejo de cada tarjeta
 SELECT
     id_tarjeta,
@@ -42,6 +57,17 @@ ORDER BY id_tarjeta, anio,mes;
 
 -- 6. Promociones activas durante una fecha específica
 
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    p.descuento_aplicado,
+    p.fecha_inicio,
+    p.fecha_fin
+FROM 
+    Promociones p
+WHERE 
+    ? BETWEEN p.fecha_inicio AND p.fecha_fin;
+
 -- 7. Métodos de pago utilizados por un cliente
 
 SELECT DISTINCT descripcion AS metodo_pago
@@ -54,6 +80,20 @@ WHERE c.id_cliente = :id_cliente;
 
 -- 8. Consultar todas las transacciones realizadas por tarjeta
 
+SELECT 
+    t.id_transaccion,
+    t.fecha_transaccion,
+    t.monto,
+    t.tipo_transaccion,
+    tar.id_tarjeta,
+    c.nombre AS cliente
+FROM 
+    Transacciones t
+    JOIN Pagos p ON t.id_pago = p.id_pago
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas tar ON cm.id_tarjeta = tar.id_tarjeta
+    JOIN Clientes c ON tar.id_cliente = c.id_cliente;
+
 -- 9. Tarjetas que tienen promociones aplicadas
 SELECT DISTINCT t.id_tarjeta,c.nombre AS nombre_cliente,
     nombre_tipo AS tipo_tarjeta
@@ -65,6 +105,18 @@ ORDER BY t.id_tarjeta;
 
 -- 10. Clientes que han utilizado más de un tipo de tarjeta
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(DISTINCT t.id_tipo_tarjeta) AS tipos_tarjetas
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+GROUP BY 
+    c.id_cliente, c.nombre
+HAVING 
+    COUNT(DISTINCT t.id_tipo_tarjeta) > 1;
+    
 -- 11. Cuotas de manejo vencidas hasta la fecha
 
 SELECT
