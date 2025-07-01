@@ -155,6 +155,24 @@ DELIMITER ;
 
 -- 10. Al cambiar el estado de una transacción a "fallida", generar una alerta o registro de auditoría.
 
+DELIMITER $$
+
+CREATE TRIGGER RegistrarAlertaTransaccionFallida
+AFTER UPDATE ON Transacciones
+FOR EACH ROW
+BEGIN
+    IF NEW.tipo_transaccion = 'fallida' THEN
+        INSERT INTO Notificaciones (id_cliente, mensaje, tipo, fecha_envio, leido)
+        SELECT t.id_cliente, CONCAT('Transacción fallida: ', NEW.id_transaccion), 'Alerta', CURDATE(), FALSE
+        FROM Pagos p
+        JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+        JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+        WHERE p.id_pago = NEW.id_pago;
+    END IF;
+END $$
+
+DELIMITER;
+
 -- 11. Al eliminar un método de pago, desvincularlo automáticamente de las tarjetas del cliente.
 
 DELIMITER $$
