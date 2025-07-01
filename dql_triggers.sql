@@ -192,6 +192,26 @@ DELIMITER ;
 
 -- 12. Al modificar una fecha de vencimiento de una cuota, recalcular la alerta de pago.
 
+DELIMITER $$
+
+CREATE TRIGGER RecalcularAlertaCuota
+AFTER UPDATE ON Cuotas_de_Manejo
+FOR EACH ROW
+BEGIN
+    IF NEW.fecha_vencimiento != OLD.fecha_vencimiento THEN
+        INSERT INTO Notificaciones (id_cliente, mensaje, tipo, fecha_envio, leido)
+        SELECT t.id_cliente, 
+               CONCAT('Cuota ', NEW.id_cuota_manejo, ' cambió fecha de vencimiento a ', NEW.fecha_vencimiento), 
+               'Alerta', 
+               CURDATE(), 
+               FALSE
+        FROM Tarjetas t
+        WHERE t.id_tarjeta = NEW.id_tarjeta;
+    END IF;
+END $$
+
+DELIMITER;
+
 -- 13. Al insertar una nueva cuota, verificar si hay promociones vigentes y aplicarlas automáticamente.
 
 DELIMITER $$
