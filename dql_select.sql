@@ -198,6 +198,17 @@ WHERE estado_cuenta = 'Activo';
 
 -- 18. Tarjetas con cuota de manejo superior a cierto valor
 
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    cm.monto AS cuota_manejo
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+WHERE 
+    cm.monto > 50000;
+
 -- 19. Cuotas de manejo con vencimiento próximo (menos de 7 días)
 
 SELECT
@@ -212,6 +223,21 @@ JOIN Estado_Cuota ec ON cm.id_estado_cuota = ec.id_estado_cuota
 WHERE cm.fecha_vencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)   AND ec.descripcion = 'Pendiente';
 
 -- 20. Tarjetas creadas en el último mes
+
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo AS tipo_tarjeta
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+WHERE 
+    t.id_tarjeta IN (
+        SELECT id_tarjeta 
+        FROM Cuotas_de_Manejo 
+        WHERE fecha_vencimiento >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+    );
 
 -- 21. Clientes que no han realizado pagos en el último mes
 
@@ -228,6 +254,15 @@ WHERE
 
 -- 22. Promociones con más de 20% de descuento
 
+SELECT 
+    id_promocion,
+    nombre_promocion,
+    descuento_aplicado
+FROM 
+    Promociones
+WHERE 
+    descuento_aplicado > 20;
+
 -- 23. Listado de tarjetas por tipo
 
 SELECT  tt.nombre_tipo, COUNT(t.id_tarjeta) AS cantidad_de_tarjetas
@@ -238,6 +273,18 @@ ORDER BY cantidad_de_tarjetas DESC;
 
 -- 24. Cuotas de manejo agrupadas por cliente
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    COUNT(cm.id_cuota_manejo) AS total_cuotas,
+    SUM(cm.monto) AS monto_total
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+GROUP BY 
+    c.id_cliente, c.nombre;
+    
 -- 25. Promociones activas por mes
 
 SELECT
