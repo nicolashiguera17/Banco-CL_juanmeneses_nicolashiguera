@@ -284,7 +284,7 @@ FROM
     JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
 GROUP BY 
     c.id_cliente, c.nombre;
-    
+
 -- 25. Promociones activas por mes
 
 SELECT
@@ -296,6 +296,17 @@ FROM Promociones
 WHERE DATE_FORMAT(CURDATE(), '%Y-%m') BETWEEN DATE_FORMAT(fecha_inicio, '%Y-%m') AND DATE_FORMAT(fecha_fin, '%Y-%m');
 
 -- 26. Métodos de pago más usados
+
+SELECT 
+    mp.descripcion,
+    COUNT(p.id_pago) AS total_pagos
+FROM 
+    Metodos_Pago mp
+    JOIN Pagos p ON mp.id_metodo = p.id_metodo
+GROUP BY 
+    mp.id_metodo, mp.descripcion
+ORDER BY 
+    total_pagos DESC;
 
 -- 27. Consultar todos los pagos con tarjeta de crédito
 
@@ -314,6 +325,15 @@ WHERE mp.descripcion = 'Tarjeta de crédito';
 
 -- 28. Clientes que tienen descuentos activos
 
+SELECT DISTINCT 
+    c.id_cliente,
+    c.nombre,
+    d.descripcion AS descuento
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Descuentos d ON t.id_descuento = d.id_descuento;
+
 -- 29. Cuotas de manejo agrupadas por año
 
 SELECT
@@ -325,6 +345,17 @@ GROUP BY YEAR(fecha_vencimiento)
 ORDER BY anio;
 
 -- 30. Historial de promociones aplicadas a una tarjeta
+
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    p.descuento_aplicado,
+    tp.fecha_aplicacion
+FROM 
+    Tarjetas_Promociones tp
+    JOIN Promociones p ON tp.id_promocion = p.id_promocion
+WHERE 
+    tp.id_tarjeta = 20001;
 
 -- 31. Total de pagos recibidos por mes en el año actual
 
