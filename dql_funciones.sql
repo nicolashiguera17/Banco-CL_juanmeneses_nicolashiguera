@@ -260,6 +260,23 @@ DELIMITER ;
 
 -- 14. Obtener el monto acumulado de pagos de un cliente en el año actual.
 
+DELIMITER $$
+
+CREATE FUNCTION MontoPagosAnual(idCliente BIGINT) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total DECIMAL(10,2);
+    SELECT SUM(p.monto) INTO total
+    FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = idCliente
+    AND YEAR(p.fecha_pago) = YEAR(CURDATE());
+    RETURN COALESCE(total, 0.00);
+END $$
+
+DELIMITER;
+
 -- 15. Evaluar si una tarjeta ha superado el monto de apertura inicial.
 
 DELIMITER $$
