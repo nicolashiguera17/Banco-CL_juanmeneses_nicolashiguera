@@ -240,6 +240,29 @@ DELIMITER ;
 
 -- 14. Al cambiar el tipo de tarjeta, reasignar el monto de apertura y su nueva cuota de manejo.
 
+DELIMITER $$
+
+CREATE TRIGGER ReasignarCuotaTipoTarjeta
+AFTER UPDATE ON Tarjetas
+FOR EACH ROW
+BEGIN
+    IF NEW.id_tipo_tarjeta != OLD.id_tipo_tarjeta THEN
+        INSERT INTO Cuotas_de_Manejo (id_tarjeta, monto, fecha_vencimiento, id_estado_cuota)
+        VALUES (
+            NEW.id_tarjeta,
+            CASE NEW.id_tipo_tarjeta
+                WHEN 1 THEN 30000
+                WHEN 2 THEN 50000
+                ELSE 20000
+            END,
+            DATE_ADD(CURDATE(), INTERVAL 1 MONTH),
+            1
+        );
+    END IF;
+END $$
+
+DELIMITER;
+
 -- 15. Al insertar una nueva transacción, validar si el monto excede cierto límite y registrar alerta.
 
 DELIMITER $$
