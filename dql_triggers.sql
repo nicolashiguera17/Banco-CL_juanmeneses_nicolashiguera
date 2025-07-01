@@ -112,6 +112,27 @@ DELIMITER ;
 
 -- 8. Al eliminar un cliente, borrar todas sus tarjetas y pagos asociados.
 
+DELIMITER $$
+
+CREATE TRIGGER EliminarTarjetasPagosCliente
+AFTER DELETE ON Clientes
+FOR EACH ROW
+BEGIN
+    DELETE p FROM Pagos p
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = OLD.id_cliente;
+    
+    DELETE cm FROM Cuotas_de_Manejo cm
+    JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta
+    WHERE t.id_cliente = OLD.id_cliente;
+    
+    DELETE FROM Tarjetas
+    WHERE id_cliente = OLD.id_cliente;
+END $$
+
+DELIMITER;
+
 -- 9. Al actualizar el estado de una cuota a "pagada", insertar un registro en el historial de pagos.
 
 DELIMITER $$
