@@ -348,6 +348,20 @@ DELIMITER ;
 
 -- 18. Calcular la proporción de pagos en efectivo vs electrónicos por cliente.
 
+DELIMITER $$
+
+CREATE FUNCTION ProporcionPagosEfectivo(idCliente BIGINT) RETURNS DECIMAL(5,2)
+DETERMINISTIC
+BEGIN
+    DECLARE total INT;
+    DECLARE efectivo INT;
+    SELECT COUNT(*) INTO total FROM Pagos p JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta WHERE t.id_cliente = idCliente;
+    SELECT COUNT(*) INTO efectivo FROM Pagos p JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo JOIN Tarjetas t ON cm.id_tarjeta = t.id_tarjeta JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo WHERE t.id_cliente = idCliente AND mp.descripcion = 'Efectivo';
+    RETURN IF(total > 0, (efectivo / total) * 100, 0.00);
+END $$
+
+DELIMITER;
+
 -- 19. Obtener el total de cuotas emitidas para un tipo de tarjeta.
 
 DELIMITER $$
