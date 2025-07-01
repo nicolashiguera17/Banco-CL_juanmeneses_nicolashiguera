@@ -1234,13 +1234,79 @@ GROUP BY
     c.id_cliente, c.nombre
 HAVING 
     SUM(CASE WHEN ec.descripcion IN ('Vencida', 'Rechazada') THEN 1 ELSE 0 END) = 0;
-    
+
 -- 96. Tarjetas usadas exclusivamente con un método de pago
+
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    mp.descripcion AS metodo_pago
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Cuotas_de_Manejo cm ON t.id_tarjeta = cm.id_tarjeta
+    JOIN Pagos p ON cm.id_cuota_manejo = p.id_cuota_manejo
+    JOIN Metodos_Pago mp ON p.id_metodo = mp.id_metodo
+GROUP BY 
+    t.id_tarjeta, c.nombre, mp.descripcion
+HAVING 
+    COUNT(DISTINCT p.id_metodo) = 1;
 
 -- 97. Historial de transacciones agrupado por trimestre
 
+SELECT 
+    DATE_FORMAT(t.fecha_transaccion, '%Y-Q%q') AS trimestre,
+    COUNT(t.id_transaccion) AS total_transacciones,
+    SUM(t.monto) AS monto_total
+FROM 
+    Transacciones t
+GROUP BY 
+    DATE_FORMAT(t.fecha_transaccion, '%Y-Q%q')
+ORDER BY 
+    trimestre;
+
 -- 98. Análisis de promociones efectivas vs inefectivas
+
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    COUNT(tp.id_tarjeta_promocion) AS aplicaciones,
+    CASE 
+        WHEN COUNT(tp.id_tarjeta_promocion) > 0 THEN 'Efectiva'
+        ELSE 'Inefectiva'
+    END AS estado_promocion
+FROM 
+    Promociones p
+    LEFT JOIN Tarjetas_Promociones tp ON p.id_promocion = tp.id_promocion
+GROUP BY 
+    p.id_promocion, p.nombre_promocion;
 
 -- 99. Clientes que acumulan más beneficios en descuentos
 
+SELECT 
+    c.id_cliente,
+    c.nombre,
+    SUM(p.descuento_aplicado) AS total_descuentos
+FROM 
+    Clientes c
+    JOIN Tarjetas t ON c.id_cliente = t.id_cliente
+    JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+    JOIN Promociones p ON tp.id_promocion = p.id_promocion
+GROUP BY 
+    c.id_cliente, c.nombre
+ORDER BY 
+    total_descuentos DESC
+LIMIT 10;
+
 -- 100. Promociones utilizadas en el último Black Friday
+
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    p.descuento_aplicado,
+    tp.fecha_aplicacion
+FROM 
+    Promociones p
+    JOIN Tarjetas_Promociones tp ON p.id_promocion = tp.id_promocion
+WHERE 
+    tp.fecha_aplicacion BETWEEN '2024-11-29' AND '2024-11-30';
