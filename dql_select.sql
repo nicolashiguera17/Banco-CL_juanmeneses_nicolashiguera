@@ -66,7 +66,7 @@ SELECT
 FROM 
     Promociones p
 WHERE 
-    ? BETWEEN p.fecha_inicio AND p.fecha_fin;
+    2025-06-28 BETWEEN p.fecha_inicio AND p.fecha_fin;
 
 -- 7. Métodos de pago utilizados por un cliente
 
@@ -116,7 +116,7 @@ GROUP BY
     c.id_cliente, c.nombre
 HAVING 
     COUNT(DISTINCT t.id_tipo_tarjeta) > 1;
-    
+
 -- 11. Cuotas de manejo vencidas hasta la fecha
 
 SELECT
@@ -134,6 +134,22 @@ ORDER BY cm.fecha_vencimiento;
 
 -- 12. Transacciones registradas durante la última semana
 
+SELECT 
+    t.id_transaccion,
+    t.fecha_transaccion,
+    t.monto,
+    t.tipo_transaccion,
+    c.nombre AS cliente
+FROM 
+    Transacciones t
+    JOIN Pagos p ON t.id_pago = p.id_pago
+    JOIN Cuotas_de_Manejo cm ON p.id_cuota_manejo = cm.id_cuota_manejo
+    JOIN Tarjetas tar ON cm.id_tarjeta = tar.id_tarjeta
+    JOIN Clientes c ON tar.id_cliente = c.id_cliente
+WHERE 
+    t.fecha_transaccion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+    AND t.fecha_transaccion <= CURDATE();
+
 -- 13. Listar los clientes con más de una tarjeta activa
 SELECT c.nombre,COUNT(t.id_tarjeta) AS numero_de_tarjetas
 FROM Clientes c
@@ -142,6 +158,17 @@ GROUP BY c.id_cliente, c.nombre
 HAVING COUNT(t.id_tarjeta) > 1;
 
 -- 14. Promociones aplicadas a una tarjeta específica
+
+SELECT 
+    p.id_promocion,
+    p.nombre_promocion,
+    p.descuento_aplicado,
+    tp.fecha_aplicacion
+FROM 
+    Tarjetas_Promociones tp
+    JOIN Promociones p ON tp.id_promocion = p.id_promocion
+WHERE 
+    tp.id_tarjeta = 20001;
 
 -- 15. Pagos realizados en una fecha determinada
 
@@ -152,6 +179,18 @@ WHERE p.fecha_pago = :fecha_determinada;
 
 -- 16. Consultar tarjetas sin promociones asignadas
 
+SELECT 
+    t.id_tarjeta,
+    c.nombre AS cliente,
+    tt.nombre_tipo AS tipo_tarjeta
+FROM 
+    Tarjetas t
+    JOIN Clientes c ON t.id_cliente = c.id_cliente
+    JOIN Tipos_Tarjeta tt ON t.id_tipo_tarjeta = tt.id_tipo_tarjeta
+    LEFT JOIN Tarjetas_Promociones tp ON t.id_tarjeta = tp.id_tarjeta
+WHERE 
+    tp.id_tarjeta_promocion IS NULL;
+    
 -- 17. Consultar métodos de pago disponibles actualmente
 SELECT id_metodo, descripcion, estado_cuenta
 FROM Metodos_Pago
